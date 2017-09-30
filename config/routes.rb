@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  get 'welcome/home'
+
   root 'welcome#home'
+  resources :members, only: [:create]
   get '/join' => 'members#new'
-  post '/join' => 'members#create'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
