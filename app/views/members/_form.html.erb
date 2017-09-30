@@ -1,0 +1,25 @@
+<%= form_for member do |f| %>
+  <p>
+    <%= f.text_field :first_name, placeholder: "First Name" %>
+  </p>
+  <p>
+    <%= f.text_field :last_name, placeholder: "Last Name" %>
+  </p>
+  <p>
+    <%= f.text_field :family_title, placeholder: "Family Title" %>
+  </p>
+  <p>
+    $<%= f.number_field :monthly_income, placeholder: "Monthly Income" %>
+  </p>
+  <p>
+
+  </p>
+  <p>
+    <%= f.email_field :email, placeholder: "Email" %>
+  </p>
+  <p>
+    <%= f.password_field :password, placeholder: "Password" %>
+  </p>
+  <%= f.hidden_field :head_of_household, value: true %>
+  <%= f.submit %>
+<% end %>

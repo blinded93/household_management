@@ -1,0 +1,9 @@
+<%= form_for @household do |f| %>
+  <p>
+    <%= f.text_field :name, placeholder: "Name" %>
+  </p>
+  <p>
+    <%= f.text_field :address, placeholder: "Address" %>
+  </p>
+  <%= f.submit %>
+<% end %>
