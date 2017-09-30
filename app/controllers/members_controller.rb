@@ -37,7 +37,7 @@ class MembersController < ApplicationController
       redirect_to household_member_path(current_household, @member)
     else
       render :edit
-    end
+    end 
   end
 
   def destroy

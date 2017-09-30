@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'welcome#home'
-  resources :members, only: [:create]
   get '/join' => 'members#new'
+  resources :members, only: [:create]
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'

@@ -3,7 +3,6 @@ class HouseholdsController < ApplicationController
   before_action :redirect_unless_logged_in
 
   def settings
-
   end
 
   def show
