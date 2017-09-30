@@ -33,7 +33,11 @@ class MembersController < ApplicationController
   end
 
   def update
-
+    if @member.update(member_params)
+      redirect_to household_member_path(current_household, @member)
+    else
+      render :edit
+    end
   end
 
   def destroy
