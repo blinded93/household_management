@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
-  before action :redirect_unless_logged_in, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_unless_logged_in, only: [:show, :edit, :update, :destroy]
+
   def index
     @members = current_household.members
   end
@@ -13,7 +14,18 @@ class MembersController < ApplicationController
   end
 
   def create
-
+    @member = Member.create(member_params)
+    if @member.valid?
+      @member.save
+      session[:member_id] = @member.id
+      if @member.household.present?
+        redirect_to household_member_path(@member.household, @member), notice: "Account successfully create."
+      else
+        redirect_to new_household_path, notice: "Please create a household to continue."
+      end
+    else
+      render :new
+    end
   end
 
   def edit
