@@ -15,6 +15,7 @@ class HouseholdsController < ApplicationController
 
   def create
     @household = current_member.create_household(household_params)
+    byebug
     if @household.valid?
       @household.save
       redirect_to household_settings_path(current_household)
