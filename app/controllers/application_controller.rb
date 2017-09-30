@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_methods :current_member, :current_household, :logged_in?
+  helper_method :current_member, :current_household, :logged_in?
 
   def current_member
     @current_member ||= Member.find_by(id: session[:member_id])
