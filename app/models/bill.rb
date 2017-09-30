@@ -1,5 +1,5 @@
 class Bill < ActiveRecord::Base
-  include Meta
-  
+  # include Meta
+
   belongs_to :household
 end

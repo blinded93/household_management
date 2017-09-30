@@ -1,7 +1,7 @@
 class CreateListItems < ActiveRecord::Migration
   def change
     create_table :list_items do |t|
-      t.integer :quantity
+      t.integer :quantity, default: 1
       t.references :list, index: true
       t.references :item, index: true
 
