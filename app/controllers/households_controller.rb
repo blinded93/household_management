@@ -2,7 +2,7 @@ class HouseholdsController < ApplicationController
   before_action :set_household, only: [:settings, :edit, :update, :destroy]
   before_action :redirect_unless_logged_in
 
-  def settings
+  def control
   end
 
   def show

@@ -3,7 +3,6 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.string :name
       t.string :type
-      t.integer :stock, default:0
 
       t.timestamps null: false
     end

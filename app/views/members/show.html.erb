@@ -9,10 +9,10 @@
     <%= render 'list' %>
   </div>
   <div class='col-4'>
-    <h5>I need...</h5>
+    <h5 class='border'><span class='border'>I need...</span></h5>
     <ul>
       <% if @member.head_of_household || @member = current_member %>
-        <%= render 'list'  %>
+        <%= render ''  %>
       <% else %>
         <%= render @member.lists %>
       <% end %>

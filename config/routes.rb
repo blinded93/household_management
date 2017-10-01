@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
 
   resources :households, only: [:show, :new, :create, :edit, :update, :destroy] do
-    get 'settings' => 'households#settings'
+    get 'control' => 'households#control'
     resources :members
     resources :rooms
     resources :bills
