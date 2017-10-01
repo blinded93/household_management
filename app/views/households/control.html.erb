@@ -1,12 +1,12 @@
 <div class='row'>
   <div class='col-6'>
     <div class=''>
-      <h5>Room Item Needs</h5>
-        <%= render 'list', @ %>
+      <h5>Household Needs</h5>
+        <%= render 'members/member' %>
     </div><br>
     <div class=''>
-      <h5>Member Item Needs</h5>
-        <%= render 'list',  %>
+      <h5>Family Needs</h5>
+        <%= render partial: 'members/member', collection: current_household.members, as: :member %>
     </div>
     <div class=''>
 
