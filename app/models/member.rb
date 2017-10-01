@@ -3,6 +3,6 @@ class Member < ActiveRecord::Base
   has_secure_password
 
   belongs_to :household
-  has_many :rooms, as: :owner
   has_many :chores
+  has_one :room
 end

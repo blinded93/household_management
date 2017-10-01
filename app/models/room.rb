@@ -1,9 +1,8 @@
 class Room < ActiveRecord::Base
   # include Meta
 
-  belongs_to :owner, polymorphic:true
+  belongs_to :household
   has_one :lists, as: :list_owner
-
-  scope :find_by_member, -> (member) { where(owner: member) }
-  scope :find_by_household, -> (member) { where(owner: household) }
+  has_many :room_items
+  has_many :items, through: :room_items
 end
