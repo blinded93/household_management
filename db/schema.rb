@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001015243) do
+ActiveRecord::Schema.define(version: 20171001024831) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "company"
@@ -38,9 +38,13 @@ ActiveRecord::Schema.define(version: 20171001015243) do
 
   create_table "households", force: :cascade do |t|
     t.string   "name"
-    t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip_code"
   end
 
   create_table "items", force: :cascade do |t|
@@ -99,8 +103,13 @@ ActiveRecord::Schema.define(version: 20171001015243) do
 
   create_table "rooms", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "member_id"
+    t.integer  "household_id"
   end
+
+  add_index "rooms", ["household_id"], name: "index_rooms_on_household_id"
+  add_index "rooms", ["member_id"], name: "index_rooms_on_member_id"
 
 end

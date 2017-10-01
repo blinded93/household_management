@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
   root 'welcome#home'
-  get '/join' => 'members#new'
-  resources :members, only: [:create]
+  get '/join' => 'households#new'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
 
-  resources :households, only: [:show, :new, :create, :edit, :update, :destroy] do
+  resources :households, only: [:show, :create, :edit, :update, :destroy] do
     get 'control' => 'households#control'
     resources :members
     resources :rooms
