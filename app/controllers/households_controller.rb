@@ -1,6 +1,6 @@
 class HouseholdsController < ApplicationController
-  before_action :set_household, only: [:settings, :edit, :update, :destroy]
-  before_action :redirect_unless_logged_in
+  before_action :set_household, only: [:control, :settings, :edit, :update, :destroy]
+  before_action :redirect_unless_logged_in, except: [:new, :create]
 
   def control
   end
@@ -10,14 +10,16 @@ class HouseholdsController < ApplicationController
 
   def new
     @household = Household.new
+    @member = @household.members.build
   end
 
   def create
-    @household = current_member.create_household(household_params)
-    byebug
+    @household = Household.new(household_params)
     if @household.valid?
       @household.save
-      redirect_to household_settings_path(current_household)
+      member = @household.members.first
+      session[:member_id] = member.id
+      redirect_to household_control_path(@household)
     else
       render :new
     end
@@ -36,10 +38,10 @@ class HouseholdsController < ApplicationController
 
   private
     def set_household
-      @household ||= current_member.household
+      @household ||= current_household
     end
 
     def household_params
-      params.require(:household).permit(:name, :address)
+      params.require(:household).permit(:name, :address1, :address2, :city, :state, :zip_code, members_attributes: [:first_name, :last_name, :family_title, :monthly_income, :email, :password, :head_of_household])
     end
 end
