@@ -16,3 +16,7 @@
 .list-group-item {
     padding: 3px 10px !important
 }
+
+.strikeout {
+  text-decoration: line-through;
+}
