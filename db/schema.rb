@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001024831) do
+ActiveRecord::Schema.define(version: 20171002234725) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "company"
@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(version: 20171001024831) do
     t.string   "task"
     t.date     "due_date"
     t.integer  "member_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "completed",  default: false
   end
 
   add_index "chores", ["member_id"], name: "index_chores_on_member_id"
