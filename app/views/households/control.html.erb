@@ -1,12 +1,22 @@
 <div class='row'>
   <div class='col-6'>
     <div class=''>
+      <h5>Household Chores</h5>
+      <% current_household %>
+        <%= render '',  %>
+      <% end %>
+    </div>
+    <div class=''>
       <h5>Household Needs</h5>
-        <%= render 'members/member' %>
+      <% current_household.rooms.each do |room| %>
+        <%= render 'households/list_owner',list_owner: room %>
+      <% end %>
     </div><br>
     <div class=''>
-      <h5>Family Needs</h5>
-        <%= render partial: 'members/member', collection: current_household.members, as: :member %>
+      <h5>Member Needs</h5>
+      <% current_household.members.each do |member| %>
+        <%= render 'households/list_owner', list_owner: member %>
+      <% end %>
     </div>
     <div class=''>
 
