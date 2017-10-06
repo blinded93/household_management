@@ -1,5 +1,5 @@
 class Member < ActiveRecord::Base
-  # include Meta
+  include Shared
   has_secure_password
 
   belongs_to :household
@@ -15,5 +15,13 @@ class Member < ActiveRecord::Base
     else
       member
     end
+  end
+
+  def name
+    first_name
+  end
+
+  def plural
+    self.name + "'s"
   end
 end
