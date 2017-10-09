@@ -6,9 +6,17 @@ class SessionsController < ApplicationController
     @member = Member.find_by(email: params[:email])
     if @member && @member.authenticate(params[:password])
       session[:member_id] = @member.id
-      redirect_to household_member_path(@member.household, @member), notice: "Welcome back!"
+      session[:menu_partial] = 'member'
+      redirect_to member_path(@member), notice: "Welcome back!"
     else
       render :new
     end
+  end
+
+  def destroy
+    unless session[:member_id].nil?
+      session.clear
+    end
+    redirect_to login_path
   end
 end
