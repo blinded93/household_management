@@ -1,21 +1,9 @@
 <div class='row'>
-  <div class='col-4'>
-    <ul>
-      <h5>Chores</h5>
-      <%= render @member.chores %>
-    </ul>
+  <div class="col">
   </div>
-  <div class=col-4>
-    <%= render 'list' %>
+  <div class="col-10">
+    <%= render 'main', member:@member %>
   </div>
-  <div class='col-4'>
-    <h5 class='border'><span class='border'>I need...</span></h5>
-    <ul>
-      <% if @member.head_of_household || @member = current_member %>
-        <%= render ''  %>
-      <% else %>
-        <%= render @member.lists %>
-      <% end %>
-    </ul>
+  <div class="col">
   </div>
 </div>
