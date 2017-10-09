@@ -5,7 +5,8 @@ class Member < ActiveRecord::Base
   belongs_to :household
   has_many :chores
   has_one :room
-  has_one :list, as: :list_owner
+  has_many :recieved_messages, class_name: 'Message', primary_key: 'id', foreign_key: 'recipient_id'
+  has_many :sent_messages, class_name: 'Message', primary_key: 'id', foreign_key: 'sender_id'
 
   scope :part_of, -> (household) { where(household_id: household.id)}
 
