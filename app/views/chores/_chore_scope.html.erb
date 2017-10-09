@@ -1,0 +1,8 @@
+<ul class="list-group">
+  <li class="list-group-item justify-content-between">
+      <%= link_to chore, "/households/#{current_household.id}/chores/#{scope}" %>
+    <span class="badge badge-default badge-pill">
+      <%= chores.send(scope).count %>
+    </span>
+  </li>
+</ul>

@@ -1,0 +1,11 @@
+<tr>
+  <td class='col-2'><%= check_box_tag 'chore_ids[]', chore.id, chore.completed %></td>
+
+  <%= content_tag(:td, class:"#{'strikeout' if chore.completed}") do %>
+    <%= chore.task %>
+  <% end %>
+
+  <%= content_tag(:td, class:"col-2 #{'strikeout' if chore.completed}") do %>
+    <%= chore.due_date %>
+  <% end %>
+</tr>
