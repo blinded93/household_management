@@ -1,0 +1,6 @@
+<ul class="list-group">
+  <li class="list-group-item justify-content-between">
+    <%= link_to room.name, household_room_path(room.household, room) %>
+    <span class="badge badge-default badge-pill"><%= room.list.size %></span>
+  </li>
+</ul>

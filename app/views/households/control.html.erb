@@ -1,22 +1,28 @@
 <div class='row'>
   <div class='col-6'>
     <div class=''>
-      <h5>Household Chores</h5>
-      <% current_household %>
-        <%= render '',  %>
+      <h5>
+        All Chores
+      </h5>
+      <% Chore.scopes.each do |scope, chore| %>
+        <%= render 'chores/chore_scope', {chore: chore, scope: scope, chores: @chores} %>
       <% end %>
     </div>
+      <br>
     <div class=''>
-      <h5>Household Needs</h5>
+      <h5>
+        Household Needs
+      </h5>
       <% current_household.rooms.each do |room| %>
-        <%= render 'households/list_owner',list_owner: room %>
+        <%= render 'households/list_owner', room: room %>
       <% end %>
-    </div><br>
+    </div>
+      <br>
     <div class=''>
-      <h5>Member Needs</h5>
-      <% current_household.members.each do |member| %>
-        <%= render 'households/list_owner', list_owner: member %>
-      <% end %>
+      <h5>
+        Household Inventory
+      </h5>
+      
     </div>
     <div class=''>
 
