@@ -1,6 +1,8 @@
 <ul class="list-group">
   <li class="list-group-item justify-content-between">
-    <%= link_to member.first_name, household_member_path(member.household, member) %>
-    <span class="badge badge-default badge-pill"><%= member.list.items.count %></span>
+    <%= link_to member.first_name, member_path(member) %>
+    <span class="badge badge-default badge-pill">
+      <%= member.list.items.count %>
+    </span>
   </li>
 </ul>
