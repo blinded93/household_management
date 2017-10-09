@@ -25,6 +25,6 @@ class ChoresController < ApplicationController
 
   private
   def set_chores
-    @chores = Chore.send(params[:scope]).for(current_member)
+    @chores = current_member.chores.send(params[:scope])
   end
 end
