@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002234725) do
+ActiveRecord::Schema.define(version: 20171008001533) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "company"
@@ -68,13 +68,10 @@ ActiveRecord::Schema.define(version: 20171002234725) do
 
   create_table "lists", force: :cascade do |t|
     t.string   "name"
-    t.integer  "list_owner_id"
-    t.string   "list_owner_type"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "room_id"
   end
-
-  add_index "lists", ["list_owner_type", "list_owner_id"], name: "index_lists_on_list_owner_type_and_list_owner_id"
 
   create_table "members", force: :cascade do |t|
     t.string   "first_name"
@@ -90,6 +87,16 @@ ActiveRecord::Schema.define(version: 20171002234725) do
   end
 
   add_index "members", ["household_id"], name: "index_members_on_household_id"
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "read_at"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "room_items", force: :cascade do |t|
     t.integer  "stock"
