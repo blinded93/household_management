@@ -6,7 +6,10 @@ class Chore < ActiveRecord::Base
   scope :due_tomorrow, -> { where(due_date: Date.tomorrow) }
   scope :not_due, -> { where("due_date > ?", Date.tomorrow) }
   scope :completed, -> { where(completed: true) }
-  scope :for, -> (member) { where(member: member) }
+  scope :for, -> (household) {
+    joins(:member).
+    where(members: {household_id: household.id})
+  }
 
   def self.scopes
     {
