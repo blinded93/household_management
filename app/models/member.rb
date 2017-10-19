@@ -1,5 +1,6 @@
 class Member < ActiveRecord::Base
   include Shared
+
   has_secure_password
 
   belongs_to :household
@@ -7,8 +8,6 @@ class Member < ActiveRecord::Base
   has_one :room
   has_many :recieved_messages, class_name: 'Message', primary_key: 'id', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', primary_key: 'id', foreign_key: 'sender_id'
-
-  scope :part_of, -> (household) { where(household_id: household.id)}
 
   def self.find_or_create_from_household_by(house, attrs)
     if !member = self.find_by(email: attrs[:email])
