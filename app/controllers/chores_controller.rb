@@ -1,30 +1,61 @@
 class ChoresController < ApplicationController
-  before_action :set_chores, only:[:index]
+  before_action :set_chores, only:[:show, :destroy]
+  before_action :set_chore, only:[:show, :edit, :update, :complete]
 
   def index
   end
 
-  def complete
-    set_chores
-    # byebug
-    @chores.each do |chore|
-      if params[:chore_ids].try(:include?, chore.id.to_s)
-        chore.completed = true
-        chore.save
-      else
-        chore.completed = false
-        chore.save
-      end
+  def new
+    @chore = Chore.new
+  end
+
+  def create
+    @chore = Chore.new(chore_params)
+    if @chore.valid?
+      @chore.save
+      redirect_to household_control_path(current_household)
+    else
+      render :new
     end
-    redirect_to :back
+  end
+
+  def edit
   end
 
   def update
+    if @chore.update(chore_params)
+      redirect_to :back
+    else
+      render :edit
+    end
+  end
 
+  def destroy
+    # binding.pry
+    @chores.completed.destroy_all
+    redirect_to :back
+  end
+
+  def complete
+    # binding.pry
+    @chore.toggle!(:completed)
+    redirect_to :back
   end
 
   private
   def set_chores
-    @chores = current_member.chores.send(params[:scope])
+    if params[:scope]
+      @chores = current_member.chores.send(params[:scope])
+    else
+      @chores = current_member.chores
+    end
+  end
+
+  def set_chore
+    @chore = Chore.find_by(id: params[:id])
+  end
+
+  def chore_params
+    params.require(:chore).permit(:task, :due_date, :member_id)
   end
 end

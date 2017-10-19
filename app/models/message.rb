@@ -5,5 +5,5 @@ class Message < ActiveRecord::Base
   validates_presence_of :subject, :message, :sender_id, :recipient_id
 
   default_scope { order(created_at: :desc) }
-  scope :unread, -> { where(read_at: nil)}
+  scope :unread, -> { where(read_at: nil) }
 end
