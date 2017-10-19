@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     @member = Member.find_by(email: params[:email])
     if @member && @member.authenticate(params[:password])
       session[:member_id] = @member.id
-      session[:menu_partial] = 'member'
+      session[:menu_partial] = "layouts/member_menu"
       redirect_to member_path(@member), notice: "Welcome back!"
     else
       render :new
