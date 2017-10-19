@@ -1,11 +1,18 @@
 <tr>
-  <td class='col-2'><%= check_box_tag 'chore_ids[]', chore.id, chore.completed %></td>
-
   <%= content_tag(:td, class:"#{'strikeout' if chore.completed}") do %>
-    <%= chore.task %>
+    <% if household_partial? %>
+        <span title='Click to Edit'>
+          <%= link_to chore.task, edit_household_chore_path(current_household, chore), remote: true, data:{ toggle:'modal', target:"#edit_modal_#{chore.id}" } %>
+        </span>
+      <% else %>
+        <span title='Click to Complete'>
+          <%= link_to chore.task, complete_chores_path(chore), class:'nav-link', method: 'patch' %>
+        </span>
+    <% end %>
   <% end %>
-
   <%= content_tag(:td, class:"col-2 #{'strikeout' if chore.completed}") do %>
     <%= chore.due_date %>
   <% end %>
-</tr>
+
+  <%= render 'modals/edit_chore', chore: chore %>
+  </tr>
