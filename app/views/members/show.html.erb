@@ -1,8 +1,68 @@
 <div class='row'>
   <div class="col">
   </div>
-  <div class="col-10">
-    <%= render 'main', member:@member %>
+  <div class="col-8">
+    <p>
+      <a class="btn btn-sm btn-secondary" data-toggle="collapse" href="#chores" aria-expanded="false" aria-controls="collapseExample">
+        Chores
+      </a>
+      <a class="btn btn-sm btn-secondary" data-toggle="collapse" href="#room"  aria-expanded="false" aria-controls="collapseExample">
+        <%= current_member.plural %> <%= current_member.room.try(:name) %>
+      </a>
+      <a class="btn btn-sm btn-secondary" data-toggle="collapse" href="#member"  aria-expanded="false" aria-controls="collapseExample">
+        Unread Messages
+      </a>
+    </p>
+    <div class="collapse show" id="chores">
+      <div class="card card-block">
+        <% Chore.scopes.each do |scope, scope_title| %>
+          <%= render 'chores/all', {scope_title: scope_title, scope: scope, chores: @chores} %>
+        <% end %>
+      </div>
+    </div>
+    <div class="collapse" id="room">
+      <div class="card card-block">
+        <table class='table table-sm table-hover'>
+          <thead>
+            <h5><strong>Household Needs</strong><small> - <%= link_to "Edit", edit_list_path(current_member.room.list) %></small></h5>
+            <tr>
+              <th>Item</th>
+              <th>Information</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render current_member.room.list  %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="collapse" id="member">
+      <div class="card card-block">
+        <table class='table table-sm table-hover'>
+          <thead>
+            <h5>
+              <strong>Notes/Personal Requests</strong> -
+              <small>
+                <%= link_to "New", new_member_message_path(current_member),
+                  class:'btn btn-sm btn-link',
+                  data:{ toggle:'modal', target:'#new_message' }
+                  %>
+              </small>
+            </h5>
+            <%= render 'modals/new_message', message:@message %>
+            <tr>
+              <th class='col-3'>Sent</th>
+              <th>Subject</th>
+              <th class='col-2'>Sender</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render current_member.recieved_messages.first(10) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
   <div class="col">
   </div>
