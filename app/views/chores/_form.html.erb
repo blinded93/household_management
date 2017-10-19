@@ -1,0 +1,33 @@
+<div class='form-group row'>
+  <%= f.label :member_id, class: 'text-center col-md-3 col-form-label' %>
+  <div class='col-sm-9'>
+    <%= f.collection_select(:member_id, current_household.members, :id, :first_name, {prompt: 'Select Member'}, {class: 'custom-select form-control-sm'}) %>
+  </div>
+</div>
+<div class='form-group form-inline row'>
+  <%= f.label :due_date, 'Due',  class:'col-sm-3 col-form-label' %>
+  <div class='col-sm-9'>
+    <%= f.date_select :due_date, {
+      use_two_digit_numbers:true,
+      start_year:Date.today.year,
+      end_year:Date.today.year + 1,
+      order: [:year, :month, :day],
+      prompt:true}, {
+        class:'form-control form-control-sm'
+          } %>
+  </div>
+</div>
+<div class='form-group row'>
+  <%= f.label :task, class:'text-center col-sm-3 col-form-label' %>
+  <div class='col-sm-9'>
+    <%= f.text_area :task, placeholder: "Task", class:'form-control form-control-sm' %>
+  </div>
+</div>
+<div class='form-group row'>
+  <div class="col">
+
+  </div>
+  <div class='col-sm-8'>
+    <%= f.submit class: 'btn btn-sm' %>
+  </div>
+</div>
