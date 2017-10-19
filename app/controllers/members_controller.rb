@@ -4,9 +4,13 @@ class MembersController < ApplicationController
 
   def index
     @members = current_household.members
+    @member = Member.new
   end
 
   def show
+    session[:menu_partial] = "layouts/member_menu"
+    @chores = @member.chores
+    @message = Message.new
   end
 
   def new
@@ -14,12 +18,14 @@ class MembersController < ApplicationController
   end
 
   def create
+    raise params.inspect
     @member = Member.create(member_params)
     if @member.valid?
       @member.save
       session[:member_id] = @member.id
+      session[:menu_partial] = "layouts/member_menu"
       if @member.household.present?
-        redirect_to household_member_path(@member.household, @member), notice: "Account successfully create."
+        redirect_to member_path(@member), notice: "Account successfully create."
       else
         redirect_to new_household_path, notice: "Please create a household to continue."
       end
@@ -37,7 +43,7 @@ class MembersController < ApplicationController
       redirect_to household_member_path(current_household, @member)
     else
       render :edit
-    end 
+    end
   end
 
   def destroy

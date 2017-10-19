@@ -1,10 +1,12 @@
 class HouseholdsController < ApplicationController
   before_action :set_household, only: [:control, :settings, :edit, :update, :destroy]
   before_action :redirect_unless_logged_in, except: [:new, :create]
-  before_action :render_partial
 
   def control
     @chores = Chore.for(current_household)
+    @chore = Chore.new
+    @edit_chore = Chore.find_by(id: params[:id]) || Chore.first
+    session[:menu_partial] = "layouts/household_menu"
   end
 
   def show
