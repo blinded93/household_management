@@ -22,6 +22,7 @@
       <legend>Create Member</legend>
       <%= f.fields_for :members, @member do |m| %>
         <%= render 'members/form', f:m %>
+        <%= m.hidden_field :head_of_household, value: true %>
       <% end %>
     </fieldset>
   </p>

@@ -1,39 +1,28 @@
 <div class='row'>
-  <div class='col-6'>
-    <div class=''>
-      <h5>
-        All Chores
-      </h5>
-      <% Chore.scopes.each do |scope, chore| %>
-        <%= render 'chores/chore_scope', {chore: chore, scope: scope, chores: @chores} %>
-      <% end %>
-    </div>
-      <br>
-    <div class=''>
-      <h5>
-        Household Needs
-      </h5>
-      <% current_household.rooms.each do |room| %>
-        <%= render 'households/list_owner', room: room %>
-      <% end %>
-    </div>
-      <br>
-    <div class=''>
-      <h5>
-        Household Inventory
-      </h5>
-      
-    </div>
-    <div class=''>
-
-    </div>
+  <div class="col">
   </div>
-  <div class='col-6'>
-    <div class=''>
+  <div class='col-8'>
+    <h5>
+      All Chores - <small><%= link_to "New", new_household_chore_path(current_household), data:{toggle:'modal', target:'#new_chore'} %></small>
+      <%= render 'modals/new_chore', chore: @chore %>
+    </h5>
+    <% Chore.scopes.each do |scope, scope_title| %>
+      <%= render 'chores/all', {scope_title: scope_title, scope: scope, chores: @chores.send(scope)} %>
+    <% end %>
 
-    </div>
-    <div class=''>
+    <br>
+    <h5>
+      Household Needs
+    </h5>
+    <% current_household.rooms.each do |room| %>
+      <%= render 'households/list_owner', room: room %>
+    <% end %>
+    <br>
+    <h5>
+      Household Inventory
+    </h5>
 
-    </div>
+  </div>
+  <div class="col">
   </div>
 </div>
