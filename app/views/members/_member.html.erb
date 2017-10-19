@@ -1,8 +1,12 @@
-<ul class="list-group">
-  <li class="list-group-item justify-content-between">
-    <%= link_to member.first_name, member_path(member) %>
-    <span class="badge badge-default badge-pill">
-      <%= member.list.items.count %>
-    </span>
-  </li>
-</ul>
+<div id="exampleAccordion" data-children=".item">
+  <div class="item">
+    <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion1" aria-expanded="true" aria-controls="exampleAccordion1">
+      <%= member.first_name %>
+    </a>
+    <div id="exampleAccordion1" class="collapse" role="tabpanel">
+      <p class="mb-3">
+        <%= member.last_name %>
+      </p>
+    </div>
+  </div>
+</div>
