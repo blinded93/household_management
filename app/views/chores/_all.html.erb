@@ -1,9 +1,9 @@
-<div id="#Accordion1" data-children=".item">
+<div id="#Accordion_<%= scope.to_s %>" data-children=".item">
   <div class="item">
     <span class="badge badge-default">
       <%= chores.send(scope).count %>
     </span>
-    <a  class='btn btn-sm' data-toggle="collapse" data-parent="#Accordion1" href="#<%= scope.to_s %>" aria-expanded="true" aria-controls="<%= scope.to_s %>">
+    <a  class='btn btn-sm' data-toggle="collapse" data-parent="#Accordion_<%= scope.to_s %>" href="#<%= scope.to_s %>" aria-expanded="true" aria-controls="<%= scope.to_s %>">
       <%= scope_title %>
     </a>
     <div id="<%= scope.to_s %>" class="collapse" role="tabpanel">
