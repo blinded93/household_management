@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'welcome#home'
   get '/join' => 'households#new'
   get '/login' => 'sessions#new'
@@ -10,18 +11,18 @@ Rails.application.routes.draw do
   resources :households, only: [:show, :create, :edit, :update, :destroy] do
     get 'control' => 'households#control'
     resources :members, except: [:show]
+    resources :invitees, except: [:index]
     resources :rooms
     resources :bills
-    resources :chores, only: [:new, :create, :edit, :update, :destroy]
-    get '/chores/:scope' => 'chores#index'
+    resources :chores, except: [:index, :show]
   end
 
   resources :members, only: [:show] do
-    get '/chores/:scope' => 'chores#index', as: :chores
     get '/messages/inbox' => 'messages#inbox', as: :inbox
     get '/messages/sent' => 'messages#sent', as: :sent_messages
     resources :messages, only: [:new, :create, :destroy]
+    resources :lists, only: [:edit, :update, :destroy]
   end
-  resources :lists, only: [:edit, :update, :destroy]
-  resources :items, only: [:create, :edit, :update, :destroy]
+  resources :items, only: [:new, :create, :edit, :update, :destroy]
+  post 'add_item' => 'items#add'
 end

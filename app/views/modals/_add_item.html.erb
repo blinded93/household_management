@@ -1,0 +1,32 @@
+<div class="modal fade" id="add_item" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">
+          Add Item
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_for @item,
+        url:member_items_path(current_member) do |f| %>
+        <div class="modal-body">
+          <%= f.label :name %>
+          <%= f.text_field :name %><br>
+
+          <%= f.label :info, "Type/Brand" %>
+          <%= f.text_field :info %>
+
+          <%= fields_for @list_item do |m| %>
+            <%= m.label :quantity %>
+            <%= m.number_field :quantity %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Add" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
