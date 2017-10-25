@@ -1,12 +1,12 @@
-<div class="row">
-  <div class="col">
-  </div>
-  <div class="col-10">
-    <%= link_to "New Member", new_household_member_path(current_household), data:{toggle: 'modal', target: '#exampleModal', remote: 'index.html.erb'}, class:'btn-sm' %>
-    <%= render 'modal_info', member:@member %>
-    <%= render 'layouts/modal' %>
-    <%= render partial:'members/member', collection:@members %>
-  </div>
-  <div class="col">
-  </div>
-</div>
+<h5>Members
+  <small>
+    <%= link_to "New",
+        new_household_member_path(current_household),
+        data:{toggle:'modal', target:'#new_member'},
+        class:'btn btn-sm' %>
+  </small>
+</h5>
+<%= render 'modals/new_member' %>
+<%= render @members %>
+<br>
+<%= render 'invitees/all', invitees:@invitees %>
