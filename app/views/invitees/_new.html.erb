@@ -1,0 +1,4 @@
+<%= form_for @invitee, url: household_invitees_path(current_household) do |f| %>
+  <%= render 'invitees/form', f:f %>
+  <%= f.submit "Invite!" %>
+<% end %>

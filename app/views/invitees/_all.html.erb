@@ -1,0 +1,35 @@
+<div id="#Accordion1" data-children=".item">
+  <div class="item">
+    <a  class='btn btn-sm' data-toggle="collapse" data-parent="#Accordion1" href="#invitees" aria-expanded="true" aria-controls="invitees">
+      Invites
+    </a>
+    <span class="badge badge-default badge-pill">
+      <%= current_household.invitees.count %>
+    </span>
+    <small>
+    <%= link_to "New",
+        new_household_invitee_path(current_household),
+        data:{toggle:'modal', target:'#new_invitee'},
+        class:'btn btn-sm'  %>
+      </small>
+        <%= render 'modals/new_invitee' %>
+    <div id="invitees" class="collapse" role="tabpanel">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-10">
+          <table>
+            <tr>
+              <th class='col-1'></th>
+              <th class='col-5'>Name</th>
+              <th class='col-6'>Email</th>
+            </tr>
+              <%= render invitees %>
+          </table>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

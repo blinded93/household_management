@@ -1,0 +1,18 @@
+<div class="modal fade" id="new_invitee" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel"><strong>New Invite</strong></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%=  render 'invitees/new', invitee: @invitee %>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Close", "#", data: { dismiss:'modal'}, class:'btn btn-sm' %>
+      </div>
+    </div>
+  </div>
+</div>
