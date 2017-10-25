@@ -1,3 +1,13 @@
-<tr>
-  <%= render list.items %>
-</tr>
+<table class='table table-sm table-hover'>
+  <thead>
+    <%= yield(:add_item) unless household_partial? %>
+    <tr>
+      <th class='col-5'>Name</th>
+      <th class='col-5'>Type/Brand</th>
+      <th class='col-2'>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render member.list.items, list:member.list %>
+  </tbody>
+</table>
