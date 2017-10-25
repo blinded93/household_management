@@ -1,29 +1,32 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
-  before_action :redirect_unless_logged_in, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_unless_logged_in, except: [:new]
+  before_action :set_member, only: [:index, :show, :edit, :update, :destroy]
+  before_action :correct_parent, except: [:show]
 
   def index
     @members = current_household.members
     @member = Member.new
+    @invitees = current_household.invitees
+    @invitee = Invitee.new
   end
 
   def show
     session[:menu_partial] = "layouts/member_menu"
     @chores = @member.chores
     @message = Message.new
+    @item = Item.new
+    @list_item = @item.list_items.build
   end
 
   def new
     @member = Member.new
+    render layout:false
   end
 
   def create
-    raise params.inspect
-    @member = Member.create(member_params)
+    @member = current_household.members.build(member_params)
     if @member.valid?
       @member.save
-      session[:member_id] = @member.id
-      session[:menu_partial] = "layouts/member_menu"
       if @member.household.present?
         redirect_to member_path(@member), notice: "Account successfully create."
       else
@@ -40,7 +43,7 @@ class MembersController < ApplicationController
 
   def update
     if @member.update(member_params)
-      redirect_to household_member_path(current_household, @member)
+      redirect_to household_members_path(current_household)
     else
       render :edit
     end

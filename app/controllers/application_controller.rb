@@ -27,4 +27,12 @@ class ApplicationController < ActionController::Base
   def menu_partial
     @partial ||= session[:menu_partial]
   end
+
+  def correct_parent
+    parent_key = params.keys.find{|key| key.include?("_id")}.to_sym
+    parent = parent_key.slice(0..-4)
+    unless params[parent_key].to_i == self.send("current_#{parent}").id
+      params[parent_key] = self.send("current_#{parent}").id
+    end
+  end
 end

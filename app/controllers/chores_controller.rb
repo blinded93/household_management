@@ -1,6 +1,8 @@
 class ChoresController < ApplicationController
   before_action :set_chores, only:[:show, :destroy]
   before_action :set_chore, only:[:show, :edit, :update, :complete]
+  before_action :redirect_unless_logged_in
+  before_action :correct_parent, except: [:index, :show, :complete]
 
   def index
   end
@@ -31,13 +33,11 @@ class ChoresController < ApplicationController
   end
 
   def destroy
-    # binding.pry
     @chores.completed.destroy_all
     redirect_to :back
   end
 
   def complete
-    # binding.pry
     @chore.toggle!(:completed)
     redirect_to :back
   end

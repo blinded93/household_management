@@ -14,9 +14,13 @@
  *= require_self
  */
 .list-group-item {
-    padding: 3px 10px !important
+  padding: 3px 10px !important
 }
 
 .strikeout {
   text-decoration: line-through;
+}
+
+.form-check-input {
+  margin-left:0 !important
 }
