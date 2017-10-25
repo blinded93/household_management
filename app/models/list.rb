@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  belongs_to :room
+  belongs_to :member
   has_many :list_items
   has_many :items, through: :list_items
 

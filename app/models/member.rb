@@ -6,8 +6,15 @@ class Member < ActiveRecord::Base
   belongs_to :household
   has_many :chores
   has_one :room
+  has_one :list
   has_many :recieved_messages, class_name: 'Message', primary_key: 'id', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', primary_key: 'id', foreign_key: 'sender_id'
+
+  after_initialize :assign_list
+
+  def assign_list
+    self.list || create_list(name: self.name)
+  end
 
   def self.find_or_create_from_household_by(house, attrs)
     if !member = self.find_by(email: attrs[:email])
