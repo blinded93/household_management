@@ -1,28 +1,35 @@
-<div id="#Accordion" data-children=".item">
+<div id="#Accordion1" data-children=".item">
   <div class="item">
-     <span class="badge badge-default badge-pill">
+    <span class="badge badge-default">
       <%= chores.send(scope).count %>
     </span>
-    <a  class='btn btn-link btn-sm' data-toggle="collapse" data-parent="#Accordion" href="#<%= scope.to_s %>" aria-expanded="true" aria-controls="<%= scope.to_s %>">
+    <a  class='btn btn-sm' data-toggle="collapse" data-parent="#Accordion1" href="#<%= scope.to_s %>" aria-expanded="true" aria-controls="<%= scope.to_s %>">
       <%= scope_title %>
     </a>
     <div id="<%= scope.to_s %>" class="collapse" role="tabpanel">
       <% if scope_title == "Completed" %>
-      <%= button_to "Clear Completed", clear_chores_path,
-      method: :delete,
-      data:{confirm: "Clear all completed chores?" },
-      class:'btn btn-sm btn-link text-danger',
-      params:{scope:scope}
-      %>
+      <div class="row">
+      <div class="col-1">
+      </div>
+      <div class="col-11">
+        <%= link_to "Clear Completed", clear_chores_path,
+        method: :delete,
+        data:{confirm: "Clear all completed chores?" },
+        class:'btn btn-sm',
+        params:{scope:scope}
+          %>
+      </div>
+    </div>
       <% end %>
       <div class="row">
         <div class="col">
         </div>
-        <div class="col-10">
+        <div class="col-11">
           <table class='table table-sm table-hover'>
             <thead>
               <tr>
                 <th class='col-8'>Task</th>
+                <th>Member</th>
                 <th class='col-2'>Due</th>
               </tr>
             </thead>
@@ -31,8 +38,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col">
-        </div>
+
       </div>
     </div>
   </div>
