@@ -1,21 +1,23 @@
 <tr>
-  <%= content_tag(:td) do %>
+  <td>
     <% if household_partial? %>
       <span title='Click to Remove'>
-        <%= link_to item.name, item_path(item), class:'btn btn-sm nav-link text-left', method: 'delete' %>
+        <%= link_to item.name, list_item_path(item.list_item(list)), class:'btn btn-sm nav-link text-left', method: 'delete', 'data-confirm'=>"Is this item purchased?" %>
       </span>
     <% else %>
       <span title='Click to Edit'>
-        <%= link_to item.name, edit_item_path(item), data:{ toggle:'modal', target:"#edit_item_#{item.id}" }, class:'btn btn-sm' %>
+        <%= link_to item.name, list_item_path(item), data:{ toggle:'modal', target:"#edit_item_#{item.id}" }, class:'btn btn-sm' %>
       </span>
-    <% end %>
+      <%= render 'modals/edit_item', {list_item:item.list_item(current_member.list), item:item} %>
+    </td>
   <% end %>
-  <%= content_tag(:td, class:"#{'strikeout' if chore.completed}") do %>
-    <%= chore.member.name %>
-  <% end %>
-  <%= content_tag(:td, class:"col-2 #{'strikeout' if chore.completed}") do %>
-    <%= item.list_item.quantity %>
-  <% end %>
-
-  <%= render 'modals/edit_chore', chore: chore %>
+  <td>
+    <%= item.list_item(list).brand %>
+  </td>
+  <td>
+    <%= item.list_item(list).info %>
+  </td>
+  <td>
+    <%= item.list_item(list).quantity %>
+  </td>
 </tr>
