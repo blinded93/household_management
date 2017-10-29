@@ -1,5 +1,5 @@
 <tr>
-  <%= content_tag(:td, class:"#{'strikeout' if chore.completed}") do %>
+  <td class="<%= 'strikeout' if chore.completed %>">
     <% if household_partial? %>
         <span title='Click to Edit'>
           <%= link_to chore.task, edit_household_chore_path(current_household, chore), data:{ toggle:'modal', target:"#edit_modal_#{chore.id}" }, class:'btn btn-sm' %>
@@ -9,13 +9,14 @@
           <%= link_to chore.task, complete_chores_path(chore), class:'btn btn-sm nav-link text-left', method: 'patch' %>
         </span>
     <% end %>
+  </td>
+  <% if household_partial? %>
+    <td class="<%= 'strikeout' if chore.completed %>">
+      <%= chore.member.name %>
+    </td>
   <% end %>
-  <%= content_tag(:td, class:"#{'strikeout' if chore.completed}") do %>
-    <%= chore.member.name %>
-  <% end %>
-  <%= content_tag(:td, class:"col-2 #{'strikeout' if chore.completed}") do %>
+  <td class="<%= 'strikeout' if chore.completed %>">
     <%= chore.due_date %>
-  <% end %>
-
+  </td>
   <%= render 'modals/edit_chore', chore: chore %>
-  </tr>
+</tr>

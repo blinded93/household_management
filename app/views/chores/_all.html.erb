@@ -28,9 +28,14 @@
           <table class='table table-sm table-hover'>
             <thead>
               <tr>
-                <th class='col-8'>Task</th>
-                <th>Member</th>
-                <th class='col-2'>Due</th>
+                <% if household_partial? %>
+                  <th scope='col-8'>Task</th>
+                  <th scope='col-2'>Member</th>
+                  <th scope='col-2'>Due</th>
+                <% else %>
+                  <th scope='col-10'>Task</th>
+                  <th scope='col-2'>Due</th>
+                <% end %>
               </tr>
             </thead>
             <tbody>
