@@ -6,7 +6,7 @@ class HouseholdsController < ApplicationController
   def control
     @chores = Chore.for(current_household)
     @chore = Chore.new
-    @edit_chore = Chore.find_by(id: params[:id]) || Chore.first
+    @edit_chore = @chores.find_by(id: params[:id])
     session[:menu_partial] = "layouts/household_menu"
   end
 

@@ -2,7 +2,7 @@ class ChoresController < ApplicationController
   before_action :set_chores, only:[:show, :destroy]
   before_action :set_chore, only:[:show, :edit, :update, :complete]
   before_action :redirect_unless_logged_in
-  before_action :correct_parent, except: [:index, :show, :complete]
+  before_action :correct_parent, except: [:index, :show, :complete, :destroy]
 
   def index
   end
