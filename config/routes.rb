@@ -21,8 +21,6 @@ Rails.application.routes.draw do
     get '/messages/inbox' => 'messages#inbox', as: :inbox
     get '/messages/sent' => 'messages#sent', as: :sent_messages
     resources :messages, only: [:new, :create, :destroy]
-    resources :lists, only: [:edit, :update, :destroy]
   end
-  resources :items, only: [:new, :create, :edit, :update, :destroy]
-  post 'add_item' => 'items#add'
+  resources :list_items, only: [:create, :update, :destroy]
 end
