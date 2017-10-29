@@ -17,11 +17,10 @@ class Member < ActiveRecord::Base
   end
 
   def self.find_or_create_from_household_by(house, attrs)
-    if !member = self.find_by(email: attrs[:email])
-      house.members.build(attrs)
-    else
-      member
+    unless member = self.find_by(email: attrs[:email])
+      member = house.members.create(attrs)
     end
+    member
   end
 
   def name
