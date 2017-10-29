@@ -14,8 +14,9 @@ class MembersController < ApplicationController
     session[:menu_partial] = "layouts/member_menu"
     @chores = @member.chores
     @message = Message.new
-    @item = Item.new
-    @list_item = @item.list_items.build
+    @list_item = ListItem.new
+    @item = @list_item.build_item
+    @items = Item.all
   end
 
   def new
