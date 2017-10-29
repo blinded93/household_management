@@ -25,11 +25,12 @@
         </strong>
         <small>
            - <%= link_to "Add", new_item_path(current_member),
-           data:{ toggle:'modal', target:"#add_item" },
+           data:{ toggle:'modal',
+           target:"#add_item" },
            class:'btn btn-sm' %>
          </small>
        </h5>
-       <%= render 'modals/add_item' %>
+       <%= render 'modals/add_item', list_item:@list_item %>
      <% end %>
      <%= render 'lists/list', member:current_member %>
   </div>
