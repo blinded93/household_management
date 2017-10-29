@@ -1,0 +1,7 @@
+<%= f.label :quantity %>
+<%= f.number_field :quantity %><br>
+<%= f.label :brand %>
+<%= f.text_field :brand %><br>
+<%= f.label :info %>
+<%= f.text_field :info %><br>
+<%= f.hidden_field :list_id, value:current_member.list.id %>
