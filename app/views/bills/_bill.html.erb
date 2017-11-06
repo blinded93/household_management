@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <span title='Click to Edit'>
+      <%= link_to bill.company, edit_household_bill_path(current_household, bill), data:{ toggle:'modal', target:"#edit_bill_#{bill.id}" }, class:'btn btn-sm' %>
+    </span>
+  </td>
+  <td>
+    <%= bill.utility %>
+  </td>
+  <td>
+    <%= number_to_currency(bill.amount) %>
+  </td>
+  <td>
+    <%= bill.due_date %>
+  </td>
+  <%= render 'modals/edit_bill', bill: bill %>
+</tr>

@@ -1,0 +1,34 @@
+<div id="#Accordion_<%= scope.to_s %>_bill" data-children=".item">
+  <div class="item">
+    <span class="badge badge-default <%= "badge-danger" if scope == :over_due %>">
+      <%= bills.send(scope).count %>
+    </span>
+    <a  class='btn btn-sm' data-toggle="collapse" data-parent="#Accordion_<%= scope.to_s %>_bill" href="#<%= scope.to_s %>_bills" aria-expanded="true" aria-controls="<%= scope.to_s %>_bills">
+      <%= scope_title %>
+    </a>
+    <div id="<%= scope.to_s %>_bills" class="collapse" role="tabpanel">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-11">
+          <table class='table table-sm table-hover'>
+            <caption class='sm-font'>
+              Total expenses: <%= number_to_currency(bills.send(scope).sum(:amount)) %>
+            </caption>
+            <thead>
+              <tr>
+                <th class='col-5 text-center'>Company</th>
+                <th class='col-3 text-center'>Utility</th>
+                <th class='col-2 text-center'>Amount</th>
+                <th class='col-2 text-center'>Due</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render bills %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
