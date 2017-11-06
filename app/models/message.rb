@@ -6,4 +6,12 @@ class Message < ActiveRecord::Base
 
   default_scope { order(created_at: :desc) }
   scope :unread, -> { where(read_at: nil) }
+
+  def sender
+    Member.find_by(id: self.sender_id)
+  end
+
+  def recipient
+    Member.find_by(id: self.recipient_id)
+  end
 end
