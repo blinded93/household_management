@@ -9,7 +9,7 @@ class MemberMailer < ApplicationMailer
   def invite(member, invitee)
     @member = member
     @invitee = invitee
-    @url = 'localhost:3000' + new_household_member_path(member.household)
+    @url = household_invitees_login_url(@invitee.household)
     binding.pry
     mail to:@invitee.email, subject: "Come join the household!"
   end

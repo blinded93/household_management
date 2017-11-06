@@ -1,7 +1,3 @@
-<p>
-  Hello, <%= @invitee.name %>!
-</p>
-
 <dl>
   <dt>
     <strong>
@@ -9,7 +5,7 @@
     </strong>
   </dt>
   <dl>
-    You have been invited by <%= @member.first_name %> to join the <%= @member.household.name %> household.
+    You have been invited by <%= @member.name %> to join the <%= @member.household.name %> household.
     <%= link_to "Click here", @url %> and use <code>code:<%= @invitee.password %></code> to signup!
   </dl>
 </dl>
