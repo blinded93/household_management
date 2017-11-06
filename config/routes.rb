@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root 'welcome#home'
   get '/join' => 'households#new'
   get '/login' => 'sessions#new'
@@ -9,8 +10,11 @@ Rails.application.routes.draw do
   delete '/chores/clear' => 'chores#destroy', as: :clear_chores
 
   resources :households, only: [:show, :create, :edit, :update, :destroy] do
+    resource :calendar, only: [:show], controller: :calendar
     get 'control' => 'households#control'
     resources :members, except: [:show]
+    get 'invitees/login' => 'invitees#login'
+    post 'invitees/verify' => 'invitees#verify'
     resources :invitees, except: [:index]
     resources :rooms
     resources :bills
@@ -20,7 +24,9 @@ Rails.application.routes.draw do
   resources :members, only: [:show] do
     get '/messages/inbox' => 'messages#inbox', as: :inbox
     get '/messages/sent' => 'messages#sent', as: :sent_messages
-    resources :messages, only: [:new, :create, :destroy]
+    resources :messages, only: [:new, :create, :show, :destroy]
   end
+  get 'add_item' => 'list_items#new'
+  get 'edit_item/:id' => 'list_items#edit', as: :edit_item
   resources :list_items, only: [:create, :update, :destroy]
 end
