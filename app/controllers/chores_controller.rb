@@ -33,7 +33,11 @@ class ChoresController < ApplicationController
   end
 
   def destroy
-    @chores.completed.destroy_all
+    if chore = Chore.find_by(id:params[:id])
+      chore.destroy
+    else
+      @chores.completed.destroy_all
+    end
     redirect_to :back
   end
 
