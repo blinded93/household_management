@@ -1,0 +1,44 @@
+<div class="modal fade" id="day_<%= date.to_s %>" tabindex="-1" role="dialog" aria-labelledby="day_title_<%= date.to_s %>" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="day_title_<%= date.to_s %>">
+          <strong>
+            <%= date.day %>
+          </strong>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <% if bills %>
+        <div class="modal-body">
+          <div class='lg-font mx-auto day-cell-zoomed'>
+              <% bills.each do |bill| %>
+                <dl class="">
+                  <dt>
+                    <%= bill.utility %>
+                  </dt>
+                    <dd class='mb-0 pl-4 sm-font'>
+                      <%= bill.company %>
+                      <%= " / #{bill.account_number}" if bill.account_number %>
+                    </dd>
+                    <dd class='mb-0 pl-4 small'>
+                      <%= number_to_currency(bill.amount) %>
+                    </dd>
+                </dl>
+              <% end %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <strong class='sm-font'>
+            Total:
+          </strong>
+          <span>
+            <%= number_to_currency(bill_sum(date)) %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
