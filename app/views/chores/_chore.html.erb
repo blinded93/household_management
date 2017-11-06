@@ -1,13 +1,22 @@
 <tr>
   <td class="<%= 'strikeout' if chore.completed %>">
     <% if household_partial? %>
-        <span title='Click to Edit'>
-          <%= link_to chore.task, edit_household_chore_path(current_household, chore), data:{ toggle:'modal', target:"#edit_modal_#{chore.id}" }, class:'btn btn-sm' %>
-        </span>
-      <% else %>
-        <span title='Click to Complete'>
-          <%= link_to chore.task, complete_chores_path(chore), class:'btn btn-sm nav-link text-left', method: 'patch' %>
-        </span>
+      <span title='Click to Edit'>
+        <%= link_to chore.task,
+          edit_household_chore_path(current_household, chore),
+          data:{
+            toggle:'modal',
+            target:"#edit_modal_#{chore.id}"},
+          class:'btn btn-sm'
+          %>
+      </span>
+    <% else %>
+      <span title='Click to Complete'>
+        <%= link_to chore.task, complete_chores_path(chore),
+          class:'btn btn-sm nav-link text-left',
+          method: 'patch'
+          %>
+      </span>
     <% end %>
   </td>
   <% if household_partial? %>
