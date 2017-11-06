@@ -1,13 +1,13 @@
-<div id="#Accordion_<%= scope.to_s %>" data-children=".item">
+<div id="#Accordion_<%= scope.to_s %>_chore" data-children=".item">
   <div class="item">
-    <span class="badge badge-default">
+    <span class="badge badge-default <%= "badge-danger" if scope == :over_due %>">
       <%= chores.send(scope).count %>
     </span>
-    <a  class='btn btn-sm' data-toggle="collapse" data-parent="#Accordion_<%= scope.to_s %>" href="#<%= scope.to_s %>" aria-expanded="true" aria-controls="<%= scope.to_s %>">
+    <a  class='btn btn-sm' data-toggle="collapse" data-parent="#Accordion_<%= scope.to_s %>_chore" href="#<%= scope.to_s %>_chores" aria-expanded="true" aria-controls="<%= scope.to_s %>_chores">
       <%= scope_title %>
     </a>
-    <div id="<%= scope.to_s %>" class="collapse" role="tabpanel">
-      <% if scope_title == "Completed" %>
+    <div id="<%= scope.to_s %>_chores" class="collapse" role="tabpanel">
+      <% if scope_title == "Completed" && household_partial? %>
       <div class="row">
       <div class="col-1">
       </div>
@@ -15,7 +15,7 @@
         <%= link_to "Clear Completed", clear_chores_path,
         method: :delete,
         data:{confirm: "Clear all completed chores?" },
-        class:'btn btn-sm',
+        class:'btn btn-sm btn-secondary',
         params:{scope:scope}
           %>
       </div>
@@ -29,21 +29,20 @@
             <thead>
               <tr>
                 <% if household_partial? %>
-                  <th scope='col-8'>Task</th>
-                  <th scope='col-2'>Member</th>
-                  <th scope='col-2'>Due</th>
+                  <th class='col-8'>Task</th>
+                  <th class='col-2'>Member</th>
+                  <th class='col-2'>Due</th>
                 <% else %>
-                  <th scope='col-10'>Task</th>
-                  <th scope='col-2'>Due</th>
+                  <th class='col-10'>Task</th>
+                  <th class='col-2'>Due</th>
                 <% end %>
               </tr>
             </thead>
             <tbody>
-              <%= render chores.send(scope) %>
+              <%= render chores %>
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   </div>
