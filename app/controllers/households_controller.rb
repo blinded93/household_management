@@ -4,9 +4,18 @@ class HouseholdsController < ApplicationController
   before_action :correct_parent, only: [:control]
 
   def control
+    @bill_scopes = Bill.scopes
+    @bills = current_household.bills
+    @bill = Bill.new
+    @edit_bill = @bills.find_by(id: params[:id])
+    @chore_scopes = Chore.scopes
     @chores = Chore.for(current_household)
     @chore = Chore.new
     @edit_chore = @chores.find_by(id: params[:id])
+    @members = current_household.members
+    @member = Member.new
+    @invitees = current_household.invitees
+    @invitee = Invitee.new
     session[:menu_partial] = "layouts/household_menu"
   end
 

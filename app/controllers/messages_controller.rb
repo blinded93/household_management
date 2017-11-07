@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show]
+  before_action :set_message, only: [:show, :destroy]
   def inbox
     @messages = current_member.recieved_messages
     render :index
@@ -29,6 +29,11 @@ class MessagesController < ApplicationController
       @message.read_at = Time.now
       @message.save
     end
+  end
+
+  def destroy
+    @message.destroy
+    redirect_to member_path(current_member)
   end
 
   private

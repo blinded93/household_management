@@ -28,11 +28,7 @@ class MembersController < ApplicationController
     @member = current_household.members.build(member_params)
     if @member.valid?
       @member.save
-      if @member.household.present?
-        redirect_to member_path(@member), notice: "Account successfully create."
-      else
-        redirect_to new_household_path, notice: "Please create a household to continue."
-      end
+      redirect_to :back
     else
       render :new
     end
@@ -51,7 +47,8 @@ class MembersController < ApplicationController
   end
 
   def destroy
-
+    @member.destroy
+    redirect_to [current_household, :members]
   end
 
   private
