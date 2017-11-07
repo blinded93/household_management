@@ -1,18 +1,28 @@
-<div class="modal fade" id="new_message" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="new_message" tabindex="-1" role="dialog" aria-labelledby="new_message_title" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel"><strong>Personal Request/Message</strong></h5>
+        <h5 class="modal-title" id="new_message_title">
+          <strong>
+            Personal Request/Message
+          </strong>
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <%= render 'messages/new', message: message %>
+      <div class='mx-auto'>
+        <%= form_for [current_member, message] do |f| %>
+          <div class="modal-body">
+            <%= render 'messages/new', f:f %>
+          </div>
       </div>
-      <div class="modal-footer">
-        <%= link_to "Close", "#", data: { dismiss:'modal'}, class:'btn btn-sm' %>
-      </div>
+        <div class="modal-footer">
+          <%= f.submit "Send",
+            class:'btn btn-sm btn-secondary'
+            %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

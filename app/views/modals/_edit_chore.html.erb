@@ -1,18 +1,34 @@
-<div class="modal fade" id="edit_modal_<%= chore.id %>" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="edit_modal_<%= chore.id %>" tabindex="-1" role="dialog" aria-labelledby="edit_chore_title" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel">Edit Chore</h5>
+        <h5 class="modal-title" id="edit_chore_title">
+          <strong>
+            Edit Chore
+          </strong>
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <%= render 'chores/edit', chore: chore %>
+      <div class='mx-auto'>
+        <%= form_for [current_household, chore] do |f| %>
+          <div class="modal-body">
+            <%= render 'chores/form', f:f %>
+          </div>
       </div>
-      <div class="modal-footer">
-        <%= link_to "Close", "#", data: { dismiss:'modal'}, class:'btn btn-sm' %>
-      </div>
+          <div class="modal-footer">
+            <%= link_to "Delete",
+              [current_household, chore],
+              class:'btn btn-sm btn-secondary text-danger',
+              method:'delete',
+              data:{confirm:"Delete chore?"}
+              %>
+            <%= f.submit "Update",
+              class:'btn btn-sm btn-secondary'
+              %>
+          </div>
+        <% end %>
     </div>
   </div>
 </div>
