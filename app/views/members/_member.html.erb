@@ -8,28 +8,29 @@
         <div class="col">
         </div>
         <div class="col-10">
-          <h6>
-            Chores
-            <span class="badge badge-default badge-pill">
-            <%= member.chores.count %>
-            </span>
-          </h6>
-          <h6>
-            Needs
-            <span class="badge badge-info">
-            <%= member.list.size %>
-            </span>
-          </h6>
-          <br>
-          <%= form_for member, url: household_member_path(current_household, member) do |f| %>
+          <%= form_for [current_household, member] do |f| %>
             <%= render 'members/form', f: f %>
             <div class="form-check row">
               <div class="col-9">
-                <%= f.check_box :head_of_household, class:'form-check-input' %>
-                <%= f.label :head_of_household, "Head of Household?", class:'form-check-label' %>
+                <%= f.check_box :head_of_household,
+                  class:'form-check-input'
+                  %>
+                <%= f.label :head_of_household,
+                  "Head of Household?",
+                  class:'form-check-label'
+                  %>
               </div>
             </div>
-            <%= f.submit "Update", class:'btn btn-sm' %>
+            <br>
+            <%= f.submit "Update",
+              class:'btn btn-sm btn-secondary'
+              %>
+            <%= link_to "Delete",
+              [current_household, member],
+              class:'btn btn-sm btn-secondary text-danger',
+              method:'delete',
+              data:{confirm:"Delete member?"}
+              %>
           <% end %>
           <br>
         </div>
