@@ -1,0 +1,6 @@
+<h3>Login</h3>
+<%= form_tag ({controller: 'invitees', action: 'verify', method: 'post'}) do %>
+  <%= text_field_tag :email,"", {placeholder: "Email"} %><br>
+  <%= password_field_tag :password, "", {placeholder: "Password"} %><br>
+  <%= submit_tag "Sign In" %>
+<% end %>
