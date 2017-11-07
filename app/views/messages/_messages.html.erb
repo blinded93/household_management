@@ -1,0 +1,30 @@
+<table class='table table-sm table-hover'>
+  <thead>
+    <h5>
+      <strong>
+        Notes/Personal Requests
+      </strong> -
+      <small>
+        <%= link_to "New", new_member_message_path(current_member),
+          class:'btn btn-sm',
+          data:{ toggle:'modal', target:'#new_message' }
+          %>
+      </small>
+    </h5>
+    <%= render 'modals/new_message', message:message %>
+    <tr>
+      <th>
+        Subject
+      </th>
+      <th>
+        Sender
+      </th>
+      <th>
+        Date
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render current_member.recieved_messages %>
+  </tbody>
+</table>
