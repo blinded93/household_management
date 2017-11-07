@@ -1,19 +1,39 @@
-<h1 class="navbar-brand">HouseholdManagement - <small class='text-muted'>:<%= current_household.name %> => <%= current_member.first_name %></small></h1>
+<h1 class="navbar-brand">
+  HouseholdManagement
+  <small class='text-muted'>
+    :<%= current_household.name %> =>
+    <span class='text-success'>
+      <%= current_member.first_name %>
+    </span>
+    <% if current_member.head_of_household? %>
+      (<%= link_to "Admin",
+        [current_household, :control],
+        class:'btn btn-sm p-0 m-0'
+        %>)
+    <% end %>
+  </small>
+</h1>
 <div class="collapse navbar-collapse" id="navbarNavDropdown">
   <ul class="navbar-nav">
     <li>
-      <%= link_to "Home", member_path(current_member), class:'nav-link' %>
+      <%= link_to "Home",
+        current_member,
+        class:'nav-link'
+        %>
     </li>
     <li>
-      <%= link_to "Inbox", member_inbox_path(current_member), class:'nav-link' %>
+      <%= link_to "Inbox",
+        member_inbox_path(current_member),
+        class:'nav-link'
+        %>
     </li>
-    <% if head_of_household? %>
-      <li>
-        <%= link_to "Household Control", household_control_path(current_household), class:'nav-link' %>
-      </li>
-    <% end %>
     <li>
-      <%= link_to "Logout", logout_path, class:'nav-link', method: 'delete', data:{confirm: "Are you sure you want to log out?"} %>
+      <%= link_to "Logout",
+        logout_path,
+        class:'nav-link',
+        method: 'delete',
+        data:{confirm: "Are you sure you want to log out?"}
+        %>
     </li>
   </ul>
 </div>
