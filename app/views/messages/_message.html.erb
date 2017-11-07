@@ -1,0 +1,21 @@
+<tr>
+  <td>
+    <%= link_to message.subject,
+      member_message_path(current_member, message),
+      data:{
+        toggle:'modal',
+        target:"#show_message_#{message.id}"
+             },
+      class:'btn btn-sm'
+      %>
+  </td>
+
+  <td>
+    <%= message.sender.name %>
+  </td>
+
+  <td>
+    <%= message.created_at.strftime("%D") %>
+  </td>
+</tr>
+<%= render 'modals/show_message', message:message %>
