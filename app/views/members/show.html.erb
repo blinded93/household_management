@@ -1,54 +1,95 @@
-<p class='text-center'>
-  <a class="btn btn-sm btn-secondary" data-toggle="collapse" href="#chores" aria-expanded="false" aria-controls="chores">
-    Chores
-  </a>
-  <a class="btn btn-sm btn-secondary" data-toggle="collapse" href="#list"  aria-expanded="false" aria-controls="list">
-    Peronal Requests
-  </a>
-  <a class="btn btn-sm btn-secondary" data-toggle="collapse" href="#inbox"  aria-expanded="false" aria-controls="inbox">
-    Inbox
-  </a>
-  <a class="btn btn-sm btn-secondary" data-toggle="collapse" href="#inventory"  aria-expanded="false" aria-controls="inventory">
-    Inventory
-  </a>
-</p>
-
-<div class="collapse show" id="chores">
-  <div class="card card-block">
-    <% Chore.scopes.each do |scope, scope_title| %>
-      <%= render 'chores/chores',
-        { scope_title: scope_title,
-          scope: scope,
-          chores: @chores
-         }
-         %>
-    <% end %>
+<div id='member-show' data-children='.link'>
+  <div class='text-center'>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#chores" aria-expanded="false" aria-controls="chores">
+      Chores
+    </a>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#requests"  aria-expanded="false" aria-controls="list">
+      Requests
+    </a>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#inbox"  aria-expanded="false" aria-controls="inbox">
+      Inbox
+    </a>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#inventory"  aria-expanded="false" aria-controls="inventory">
+      Inventory
+    </a>
+  </div><br>
+  <div class='link'>
+    <div class="collapse <%= 'show' unless selected_tab %>" id="chores">
+      <div class="card card-block p-3">
+        <span class='card-title'>
+          <u class='lg-font'>
+            Chores
+          </u>
+        </span>
+        <div id="accordion-chore" data-children=".chore-item">
+          <% Chore.scopes.each do |scope, scope_title| %>
+            <%= render 'chores/chores',
+              {scope_title: scope_title,
+               scope: scope,
+               chores: @chores}
+              %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div class="collapse" id="list">
-  <div class="card card-block">
-    <% content_for :add_item do %>
-      <h5>
-        <strong>
-          Household/Member Needs
-        </strong>
-        <small>
-          <%= link_to "Add", add_item_path,
-            data:
-              {toggle:'modal',
-               target:"#add_item"
-                },
-            class:'btn btn-sm'
+  <div class='link'>
+    <div class="collapse <%= show_tab("requests") %>" id="requests">
+      <div class="card card-block p-3">
+        <% content_for :add_item do %>
+          <span class='card-title'>
+            <u class='lg-font'>
+              Requests
+            </u>
+            <div class='d-inline pb-2'>
+              <%= link_to "Add", add_item_path,
+                data:{toggle:'modal',
+                      target:"#add_item"},
+                class:'btn btn-sm btn-outline-secondary text-dark ml-2'
+                %>
+             </div>
+           </span>
+           <%= render 'modals/add_item', list_item:@list_item %>
+         <% end %>
+         <%= render 'lists/list', list:current_member.list %>
+      </div>
+    </div>
+  </div>
+  <div class='link'>
+    <div class="collapse <%= show_tab("inbox") %>" id="inbox">
+      <div class="card card-block p-3">
+        <span class='card-title'>
+          <u class='lg-font'>
+            Inbox
+          </u>
+          <%= link_to "New",
+            new_member_message_path(current_member),
+            data:{toggle:'modal',
+                  target:'#new_message'},
+            class:'btn btn-sm btn-outline-secondary text-dark ml-2'
             %>
-         </small>
-       </h5>
-       <%= render 'modals/add_item', list_item:@list_item %>
-     <% end %>
-     <%= render 'lists/list', member:current_member %>
+        </span>
+        <%= render 'modals/new_message', message:@message %>
+        <table class='table table-sm table-hover'>
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Sender</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render current_member.recieved_messages %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-</div>
-<div class="collapse" id="inbox">
-  <div class="card card-block">
-    <%= render 'messages/messages', message:@message %>
+  <div class='link'>
+    <div class="collapse <%= show_tab("inventory") %>"  id='inventory'>
+      <div class="card card-block p-3">
+
+      </div>
+    </div>
   </div>
 </div>
