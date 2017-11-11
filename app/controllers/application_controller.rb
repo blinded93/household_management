@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_member, :current_household, :logged_in?, :head_of_household?, :menu_partial
+  helper_method :current_member, :current_household, :logged_in?, :head_of_household?, :menu_partial, :selected_tab
 
   def current_member
     @current_member ||= Member.find_by(id: session[:member_id])
@@ -34,5 +34,9 @@ class ApplicationController < ActionController::Base
     unless params[parent_key].to_i == self.send("current_#{parent}").id
       params[parent_key] = self.send("current_#{parent}").id
     end
+  end
+
+  def selected_tab
+    params[:tab]
   end
 end
