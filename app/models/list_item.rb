@@ -15,8 +15,11 @@ class ListItem < ActiveRecord::Base
   end
 
   def item_attributes=(attrs)
-    item = Item.create(attrs)
-    self.item = item
+    if item = Item.find_by(attrs)
+      self.item = item
+    else
+      self.create_item(attrs)
+    end
     self.save
   end
 end
