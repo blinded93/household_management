@@ -7,13 +7,13 @@
           data:{
             toggle:'modal',
             target:"#edit_modal_#{chore.id}"},
-          class:'btn btn-sm'
+          class:'btn btn-sm text-info'
           %>
       </span>
     <% else %>
       <span title='Click to Complete'>
         <%= link_to chore.task, complete_chores_path(chore),
-          class:'btn btn-sm nav-link text-left',
+          class:'btn btn-sm text-info',
           method: 'patch'
           %>
       </span>
