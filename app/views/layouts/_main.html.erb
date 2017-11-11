@@ -1,12 +1,39 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <nav class="navbar navbar-light ">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <%= render menu_partial %>
-      </nav>
+      <h4 class="">
+        HouseholdManagement
+        <small class='text-muted'>
+          :<%= current_household.name %> =>
+          <% if household_partial? %>
+            <span class='text-success'>
+              Admin
+            </span>
+            (<%= link_to current_member.name,
+              member_path(current_member),
+              class:'btn btn-sm text-warning p-0 m-0'
+              %>)
+          <% else %>
+            <span class='text-success'>
+              <%= current_member.first_name %>
+            </span>
+            <% if current_member.head_of_household? %>
+              (<%= link_to "Admin",
+                [current_household, :control],
+                class:'btn btn-sm text-warning p-0 m-0'
+                %>)
+            <% end %>
+          <% end %>
+        </small>
+      </h4>
+    </div>
+    <div class='col-1'>
+      <%= link_to "Logout",
+        logout_path,
+        class:'btn btn-sm text-danger nav-link',
+        method: 'delete',
+        data:{confirm: "Are you sure you want to log out?"}
+        %>
     </div>
   </div>
   <div class="row">
