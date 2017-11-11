@@ -1,32 +1,30 @@
-<div id="#Accordion1" data-children=".item">
-  <div class="item">
-    <a  class='btn p-2 font-blk' data-toggle="collapse" data-parent="#Accordion1" href="#invitees" aria-expanded="true" aria-controls="invitees">
-      Invites
-    </a>
-    <span class="badge badge-default">
-      <%= current_household.invitees.count %>
-    </span>
-    <%= link_to "New",
-        new_household_invitee_path(current_household),
-        data:{toggle:'modal', target:'#new_invitee'},
-        class:'btn btn-sm btn-secondary ml-2'  %>
-        <%= render 'modals/new_invitee' %>
-    <div id="invitees" class="collapse" role="tabpanel">
-      <div class="row">
-        <div class="col">
-        </div>
-        <div class="col-10">
-          <table class='table table-sm table-hover'>
-            <tr>
-              <th class='col-1'></th>
-              <th class='col-5'>Name</th>
-              <th class='col-6'>Email</th>
-            </tr>
-              <%= render invitees %>
-          </table>
-        </div>
-        <div class="col">
-        </div>
+<div class="member-item">
+  <a  class='btn p-2 font-blk' data-toggle="collapse" data-parent="#accordion_member" href="#invitees" aria-expanded="true" aria-controls="invitees">
+    Invites
+  </a>
+  <span class="badge badge-default">
+    <%= current_household.invitees.count %>
+  </span>
+  <%= link_to "New",
+      new_household_invitee_path(current_household),
+      data:{toggle:'modal', target:'#new_invitee'},
+      class:'btn btn-sm btn-outline-secondary text-dark ml-2'  %>
+      <%= render 'modals/new_invitee' %>
+  <div id="invitees" class="collapse" role="tabpanel">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-10">
+        <table class='table table-sm table-hover'>
+          <tr>
+            <th class='col-1'></th>
+            <th class='col-5'>Name</th>
+            <th class='col-6'>Email</th>
+          </tr>
+            <%= render invitees %>
+        </table>
+      </div>
+      <div class="col">
       </div>
     </div>
   </div>

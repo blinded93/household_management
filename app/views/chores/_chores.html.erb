@@ -1,48 +1,46 @@
-<div id="#Accordion_<%= scope.to_s %>_chore" data-children=".item">
-  <div class="item">
-    <span class="badge badge-default <%= "badge-danger" if scope == :over_due %>">
-      <%= chores.send(scope).count %>
-    </span>
-    <a  class='btn btn-sm' data-toggle="collapse" data-parent="#Accordion_<%= scope.to_s %>_chore" href="#<%= scope.to_s %>_chores" aria-expanded="true" aria-controls="<%= scope.to_s %>_chores">
-      <%= scope_title %>
-    </a>
-    <div id="<%= scope.to_s %>_chores" class="collapse" role="tabpanel">
-      <% if scope_title == "Completed" && household_partial? %>
-      <div class="row">
-      <div class="col-1">
-      </div>
-      <div class="col-11">
-        <%= link_to "Clear Completed", clear_chores_path,
-        method: :delete,
-        data:{confirm: "Clear all completed chores?" },
-        class:'btn btn-sm btn-secondary',
-        params:{scope:scope}
-          %>
-      </div>
-    </div>
-      <% end %>
-      <div class="row">
-        <div class="col">
+<div class="chore-item">
+  <span class="badge badge-success <%= "badge-danger" if scope == :over_due %> <%= "badge-warning" if scope == :due_today %>">
+    <%= chores.send(scope).count %>
+  </span>
+  <a class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion-chore" href="#<%= scope.to_s %>_chores" aria-expanded="true" aria-controls="<%= scope.to_s %>_chores">
+    <%= scope_title %>
+  </a>
+  <div id="<%= scope.to_s %>_chores" class="collapse" role="tabpanel">
+    <% if scope_title == "Completed" && household_partial? %>
+      <div class="row pt-2">
+        <div class="col-1">
         </div>
         <div class="col-11">
-          <table class='table table-sm table-hover'>
-            <thead>
-              <tr>
-                <% if household_partial? %>
-                  <th class='col-8'>Task</th>
-                  <th class='col-2'>Member</th>
-                  <th class='col-2'>Due</th>
-                <% else %>
-                  <th class='col-10'>Task</th>
-                  <th class='col-2'>Due</th>
-                <% end %>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render chores %>
-            </tbody>
-          </table>
+          <%= link_to "Clear Completed", clear_chores_path,
+            method: :delete,
+            data:{confirm: "Clear all completed chores?" },
+            class:'btn btn-sm btn-outline-secondary text-dark',
+            params:{scope:scope}
+            %>
         </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-11">
+        <table class='table table-sm table-hover'>
+          <thead>
+            <tr>
+              <% if household_partial? %>
+                <th class='col-8'>Task</th>
+                <th class='col-2'>Member</th>
+                <th class='col-2'>Due</th>
+              <% else %>
+                <th class='col-10'>Task</th>
+                <th class='col-2'>Due</th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render chores %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
