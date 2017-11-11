@@ -8,17 +8,15 @@ class ChoresController < ApplicationController
   end
 
   def new
-    @chore = Chore.new
+
   end
 
   def create
     @chore = Chore.new(chore_params)
     if @chore.valid?
       @chore.save
-      redirect_to household_control_path(current_household)
-    else
-      render :new
     end
+    redirect_to [current_household, :control]
   end
 
   def edit

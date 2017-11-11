@@ -11,12 +11,12 @@ class MembersController < ApplicationController
   end
 
   def show
-    session[:menu_partial] = "layouts/member_menu"
     @chores = @member.chores
     @message = Message.new
     @list_item = ListItem.new
     @item = @list_item.build_item
-    @items = Item.all
+    @items = Item.all.pluck(:name)
+    session[:menu_partial] = "member"
   end
 
   def new
@@ -48,7 +48,7 @@ class MembersController < ApplicationController
 
   def destroy
     @member.destroy
-    redirect_to [current_household, :members]
+    redirect_to [current_household, :control]
   end
 
   private

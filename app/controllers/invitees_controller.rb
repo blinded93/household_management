@@ -33,7 +33,7 @@ class InviteesController < ApplicationController
     if @invitee.valid?
       @invitee.save
       MemberMailer.invite(current_member, @invitee).deliver_now
-      redirect_to household_members_path(current_household)
+      redirect_to [current_household, :control]
     else
       render :new
     end
