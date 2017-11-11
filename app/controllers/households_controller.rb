@@ -4,19 +4,22 @@ class HouseholdsController < ApplicationController
   before_action :correct_parent, only: [:control]
 
   def control
-    @bill_scopes = Bill.scopes
     @bills = current_household.bills
     @bill = Bill.new
+    @bill_scopes = @bills.scopes
     @edit_bill = @bills.find_by(id: params[:id])
-    @chore_scopes = Chore.scopes
     @chores = Chore.for(current_household)
     @chore = Chore.new
+    @chore_scopes = @chores.scopes
     @edit_chore = @chores.find_by(id: params[:id])
+    @lists = List.for(current_household)
     @members = current_household.members
     @member = Member.new
     @invitees = current_household.invitees
     @invitee = Invitee.new
-    session[:menu_partial] = "layouts/household_menu"
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @events = @bills.group_by(&:due_date).merge(@chores.group_by(&:due_date))
+    session[:menu_partial] = "household"
   end
 
   def new
