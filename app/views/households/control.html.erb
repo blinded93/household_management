@@ -1,18 +1,142 @@
-<h5>
-  All Chores - <small><%= link_to "New", new_household_chore_path(current_household), data:{toggle:'modal', target:'#new_chore'} %></small>
-  <%= render 'modals/new_chore', chore: @chore %>
-</h5>
-<% Chore.scopes.each do |scope, scope_title| %>
-  <%= render 'chores/all', {scope_title: scope_title, scope: scope, chores: @chores.send(scope)} %>
-<% end %>
-<br>
-<h5>
-  Member Needs
-</h5>
-<% current_household.members.each do |member| %>
-  <%= render 'lists/lists', member:member %>
-<% end %>
-<br>
-<h5>
-  Household Inventory
-</h5>
+<div id='admin-control' data-children='.link'>
+  <div class='text-center'>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#calendar" aria-expanded="false" aria-controls="calendar">
+      Calendar
+    </a>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#chores" aria-expanded="false" aria-controls="chores">
+      Chores
+    </a>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#bills" aria-expanded="false" aria-controls="bills">
+      Bills
+    </a>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#requests" aria-expanded="false" aria-controls="requests">
+      Requests
+    </a>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#inventory" aria-expanded="false" aria-controls="inventory">
+      Inventory
+    </a>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#members" aria-expanded="false" aria-controls="members">
+      Members
+    </a>
+  </div><br>
+  <div class='link'>
+    <div class="collapse <%= 'show' unless selected_tab %>" id="calendar">
+      <div class="card card-block p-3">
+        <span class="card-title">
+        </span>
+        <%= render 'calendar/show' %>
+      </div>
+    </div>
+  </div>
+  <div class='link'>
+    <div class="collapse <%= show_tab("chores") %>" id="chores">
+      <div class="card card-block p-3">
+        <span class="card-title">
+          <u class='lg-font'>Chores</u>
+          <div class='d-inline pb-2'>
+            <%= link_to "New",
+              new_household_chore_path(current_household),
+              data:{toggle:'modal',
+                    target:'#new_chore'},
+              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
+              %>
+            <%= render 'modals/new_chore', chore: @chore %>
+          </div>
+        </span>
+        <div id="accordion-chore" data-children=".chore-item">
+          <% @chore_scopes.each do |scope, scope_title| %>
+            <%= render 'chores/chores',
+              {scope_title: scope_title,
+                scope: scope,
+                chores: @chores.send(scope)}
+              %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='link'>
+    <div class="collapse <%= show_tab("bills") %>" id="bills">
+      <div class="card card-block p-3">
+        <span class="card-title">
+          <u class='lg-font'>
+            Bills
+          </u>
+          <div class='d-inline pb-2'>
+            <%= link_to "Add",
+              new_household_bill_path(current_household),
+              data:{toggle:'modal',
+                    target:'#new_bill'},
+              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
+              %>
+              <%= render 'modals/new_bill', bill:@bill %>
+            </div>
+        </span>
+        <div id="accordion_bill" data-children=".bill-item">
+          <% @bill_scopes.each do |scope, scope_title| %>
+            <%= render 'bills/bills',
+              {scope_title:scope_title,
+               scope:scope,
+               bills:@bills.send(scope)}
+                %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='link'>
+    <div class="collapse <%= show_tab("requests") %>" id="requests">
+      <div class="card card-block p-3">
+        <span class="card-title">
+          <u class='lg-font'>Requests</u>
+        </span>
+        <div id="accordion_request" data-children=".request-item">
+          <% @lists.each do |list| %>
+            <%= render 'lists/lists', list:list %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='link'>
+    <div class="collapse <%= show_tab("inventory") %>" id="inventory">
+      <div class="card card-block p-3">
+        <span class="card-title">
+          <u class='lg-font'>Inventory</u>
+          <div class='d-inline pb-2'>
+            <%= link_to "Add",
+              request_item_path,
+              data:{toggle:'modal',
+                    target:'#new_request'},
+              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
+              %>
+          </div>
+        </span>
+
+      </div>
+    </div>
+  </div>
+  <div class='link'>
+    <div class="collapse <%= show_tab("members") %>" id="members">
+      <div class="card card-block p-3">
+        <span class="card-title">
+          <u class='lg-font'>Members</u>
+          <div class='d-inline pb-2'>
+            <%= link_to "New",
+              new_household_member_path(current_household),
+              data:{toggle:'modal',
+                    target:'#new_member'},
+              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
+              %>
+              <%= render 'modals/new_member' %>
+            </div>
+        </span>
+        <div id="accordion_member" data-children=".member-item">
+          <%= render @members %>
+          <br>
+          <%= render 'invitees/invitees', invitees:@invitees %>
+        </div/>
+      </div>
+    </div>
+  </div>
+</div>
