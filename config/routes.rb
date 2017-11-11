@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  get 'test' => 'households#test'
 
   root 'welcome#home'
   get '/join' => 'households#new'
@@ -29,4 +29,7 @@ Rails.application.routes.draw do
   get 'add_item' => 'list_items#new'
   get 'edit_item/:id' => 'list_items#edit', as: :edit_item
   resources :list_items, only: [:create, :update, :destroy]
+  get 'request_item' => 'room_items#new'
+  get 'edit_request/:id' => 'room_items#edit', as: :edit_request
+  resources :room_items, only: [:create, :update, :destroy]
 end

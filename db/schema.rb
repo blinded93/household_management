@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025232041) do
+ActiveRecord::Schema.define(version: 20171108231400) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "company"
@@ -118,6 +118,8 @@ ActiveRecord::Schema.define(version: 20171025232041) do
     t.integer  "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "request"
+    t.integer  "threshold"
   end
 
   add_index "room_items", ["item_id"], name: "index_room_items_on_item_id"
