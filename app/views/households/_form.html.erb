@@ -1,86 +1,77 @@
-<%= form_for @household do |f| %>
-  <div class='form-group row'>
-    <%= f.label :name,
-      class:'text-center col-md-3 col-form-label'
-      %>
-    <div class='col-sm-9'>
-      <%= f.text_field :name,
-        placeholder: "Name",
-        class:'form-control form-control-sm'
-        %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= f.label :address1,
-      class:'text-center col-md-3 col-form-label'
-      %>
-    <div class="col-sm-9">
-      <%= f.text_field :address1,
-        placeholder: "Address 1",
-        class:'form-control form-control-sm'
-        %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= f.label :address2,
-      class:'text-center col-md-3 col-form-label'
-      %>
-    <div class="col-sm-9">
-      <%= f.text_field :address2,
-        placeholder: "Address 2",
-        class:'form-control form-control-sm'
-        %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= f.label :city,
-      class:'text-center col-md-3 col-form-label'
-      %>
-    <div class="col-sm-9">
-      <%= f.text_field :city,
-        placeholder: "City",
-        class:'form-control form-control-sm'
-        %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= f.label :state,
-      class:'text-center col-md-3 col-form-label'
-      %>
-    <div class="col-sm-9">
-      <%= f.text_field :state,
-        placeholder: "State",
-        class:'form-control form-control-sm'
-        %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= f.label :zip_code,
-      class:'text-center col-md-3 col-form-label'
-      %>
-    <div class="col-sm-9">
-      <%= f.number_field :zip_code,
-        placeholder: "Zip Code",
-        class:'form-control form-control-sm' %>
-    </div>
-  </div>
-    <fieldset>
-      <legend>Create Member</legend>
-      <%= f.fields_for :members, @member do |m| %>
-        <%= render 'members/form', f:m %>
-        <%= m.hidden_field :head_of_household,
-          value: true
-          %>
-      <% end %>
-    </fieldset>
-  </p>
-  <%= f.submit,
-    "Create Household",
-    class:'btn btn-sm'
+<div class='form-group row pr-5'>
+  <%= f.label :name,
+    "Name",
+    class:"col-3 col-form-label text-center #{hide_if_logged_in}"
     %>
-<% end %>
+  <div class='<%= field_size %>'>
+    <%= f.text_field :name,
+      placeholder: "Name",
+      class:'form-control form-control-sm'
+      %>
+  </div>
+</div>
+
+<div class="form-group row pr-5">
+  <%= f.label :address1,
+    "Address 1",
+    class:"col-3 col-form-label text-center #{hide_if_logged_in}"
+    %>
+  <div class="<%= field_size %>">
+    <%= f.text_field :address1,
+      placeholder: "Address 1",
+      class:'form-control form-control-sm'
+      %>
+  </div>
+</div>
+
+<div class="form-group row pr-5">
+  <%= f.label :address2,
+    "Address 2",
+    class:"col-3 col-form-label text-center #{hide_if_logged_in}"
+    %>
+  <div class="<%= field_size %>">
+    <%= f.text_field :address2,
+      placeholder: "Address 2",
+      class:'form-control form-control-sm'
+      %>
+  </div>
+</div>
+
+<div class="form-group row pr-5">
+  <%= f.label :city,
+    "City",
+    class:"col-3 col-form-label text-center #{hide_if_logged_in}"
+    %>
+  <div class="<%= field_size %>">
+    <%= f.text_field :city,
+      placeholder: "City",
+      class:'form-control form-control-sm'
+      %>
+  </div>
+</div>
+
+<div class="form-group row pr-5">
+  <%= f.label :state,
+    "State",
+    class:"col-3 col-form-label text-center #{hide_if_logged_in}"
+    %>
+  <div class="<%= field_size %>">
+    <%= f.text_field :state,
+      placeholder: "State",
+      class:'form-control form-control-sm'
+      %>
+  </div>
+</div>
+
+<div class="form-group row pr-5">
+  <%= f.label :zip_code,
+    "Zip Code",
+    class:"col-3 col-form-label text-center #{hide_if_logged_in}"
+    %>
+  <div class="<%= field_size %>">
+    <%= f.number_field :zip_code,
+      placeholder: "Zip Code",
+      class:'form-control form-control-sm'
+      %>
+  </div>
+</div>
