@@ -1,2 +1,15 @@
 <h3>Welcome to the Household Management system!</h3>
-<%= link_to "Create a new household", join_path %> | <%= link_to "Log in", login_path %>
+<%= link_to "Create a new Household", "join",
+  data:{toggle:'modal',
+        target:"#new_household"},
+  class:'btn btn-sm btn-outline-info mr-2'
+  %>
+ |
+<%= link_to "Login", "login",
+  data:{toggle:'modal',
+        target:"#new_session"},
+  class:'btn btn-sm btn-outline-info ml-2'
+  %>
+
+<%= render 'households/new' %>
+<%= render 'sessions/new' %>
