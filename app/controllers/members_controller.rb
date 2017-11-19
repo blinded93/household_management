@@ -16,7 +16,7 @@ class MembersController < ApplicationController
     @list_item = ListItem.new
     @item = @list_item.build_item
     @items = Item.all.pluck(:name)
-    session[:menu_partial] = "member"
+    session[:admin] = false
   end
 
   def new
@@ -40,7 +40,7 @@ class MembersController < ApplicationController
 
   def update
     if @member.update(member_params)
-      redirect_to household_members_path(current_household)
+      redirect_to [current_household, :control, tab:'members']
     else
       render :edit
     end
