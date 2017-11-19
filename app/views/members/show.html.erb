@@ -36,20 +36,21 @@
   <div class='link'>
     <div class="collapse <%= show_tab("requests") %>" id="requests">
       <div class="card card-block p-3">
-        <% content_for :add_item do %>
+        <% content_for :add_list_item do %>
           <span class='card-title'>
             <u class='lg-font'>
               Requests
             </u>
-            <div class='d-inline pb-2'>
-              <%= link_to "Add", add_item_path,
+            <span class='pb-2'>
+              <%= link_to "Add",
+                "add_item",
                 data:{toggle:'modal',
-                      target:"#add_item"},
+                      target:"#add_list_item"},
                 class:'btn btn-sm btn-outline-secondary text-dark ml-2'
                 %>
-             </div>
+             </span>
            </span>
-           <%= render 'modals/add_item', list_item:@list_item %>
+           <%= render 'list_items/add', list_item:@list_item %>
          <% end %>
          <%= render 'lists/list', list:current_member.list %>
       </div>
@@ -62,14 +63,16 @@
           <u class='lg-font'>
             Inbox
           </u>
-          <%= link_to "New",
-            new_member_message_path(current_member),
-            data:{toggle:'modal',
-                  target:'#new_message'},
-            class:'btn btn-sm btn-outline-secondary text-dark ml-2'
-            %>
+          <span class="pb-2">
+            <%= link_to "New",
+              "new_message",
+              data:{toggle:'modal',
+                    target:'#new_message'},
+              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
+              %>
+          </span>
         </span>
-        <%= render 'modals/new_message', message:@message %>
+        <%= render 'messages/new', message:@message %>
         <table class='table table-sm table-hover'>
           <thead>
             <tr>

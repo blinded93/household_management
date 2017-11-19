@@ -1,9 +1,9 @@
 <div class="form-group row">
   <%= f.label :first_name,
     "First Name",
-    class:'col-md-3 col-form-label'
+    class:"col-3 col-form-label #{hide_if_logged_in}"
     %>
-  <div class="col-sm-9">
+  <div class="<%= field_size %>">
     <%= f.text_field :first_name,
       placeholder: "First Name",
       class:'form-control form-control-sm'
@@ -14,9 +14,9 @@
 <div class="form-group row">
   <%= f.label :last_name,
     "Last Name",
-    class:'col-md-3 col-form-label'
+    class:"col-3 col-form-label #{hide_if_logged_in}"
     %>
-  <div class="col-sm-9">
+  <div class="<%= field_size %>">
     <%= f.text_field :last_name,
       placeholder: "Last Name",
       class:'form-control form-control-sm'
@@ -26,9 +26,9 @@
 <div class="form-group row">
   <%= f.label :family_title,
     "Family Title",
-    class:'col-md-3 col-form-label'
+    class:"col-3 col-form-label #{hide_if_logged_in}"
     %>
-  <div class="col-sm-9">
+  <div class="<%= field_size %>">
     <%= f.text_field :family_title,
       placeholder: "Family Title",
       class:'form-control form-control-sm'
@@ -38,9 +38,9 @@
 <div class="form-group row">
   <%= f.label :monthly_income,
     "Income",
-    class:'col-md-3 col-form-label'
+    class:"col-3 col-form-label #{hide_if_logged_in}"
     %>
-  <div class="input-group col-sm-9">
+  <div class="input-group input-group-sm <%= field_size %>">
     <div class="input-group-addon">
       $
     </div>
@@ -56,9 +56,9 @@
 <div class="form-group row">
   <%= f.label :email,
     "Email",
-    class:'col-md-3 col-form-label'
+    class:"col-3 col-form-label #{hide_if_logged_in}"
     %>
-  <div class="col-sm-9">
+  <div class="<%= field_size %>">
     <%= f.email_field :email,
       placeholder: "Email",
       class:'form-control form-control-sm'
@@ -68,9 +68,9 @@
 <div class="form-group row">
   <%= f.label :password,
     "Password",
-    class:'col-md-3 col-form-label'
+    class:"col-3 col-form-label #{hide_if_logged_in}"
     %>
-  <div class="col-sm-9">
+  <div class="<%= field_size %>">
     <%= f.password_field :password,
       placeholder: "Password",
       class:'form-control form-control-sm'
