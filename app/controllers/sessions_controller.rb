@@ -1,7 +1,4 @@
 class SessionsController < ApplicationController
-  def new
-  end
-
   def create
     @member = Member.find_by(email: params[:email])
     if @member && @member.authenticate(params[:password])
@@ -17,6 +14,6 @@ class SessionsController < ApplicationController
     unless session[:member_id].nil?
       session.clear
     end
-    redirect_to login_path
+    redirect_to root_path
   end
 end
