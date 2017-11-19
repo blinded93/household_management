@@ -1,30 +1,24 @@
 class HouseholdsController < ApplicationController
   before_action :redirect_unless_logged_in, except: [:new, :create]
-  before_action :set_household, only: [:control, :settings, :edit, :update, :destroy]
+  before_action :set_household, only: [:control, :settings, :update, :destroy]
   before_action :correct_parent, only: [:control]
 
   def control
-    @bills = current_household.bills
     @bill = Bill.new
-    @bill_scopes = @bills.scopes
-    @edit_bill = @bills.find_by(id: params[:id])
     @chores = Chore.for(current_household)
     @chore = Chore.new
-    @chore_scopes = @chores.scopes
-    @edit_chore = @chores.find_by(id: params[:id])
     @lists = List.for(current_household)
-    @members = current_household.members
     @member = Member.new
-    @invitees = current_household.invitees
-    @invitee = Invitee.new
+    @room = Room.new
+    @room_item = RoomItem.new
+    @item = @room_item.build_item
+    @items = Item.all.pluck(:name)
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @events = @bills.group_by(&:due_date).merge(@chores.group_by(&:due_date))
-    session[:menu_partial] = "household"
+    @events = current_household.bills.group_by(&:due_date).merge(@chores.group_by(&:due_date))
+    session[:admin] = true
   end
 
   def new
-    @household = Household.new
-    @member = @household.members.build
   end
 
   def create
@@ -35,15 +29,16 @@ class HouseholdsController < ApplicationController
       session[:member_id] = member.id
       redirect_to household_control_path(@household)
     else
-      render :new
+      render 'welcome/home'
     end
   end
 
-  def edit
-  end
-
   def update
+    if @household.update(household_params)
+      redirect_to [current_household, :control, tab:'household']
+    else
 
+    end
   end
 
   def destroy
