@@ -21,15 +21,17 @@
             </div>
           </div>
           <br>
-          <%= f.submit "Update",
-            class:'btn btn-sm btn-outline-secondary text-dark'
-            %>
-          <%= link_to "Delete",
-            [current_household, member],
-            class:'btn btn-sm btn-outline-secondary text-danger',
-            method:'delete',
-            data:{confirm:"Delete member?"}
-            %>
+          <div class="text-right">
+            <%= link_to "Delete",
+              [current_household, member],
+              class:'btn btn-sm btn-outline-secondary text-danger',
+              method:'delete',
+              data:{confirm:"Delete member?"}
+              %>
+            <%= f.submit "Update",
+              class:'btn btn-sm btn-outline-secondary text-dark'
+              %>
+          </div>
         <% end %>
         <br>
       </div>
