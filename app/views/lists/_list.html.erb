@@ -1,7 +1,8 @@
 <table class='table table-sm table-hover'>
   <thead>
-    <%= yield(:add_item) unless household_partial? %>
-    <tr>
+    <%= yield(:add_list_item) unless admin? %>
+    <tr class='text-center'>
+      <th></th>
       <th class='col-3'>Name</th>
       <th class='col-3'>Brand</th>
       <th class='col-4'>Info</th>
@@ -9,6 +10,6 @@
     </tr>
   </thead>
   <tbody>
-    <%= render list.items, list:list %>
+    <%= render list.items, addee:list %>
   </tbody>
 </table>

@@ -5,7 +5,7 @@
         HouseholdManagement
         <small class='text-muted'>
           :<%= current_household.name %> =>
-          <% if household_partial? %>
+          <% if admin? %>
             <span class='text-success'>
               Admin
             </span>

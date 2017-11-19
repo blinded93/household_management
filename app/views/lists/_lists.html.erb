@@ -1,17 +1,17 @@
 <div class="item">
- <span class="badge badge-default">
-   <%= list.size %>
- </span>
- <a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_request" href="#member_<%= list.member_id %>_request" aria-expanded="true" aria-controls="member_<%= list.member_id %>_request">
-   <%= list.member.name %>
- </a>
- <div id="member_<%= list.member_id %>_request" class="collapse" role="tabpanel">
-     <div class="row">
-     <div class="col">
-     </div>
-     <div class="col-11">
-       <%= render list %>
-     </div>
-   </div>
- </div>
+  <span class="badge badge-default">
+    <%= list.size %>
+  </span>
+  <a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_request" href="#list_<%= list.id %>_request" aria-expanded="true" aria-controls="list_<%= list.id %>_request">
+    <%= list.member.name %>
+  </a>
+  <div id="list_<%= list.id %>_request" class="collapse" role="tabpanel">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-11">
+        <%= render list %>
+      </div>
+    </div>
+  </div>
 </div>
