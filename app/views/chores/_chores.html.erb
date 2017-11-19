@@ -6,7 +6,7 @@
     <%= scope_title %>
   </a>
   <div id="<%= scope.to_s %>_chores" class="collapse" role="tabpanel">
-    <% if scope_title == "Completed" && household_partial? %>
+    <% if scope_title == "Completed" && admin? %>
       <div class="row pt-2">
         <div class="col-1">
         </div>
@@ -27,7 +27,7 @@
         <table class='table table-sm table-hover'>
           <thead>
             <tr>
-              <% if household_partial? %>
+              <% if admin? %>
                 <th class='col-8'>Task</th>
                 <th class='col-2'>Member</th>
                 <th class='col-2'>Due</th>

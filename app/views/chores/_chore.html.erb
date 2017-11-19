@@ -1,12 +1,12 @@
 <tr>
   <td class="<%= 'strikeout' if chore.completed %>">
-    <% if household_partial? %>
+    <% if admin? %>
       <span title='Click to Edit'>
         <%= link_to chore.task,
           edit_household_chore_path(current_household, chore),
           data:{
             toggle:'modal',
-            target:"#edit_modal_#{chore.id}"},
+            target:"#edit_chore_#{chore.id}"},
           class:'btn btn-sm text-info'
           %>
       </span>
@@ -19,7 +19,7 @@
       </span>
     <% end %>
   </td>
-  <% if household_partial? %>
+  <% if admin? %>
     <td class="<%= 'strikeout' if chore.completed %>">
       <%= chore.member.name %>
     </td>
@@ -27,5 +27,5 @@
   <td class="<%= 'strikeout' if chore.completed %>">
     <%= chore.due_date %>
   </td>
-  <%= render 'modals/edit_chore', chore: chore %>
+  <%= render 'chores/edit', chore: chore %>
 </tr>
