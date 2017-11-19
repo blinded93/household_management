@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_member, :current_household, :logged_in?, :head_of_household?, :menu_partial, :selected_tab
+  helper_method :current_member, :current_household, :logged_in?, :head_of_household?, :admin?, :selected_tab, :selected_scope
 
   def current_member
     @current_member ||= Member.find_by(id: session[:member_id])
@@ -24,8 +24,8 @@ class ApplicationController < ActionController::Base
     current_member.head_of_household
   end
 
-  def menu_partial
-    @partial ||= session[:menu_partial]
+  def admin?
+    session[:admin]
   end
 
   def correct_parent
@@ -38,5 +38,9 @@ class ApplicationController < ActionController::Base
 
   def selected_tab
     params[:tab]
+  end
+
+  def selected_scope
+    params[:scope]
   end
 end
