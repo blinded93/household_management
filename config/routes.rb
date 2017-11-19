@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  get 'test' => 'households#test'
-
   root 'welcome#home'
-  get '/join' => 'households#new'
-  get '/login' => 'sessions#new'
+  # get '/join' => 'households#new'
+  # get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
   patch '/chores/:id/complete' => 'chores#complete', as: :complete_chores
