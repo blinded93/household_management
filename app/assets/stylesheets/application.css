@@ -20,6 +20,7 @@
 
 td {
   font-size: .85em;
+  vertical-align: middle !important;
 }
 
 .lg-font {

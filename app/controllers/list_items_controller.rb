@@ -2,17 +2,13 @@ class ListItemsController < ApplicationController
   before_action :set_list_item, only: [:update, :destroy]
 
   def create
-    if item = Item.find_by(list_item_params[:item_attributes])
-      list_item = ListItem.find_or_create(list_item_params, item)
-    else
-      list_item = ListItem.new(list_item_params)
-    end
-    redirect_to member_path(current_member)
+    list_item = ListItem.find_or_create(list_item_params)
+    redirect_to [current_member, tab:'requests']
   end
 
   def update
     @list_item.update(list_item_params)
-    redirect_to member_path(current_member)
+    redirect_to [current_member, tab:'requests']
   end
 
   def destroy
