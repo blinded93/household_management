@@ -13,17 +13,11 @@
       </div>
       <div class='mr-4'>
         <div class="modal-body">
-          <%= form_for list_item do |f| %>
+          <%= form_for room_item do |f| %>
             <%= render 'room_items/form', f:f %>
         </div>
       </div>
         <div class="modal-footer">
-          <%= link_to "Delete",
-            room_item_path(room_item),
-            class:'btn btn-sm btn-outline-danger',
-            method: 'delete',
-            params:{room_item:room_item.id}
-            %>
           <%= f.submit "Update",
             class:'btn btn-sm btn-outline-secondary text-dark'
             %>

@@ -12,6 +12,7 @@
   </td>
   <td>
     <%= item_name(item, addee) %>
+    <%= render_edit(item, addee) if item_name(item, addee).include?("href") %>
   </td>
   <% item.addee_item(addee).columns.each do |attr| %>
     <td class='text-center'>

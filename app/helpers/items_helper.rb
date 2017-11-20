@@ -7,7 +7,7 @@ module ItemsHelper
     link_to item.name,
         [item.addee_item(addee)],
         data:{toggle:'modal',
-              target:"#edit_item_#{item.id}"},
+              target:"#edit_#{addee.class_name}_item_#{item.id}"},
         class:'btn btn-sm text-info'
   end
 
