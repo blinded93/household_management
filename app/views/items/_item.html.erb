@@ -1,23 +1,21 @@
 <tr>
   <td>
-    <% if household_partial? %>
-      <span title='Click to Remove'>
-        <%= link_to item.name, list_item_path(item.list_item(list)), class:'btn btn-sm text-info', method: 'delete', 'data-confirm'=>"Is this item purchased?" %>
-      </span>
-    <% else %>
-      <span title='Click to Edit'>
-        <%= link_to item.name, list_item_path(item), data:{ toggle:'modal', target:"#edit_item_#{item.id}" }, class:'btn btn-sm text-info' %>
-      </span>
-      <%= render 'modals/edit_item', {list_item:item.list_item(current_member.list), item:item} %>
+    <span title='Remove'>
+      <%= link_to [item.addee_item(addee)],
+          class:'btn btn-sm text-muted close',
+          method:'delete',
+          data:{confirm:'Remove Item?'} do
+          %>
+          <span aria-hidden="true">&times;</span>
+      <% end %>
+    </span>
+  </td>
+  <td>
+    <%= item_name(item, addee) %>
+  </td>
+  <% item.addee_item(addee).columns.each do |attr| %>
+    <td class='text-center'>
+      <%= item.addee_item(addee).send(attr) %>
     </td>
   <% end %>
-  <td>
-    <%= item.list_item(list).brand %>
-  </td>
-  <td>
-    <%= item.list_item(list).info %>
-  </td>
-  <td>
-    <%= item.list_item(list).quantity %>
-  </td>
 </tr>
