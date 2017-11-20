@@ -1,25 +1,24 @@
 class ListItem < ActiveRecord::Base
+  include Joins
+
   belongs_to :list
   belongs_to :item
 
-  def self.find_or_create(attrs, item)
-    search_attrs = attrs.select{|key, value| key != 'quantity' && !value.is_a?(Hash)}
-    search_attrs[:item_id] = item.id
-    if list_item = ListItem.find_by(search_attrs)
-      list_item.quantity += attrs[:quantity].to_i
+  def self.find_or_create(attrs)
+    new_li = ListItem.new(attrs)
+    if list_item = ListItem.find_by(list_id:new_li.list_id, item_id:new_li.item_id)
+      list_item.update(attrs)
     else
-      list_item = ListItem.new(attrs)
+      new_li.save
+      new_li
     end
-    list_item.save
-    list_item
   end
 
   def item_attributes=(attrs)
-    if item = Item.find_by(attrs)
-      self.item = item
-    else
-      self.create_item(attrs)
-    end
-    self.save
+    self.item = Item.find_or_create_by(attrs)
+  end
+
+  def columns
+    ["brand", "info", "quantity"]
   end
 end

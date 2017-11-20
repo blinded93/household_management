@@ -1,25 +1,27 @@
 class RoomItem < ActiveRecord::Base
+  include Joins
+
   belongs_to :room
   belongs_to :item
 
-  def self.find_or_create(attrs, item)
-    search_attrs = attrs.select{|key, value| key != 'stock' && !value.is_a?(Hash)}
-    search_attrs[:item_id] = item.id
-    if room_item = RoomItem.find_by(search_attrs)
-      room_item.quantity += attrs[:stock].to_i
+  scope :need_purchased, -> { where("stock <= threshold") }
+  scope :entire_stock, -> { where("stock > threshold") }
+
+  def self.find_or_create(attrs)
+    new_ri = RoomItem.new(attrs)
+    if room_item = RoomItem.find_by(room_id:new_ri.room_id, item_id:new_ri.item_id)
+      room_item.update(attrs)
     else
-      room_item = RoomItem.new(attrs)
+      new_ri.save
+      new_ri
     end
-    room_item.save
-    room_item
   end
 
-  def item_attributes(attrs)
-    if item = Item.find_by(attrs)
-      self.item = item
-    else
-      self.create_item(attrs)
-    end
-    self.save
+  def item_attributes=(attrs)
+    self.item = Item.find_or_create_by(attrs)
+  end
+
+  def columns
+    ["stock", "threshold"]
   end
 end

@@ -1,4 +1,6 @@
 class Household < ActiveRecord::Base
+  has_secure_password
+
   has_many :members
   has_many :bills
   has_many :rooms
@@ -9,12 +11,18 @@ class Household < ActiveRecord::Base
   validates :city, :state, :zip_code, presence: true
 
   def members_attributes=(members_attributes)
-    members_attributes.values.each do |member_attributes|
-      Member.find_or_create_from_household_by(self, member_attributes)
+    members_attributes.values.each do |member_attribute|
+      member = Member.new(member_attribute)
+      if member.valid?
+        member.household = self
+        member.save
+      else
+
+      end
     end
   end
 
-  def head
+  def heads
     members.where(head_of_household: true).first
   end
 end
