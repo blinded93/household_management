@@ -1,14 +1,7 @@
 class MembersController < ApplicationController
   before_action :redirect_unless_logged_in, except: [:new]
-  before_action :set_member, only: [:index, :show, :edit, :update, :destroy]
+  before_action :set_member, only: [:show, :update, :destroy]
   before_action :correct_parent, except: [:show]
-
-  def index
-    @members = current_household.members
-    @member = Member.new
-    @invitees = current_household.invitees
-    @invitee = Invitee.new
-  end
 
   def show
     @chores = @member.chores
@@ -34,10 +27,6 @@ class MembersController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
   def update
     if @member.update(member_params)
       redirect_to [current_household, :control, tab:'members']
@@ -53,7 +42,7 @@ class MembersController < ApplicationController
 
   private
     def set_member
-      @member = Member.find_by(id: params[:id])
+      @member ||= Member.find_by(id: params[:id])
     end
 
     def member_params

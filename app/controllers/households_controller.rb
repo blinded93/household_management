@@ -18,9 +18,6 @@ class HouseholdsController < ApplicationController
     session[:admin] = true
   end
 
-  def new
-  end
-
   def create
     @household = Household.new(household_params)
     if @household.valid?
