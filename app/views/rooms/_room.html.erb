@@ -1,6 +1,6 @@
 <div class="item">
   <span class="badge badge-default">
-    <%= room.room_items.need_purchased.count %>
+    <%= restock_count(room.room_items) if admin? %>
   </span>
   <a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_inventory" href="#room_<%= room.id %>_inventory" aria-expanded="true" aria-controls="room_<%= room.id %>_inventory">
    <%= room.name %>
@@ -12,8 +12,8 @@
       <div class="col-11">
         <table class='table table-sm table-hover'>
           <thead>
-            <tr class='text-center'>
-              <th></th>
+            <tr>
+              <th> </th>
               <th class='col-6'>Name</th>
               <th class='col-3'>Stock</th>
               <th class='col-3'>Threshold</th>
