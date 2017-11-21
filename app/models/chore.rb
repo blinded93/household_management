@@ -17,8 +17,8 @@ class Chore < ActiveRecord::Base
   def self.scopes
     {
       over_due: "Over Due",
-      due_today: "Due Today",
-      due_tomorrow: "Due Tomorrow",
+      due_today: "Today",
+      due_tomorrow: "Tomorrow",
       future: "Future",
       completed: "Completed"
     }

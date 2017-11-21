@@ -4,6 +4,7 @@ class RoomItem < ActiveRecord::Base
   belongs_to :room
   belongs_to :item
 
+  scope :with_requests, -> { where(request: true) }
   scope :need_purchased, -> { where("stock <= threshold") }
   scope :entire_stock, -> { where("stock > threshold") }
 
