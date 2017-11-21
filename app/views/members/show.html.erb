@@ -89,9 +89,15 @@
     </div>
   </div>
   <div class='link'>
-    <div class="collapse <%= show_tab("inventory") %>"  id='inventory'>
+    <div class="collapse <%= show_tab("inventory") %>" id="inventory">
       <div class="card card-block p-3">
-
+        <span class="card-title">
+          <u class='lg-font'>
+            Inventory
+          </u>
+        <div id="accordion_inventory" data-children=".room-item">
+          <%= render current_household.rooms.unowned %>
+        </div>
       </div>
     </div>
   </div>
