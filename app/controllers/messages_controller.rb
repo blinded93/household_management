@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
     else
       render :new
     end
-    redirect_to member_path(current_member), message:"show"
+    redirect_to [current_member, tab:'inbox']
   end
 
   def show

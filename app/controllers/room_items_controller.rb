@@ -1,5 +1,5 @@
 class RoomItemsController < ApplicationController
-  before_action :set_room_item, only: [:request, :update, :destroy]
+  before_action :set_room_item, only: [:inventory_request, :update, :destroy]
 
   def create
     room_item = RoomItem.find_or_create(room_item_params)
@@ -7,10 +7,15 @@ class RoomItemsController < ApplicationController
   end
 
   def inventory_request
-
+    @room_item.request = true
+    @room_item.save
+    redirect_to [current_member, tab:'inventory']
   end
 
   def update
+    if room_item_params[:stock].to_i > @room_item.stock
+      @room_item.request = false
+    end
     @room_item.update(room_item_params)
     redirect_to [current_household, :control]
   end
