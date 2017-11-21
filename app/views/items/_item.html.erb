@@ -1,21 +1,13 @@
 <tr>
   <td>
-    <span title='Remove'>
-      <%= link_to [item.addee_item(addee)],
-          class:'btn btn-sm text-muted close',
-          method:'delete',
-          data:{confirm:'Remove Item?'} do
-          %>
-          <span aria-hidden="true">&times;</span>
-      <% end %>
-    </span>
+    <%= remove_button(item, addee) unless !admin? && addee.is_a?(Room) %>
   </td>
-  <td>
+  <td class='<%= 'border border-danger' if item.addee_item(addee).try(:request) %>'>
     <%= item_name(item, addee) %>
     <%= render_edit(item, addee) if item_name(item, addee).include?("href") %>
   </td>
   <% item.addee_item(addee).columns.each do |attr| %>
-    <td class='text-center'>
+    <td>
       <%= item.addee_item(addee).send(attr) %>
     </td>
   <% end %>
