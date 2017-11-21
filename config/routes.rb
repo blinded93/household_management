@@ -24,10 +24,7 @@ Rails.application.routes.draw do
     get '/messages/sent' => 'messages#sent', as: :sent_messages
     resources :messages, only: [:new, :create, :show, :destroy]
   end
-  get 'add_item' => 'list_items#new'
-  get 'edit_item/:id' => 'list_items#edit', as: :edit_item
   resources :list_items, only: [:create, :update, :destroy]
-  get 'request_item' => 'room_items#new'
-  get 'edit_request/:id' => 'room_items#edit', as: :edit_request
+  post 'request/room_item/:id' => 'room_items#inventory_request', as: :room_item_request
   resources :room_items, only: [:create, :update, :destroy]
 end
