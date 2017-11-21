@@ -1,30 +1,30 @@
 <tr>
-  <td class="<%= 'strikeout' if chore.completed %>">
+  <td>
     <% if admin? %>
-      <span title='Click to Edit'>
+      <span title='Edit'>
         <%= link_to chore.task,
           edit_household_chore_path(current_household, chore),
           data:{
             toggle:'modal',
             target:"#edit_chore_#{chore.id}"},
-          class:'btn btn-sm text-info'
+          class:"btn btn-sm text-info #{strikeout(chore)}"
           %>
       </span>
     <% else %>
-      <span title='Click to Complete'>
+      <span title='Complete'>
         <%= link_to chore.task, complete_chores_path(chore),
-          class:'btn btn-sm text-info',
-          method: 'patch'
+          class:"btn btn-sm text-info #{strikeout(chore)}",
+          method:'patch'
           %>
       </span>
     <% end %>
   </td>
   <% if admin? %>
-    <td class="<%= 'strikeout' if chore.completed %>">
+    <td class="<%= strikeout(chore) %>">
       <%= chore.member.name %>
     </td>
   <% end %>
-  <td class="<%= 'strikeout' if chore.completed %>">
+  <td class="<%= strikeout(chore) %>">
     <%= chore.due_date %>
   </td>
   <%= render 'chores/edit', chore: chore %>

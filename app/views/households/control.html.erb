@@ -145,8 +145,11 @@
               <%= render 'members/new' %>
           </span>
         </span>
-        <div id="accordion_member" data-children=".member-item">
-          <%= render current_household.members %>
+        <div id="accordion_member" data-children=".member-edit">
+          <%= render partial:'members/edit',
+            collection:current_household.members,
+            as: :member
+            %>
         </div>
       </div>
     </div>
