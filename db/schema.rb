@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115070510) do
+ActiveRecord::Schema.define(version: 20171121030654) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "company"
@@ -48,17 +48,6 @@ ActiveRecord::Schema.define(version: 20171115070510) do
     t.integer  "zip_code"
     t.string   "password_digest"
   end
-
-  create_table "invitees", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.integer  "household_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "invitees", ["household_id"], name: "index_invitees_on_household_id"
 
   create_table "items", force: :cascade do |t|
     t.string   "name"

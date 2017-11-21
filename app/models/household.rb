@@ -4,7 +4,6 @@ class Household < ActiveRecord::Base
   has_many :members
   has_many :bills
   has_many :rooms
-  has_many :invitees
 
   validates :name, presence: true
   validates :address1, presence: true, uniqueness: true
