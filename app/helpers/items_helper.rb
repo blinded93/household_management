@@ -5,17 +5,33 @@ module ItemsHelper
 
   def item_edit_link(item, addee)
     link_to item.name,
-        [item.addee_item(addee)],
-        data:{toggle:'modal',
-              target:"#edit_#{addee.class_name}_item_#{item.id}"},
-        class:'btn btn-sm text-info'
+      [item.addee_item(addee)],
+      data:{toggle:'modal',
+            target:"#edit_#{addee.class_name}_item_#{item.id}"},
+      class:"btn btn-sm text-info"
+  end
+
+  def remove_button(item, addee)
+    link_to "&times;".html_safe,
+      [item.addee_item(addee)],
+      class:'btn btn-sm text-muted close',
+      method:'delete',
+      data:{confirm:'Remove Item?'}
+  end
+
+  def inventory_request(item, addee)
+    link_to item.name,
+      [item.addee_item(addee), :request, tab:'inventory'],
+      class:'btn btn-sm text-info',
+      method:'post',
+      data:{confirm:'Request Item?'}
   end
 
   def item_name(item, addee)
     if addee.is_a?(List)
       admin? ? item.name : item_edit_link(item, addee)
     elsif addee.is_a?(Room)
-      admin? ? item_edit_link(item, addee) : item.name
+      admin? ? item_edit_link(item, addee) : inventory_request(item, addee)
     end
   end
 end
