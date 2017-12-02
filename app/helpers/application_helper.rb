@@ -6,9 +6,4 @@ module ApplicationHelper
   def btn_classes
     'btn btn-sm btn-outline-secondary text-dark ml-2'
   end
-
-  def error_messages(obj)
-    obj.erors.full_messages
-    "#{field.to_s.capitalize} #{error.first}"
-  end
 end
