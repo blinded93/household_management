@@ -4,22 +4,16 @@ class ChoresController < ApplicationController
   before_action :redirect_unless_logged_in
   before_action :correct_parent, except: [:index, :show, :complete, :destroy]
 
-  def index
-  end
-
-  def new
-
-  end
-
   def create
     @chore = Chore.new(chore_params)
-    if @chore.valid?
-      @chore.save
+    respond_to do |format|
+      if @chore.save
+        format.json { head :no_content }
+        format.js
+      else
+        format.js
+      end
     end
-    redirect_to [current_household, :control]
-  end
-
-  def edit
   end
 
   def update
