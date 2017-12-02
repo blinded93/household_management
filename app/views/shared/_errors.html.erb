@@ -1,0 +1,5 @@
+<% obj.errors.full_messages.each do |message| %>
+  <%= content_tag :small, class:'d-block' do %>
+    <%= message %>
+  <% end %>
+<% end %>
