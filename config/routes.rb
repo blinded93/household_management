@@ -1,28 +1,22 @@
 Rails.application.routes.draw do
   root 'welcome#home'
-  # get '/join' => 'households#new'
-  # get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
-  patch '/chores/:id/complete' => 'chores#complete', as: :complete_chores
+  patch '/chores/:id/complete' => 'chores#complete', as: :complete_chore
   delete '/chores/clear' => 'chores#destroy', as: :clear_chores
 
-  resources :households, only: [:show, :create, :edit, :update, :destroy] do
-    resource :calendar, only: [:show], controller: :calendar
+  resources :households, only: [:create, :update, :destroy] do
+    # resource :calendar, only: [:show], controller: :calendar
     get 'control' => 'households#control'
     resources :members, except: [:show]
-    get 'invitees/login' => 'invitees#login'
-    post 'invitees/verify' => 'invitees#verify'
-    resources :invitees, except: [:index]
-    resources :rooms
-    resources :bills
-    resources :chores, except: [:index, :show]
+    resources :rooms, only: [:new, :create, :update, :destroy]
+    resources :bills, only: [:create, :update, :destroy]
+    resources :chores, only: [:create, :update, :destroy]
   end
 
   resources :members, only: [:show] do
     get '/messages/inbox' => 'messages#inbox', as: :inbox
-    get '/messages/sent' => 'messages#sent', as: :sent_messages
-    resources :messages, only: [:new, :create, :show, :destroy]
+    resources :messages, only: [:create, :destroy]
   end
   resources :list_items, only: [:create, :update, :destroy]
   post 'request/room_item/:id' => 'room_items#inventory_request', as: :room_item_request
