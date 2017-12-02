@@ -16,6 +16,12 @@
           <%= render 'rooms/form', f:f %>
       </div>
       <div class="modal-footer">
+          <%= link_to "Delete",
+            [current_household, room],
+            class:'btn btn-sm btn-outline-secondary text-danger',
+            method:'delete',
+            data:{confirm:"Delete room?"}
+            %>
           <%= f.submit "Update",
             class:'btn btn-sm btn-outline-secondary text-dark'
             %>
