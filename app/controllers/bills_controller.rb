@@ -3,11 +3,6 @@ class BillsController < ApplicationController
   before_action :redirect_unless_logged_in
   before_action :correct_parent
 
-  def index
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @bills = current_household.bills
-  end
-
   def create
     @bill = current_household.bills.build(bill_params)
     if @bill.valid?
