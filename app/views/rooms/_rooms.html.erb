@@ -1,48 +1,62 @@
-<div class='row'>
-  <div class="col-2">
-  </div>
-  <div class="col-4 text-center">
-    <u>
-      Community
-    </u>
-  </div>
-  <div class="col-4 text-center">
-    <u>
-      Bedrooms
-    </u>
-  </div>
-  <div class="col-2 text-right">
+<div class="row">
+  <div class="col text-right">
     <%= link_to "Add Room",
-      'add_room',
+      'rooms/new',
       data:{toggle:'modal',
             target:'#new_room'},
-      class:'btn btn-sm text-info ml-2'
+      class:btn_classes
       %>
+      <br>
     <%= render 'rooms/new' %>
   </div>
 </div>
 <div class='row'>
   <div class="col-2">
   </div>
-  <div class='col-4 text-center'>
-    <% current_household.rooms.unowned.each do |room| %>
-      <%= link_to room.name,
-        "edit_room_#{room.id}",
-        data:{toggle:'modal',
-              target:"#edit_room_#{room.id}"
-              },
-        class:'btn btn-sm text-info ml-2'
-        %>
-        <%= render 'rooms/edit', room:room %>
-    <% end %>
+  <div class=' pr-0 col-4 text-center'>
+    <table class="table table-sm" id='community_rooms'>
+      <thead>
+        <tr>
+          <th>Community</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% current_household.rooms.unowned.each do |room| %>
+          <tr>
+            <td>
+              <%= link_to room.name,
+                "edit_room_#{room.id}",
+                data:{toggle:'modal',
+                      target:"#edit_room_#{room.id}"
+                      },
+                      class:link_classes
+                  %>
+              <%= render 'rooms/edit', room:room %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-  <div class='col-4 text-center'>
-    <% current_household.rooms.owned.each do |room| %>
-      <small>
-        <%= room.member.name %>
-      </small>
-    <% end %>
+  <div class='pl-0 col-4 text-center'>
+    <table class='table table-sm' id='bedrooms'>
+      <thead>
+        <tr>
+          <th>Bedrooms</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% current_household.rooms.owned.each do |room| %>
+          <tr>
+            <td>
+              <%= room.member.name %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
   <div class="col-2">
   </div>
 </div>
+</table>
