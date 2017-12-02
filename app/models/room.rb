@@ -1,6 +1,8 @@
 class Room < ActiveRecord::Base
   include Shared
 
+  validates :name, presence: true
+
   belongs_to :household
   belongs_to :member
   has_many :room_items
@@ -16,7 +18,7 @@ class Room < ActiveRecord::Base
   def member?
     !!member
   end
-  
+
   def owned_name
     member? ? "#{member.plural} #{name}": name
   end

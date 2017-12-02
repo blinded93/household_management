@@ -1,6 +1,6 @@
 class List < ActiveRecord::Base
   include Shared
-  
+
   belongs_to :member
   has_many :list_items
   has_many :items, through: :list_items

@@ -19,6 +19,6 @@ class ListItem < ActiveRecord::Base
   end
 
   def columns
-    ["brand", "info", "quantity"]
+    ['brand', 'info', 'quantity']
   end
 end
