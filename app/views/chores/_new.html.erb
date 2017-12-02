@@ -12,12 +12,16 @@
         </button>
       </div>
       <div class='mr-4'>
-        <%= form_for [current_household, chore] do |f| %>
+        <%= form_for chore,
+          url:[current_household, chore],
+          remote:true do |f| %>
           <div class="modal-body">
             <%= render 'chores/form', f:f %>
           </div>
       </div>
           <div class="modal-footer">
+            <div id='chore_errors' class='text-danger small mr-auto'>
+            </div>
             <%= f.submit "Create",
               class: 'btn btn-sm btn-outline-secondary text-dark'
               %>

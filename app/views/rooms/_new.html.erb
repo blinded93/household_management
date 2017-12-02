@@ -11,11 +11,14 @@
       </div>
       <div class="modal-body">
         <%= form_for @room,
-          url:[current_household, @room] do |f|
+          url:[current_household, @room],
+          remote:true do |f|
           %>
           <%= render 'rooms/form', f:f %>
       </div>
       <div class="modal-footer">
+        <div id='room_errors' class='text-danger small mr-auto'>
+        </div>
           <%= f.submit "Create",
             class:'btn btn-sm btn-outline-secondary text-dark'
             %>
