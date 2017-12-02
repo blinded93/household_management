@@ -1,3 +1,4 @@
+@import "bootstrap";
 .list-group-item {
   padding: 3px 10px !important;
 }
@@ -31,6 +32,7 @@ td {
   height:100px !important;
   width:120px !important;
   padding:0 !important;
+  vertical-align: top !important;
 }
 
 .day-cell-zoomed {
@@ -38,4 +40,12 @@ td {
   width:100% !important;
   /*margin:5 !important;*/
   /*padding:0 !important;*/
+}
+
+.new-form {
+  width:400px !important;
+}
+
+.error {
+  border: 1px solid red;
 }
