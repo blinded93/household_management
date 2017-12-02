@@ -2,7 +2,7 @@ class RoomItemsController < ApplicationController
   before_action :set_room_item, only: [:inventory_request, :update, :destroy]
 
   def create
-    room_item = RoomItem.find_or_create(room_item_params)
+    @room_item = RoomItem.find_or_create(room_item_params)
     redirect_to [current_household, :control, tab:'inventory']
   end
 

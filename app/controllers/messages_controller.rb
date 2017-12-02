@@ -5,15 +5,6 @@ class MessagesController < ApplicationController
     render :index
   end
 
-  def sent
-    @messages = current_member.sent_messages
-    render :index
-  end
-
-  def new
-    @message = Message.new
-  end
-
   def create
     @message = Message.new(message_params)
     if @message.valid?
