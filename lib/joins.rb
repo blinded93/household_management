@@ -4,4 +4,8 @@ module Joins
       !attr.include?("_") && !attr.include?("id")
     end
   end
+
+  def addee
+    self.class_name.split("_").first
+  end
 end
