@@ -4,10 +4,11 @@ module ItemsHelper
   end
 
   def item_edit_link(item, addee)
+    ai = item.addee_item(addee)
     link_to item.name,
-      [item.addee_item(addee)],
+      [ai],
       data:{toggle:'modal',
-            target:"#edit_#{addee.class_name}_item_#{item.id}"},
+            target:"#edit_#{ai.class_name}_#{ai.id}"},
       class:"btn btn-sm text-info"
   end
 
