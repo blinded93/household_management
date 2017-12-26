@@ -1,0 +1,7 @@
+<% if current_url.include?("household") %>
+  $('#new_<%= obj.class_name %>').modal('toggle');
+  window.location.replace("<%= house_redirect(tab, scope) %>");
+<% elsif current_url.include?("member") %>
+  $('#new_<%= obj.class_name %>').modal('toggle');
+  window.location.replace("<%= member_redirect(tab, scope) %>");
+<% end %>

@@ -1,0 +1,18 @@
+<% obj.completed_fields.each do |field| %>
+  <% unless field == :item_id || :password %>
+    var el = document.getElementById("<%= obj.id_name(field) %>");
+    el.classList.remove("border");
+    el.classList.remove("border-danger");
+  <% end %>
+<% end %>
+document.getElementById("<%= obj.error_div %>").innerHTML = "";
+<% if obj.class_name.include?("_item") %>
+    $('#edit_<%= obj.row_id %>').modal('toggle');
+    $("#<%= obj.row_id %>").html("<%= j render 'items/item', item:obj.item, addee:obj.send(obj.addee) %>");
+<% else %>
+    $('#edit_<%= obj.row_id %>').modal('toggle');
+    $(".<%= obj.row_id %>").html("<%= j render obj.row_partial, obj.class_name.to_sym => obj %>");
+<% end %>
+<% if obj.is_a?(Member) %>
+  $("#<%= obj.row_id %>").collapse("toggle")
+<% end %>
