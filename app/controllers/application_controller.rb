@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_member, :current_household, :logged_in?, :head_of_household?, :admin?, :selected_tab, :selected_scope
+  helper_method :current_member, :current_household, :logged_in?, :head_of_household?, :admin?, :selected_tab, :selected_scope, :current_url
 
   def current_member
     @current_member ||= Member.find_by(id: session[:member_id])
@@ -10,13 +10,17 @@ class ApplicationController < ActionController::Base
     @current_household ||= current_member.household
   end
 
+  def current_url
+    @url ||= request.env['PATH_INFO']
+  end
+
   def logged_in?
     !!current_member
   end
 
   def redirect_unless_logged_in
     unless logged_in?
-      redirect_to login_path, notice:"You must be logged in."
+      redirect_to root_path
     end
   end
 
@@ -26,14 +30,6 @@ class ApplicationController < ActionController::Base
 
   def admin?
     session[:admin]
-  end
-
-  def correct_parent
-    parent_key = params.keys.find{|key| key.include?("_id")}.to_sym
-    parent = parent_key.slice(0..-4)
-    unless params[parent_key].to_i == self.send("current_#{parent}").id
-      params[parent_key] = self.send("current_#{parent}").id
-    end
   end
 
   def selected_tab
