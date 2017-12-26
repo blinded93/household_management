@@ -1,0 +1,9 @@
+<% obj.completed_fields.each do |field| %>
+  <% unless field == :password %>
+    var el = document.getElementById("<%= obj.id_name(field) %>");
+    el.classList.remove("border");
+    el.classList.remove("border-danger");
+  <% end %>
+<% end %>
+$('#edit_<%= obj.row_id %>').modal('toggle');
+$("#edit_household").html("<%= j render 'households/household', household:obj%>");
