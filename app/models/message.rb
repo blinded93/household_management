@@ -1,4 +1,6 @@
 class Message < ActiveRecord::Base
+  include Shared
+
   belongs_to :sender, class_name: 'User', foreign_key: 'sender_id'
   belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
 
@@ -13,5 +15,9 @@ class Message < ActiveRecord::Base
 
   def recipient
     Member.find_by(id: self.recipient_id)
+  end
+
+  def cols
+    [:subject, :body, :recipient_id, :sender_id]
   end
 end

@@ -5,11 +5,15 @@ class Room < ActiveRecord::Base
 
   belongs_to :household
   belongs_to :member
-  has_many :room_items
+  has_many :room_items, dependent: :destroy
   has_many :items, through: :room_items
 
   scope :unowned, -> { where(member_id: nil) }
   scope :owned, -> { where("member_id IS NOT NULL") }
+
+  def cols
+    [:name]
+  end
 
   def size
     items.count
@@ -21,5 +25,9 @@ class Room < ActiveRecord::Base
 
   def owned_name
     member? ? "#{member.plural} #{name}": name
+  end
+
+  def scope
+    "room_" + "#{id}" + "_inventory"
   end
 end

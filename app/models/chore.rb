@@ -29,6 +29,10 @@ class Chore < ActiveRecord::Base
     }
   end
 
+  def cols
+    [:member_id, :due_date, :task]
+  end
+
   def formatted_due_date
     due_date.strftime("%D")
   end

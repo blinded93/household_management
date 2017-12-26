@@ -1,5 +1,10 @@
 class Bill < ActiveRecord::Base
+  include Shared
+  
   belongs_to :household
+
+  validates :company, :utility, :amount, :due_date, presence: true
+
 
   scope :over_due, -> { where("due_date < ?", Date.today) }
   scope :within_week, -> { where(due_date: Date.today..Date.today + 1.week) }
@@ -18,5 +23,9 @@ class Bill < ActiveRecord::Base
       this_month: "This Month",
       next_month: "Next Month"
     }
+  end
+
+  def cols
+    [:company, :utility, :amount, :account_number, :due_date]
   end
 end

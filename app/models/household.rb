@@ -1,27 +1,26 @@
 class Household < ActiveRecord::Base
+  include Shared
+
   has_secure_password
 
-  has_many :members
-  has_many :bills
-  has_many :rooms
+  has_many :members, dependent: :destroy
+  has_many :bills, dependent: :destroy
+  has_many :rooms, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, :city, :state, :zip_code, presence: true
   validates :address1, presence: true, uniqueness: true
-  validates :city, :state, :zip_code, presence: true
 
   def members_attributes=(members_attributes)
-    members_attributes.values.each do |member_attribute|
-      member = Member.new(member_attribute)
-      if member.valid?
-        member.household = self
-        member.save
-      else
-
-      end
+    members_attributes.values.each do |member_attributes|
+      self.members << Member.new(member_attributes)
     end
   end
 
   def heads
-    members.where(head_of_household: true).first
+    members.where(head_of_household: true)
+  end
+
+  def cols
+    [:name, :address1, :city, :state, :zip_code, :password]
   end
 end
