@@ -5,19 +5,30 @@ class BillsController < ApplicationController
 
   def create
     @bill = current_household.bills.build(bill_params)
-    if @bill.valid?
-      @bill.save
-    else
-      render :new
+    respond_to do |format|
+      if @bill.save
+        format.js { render 'shared/create',
+                    locals:{obj:@bill}
+                  }
+      else
+        format.js { render "shared/errors",
+                    locals:{obj:@bill}
+                  }
+      end
     end
-    redirect_to household_control_path(current_household)
   end
 
   def update
-    if @bill.update(bill_params)
-      redirect_to household_control_path(current_household)
-    else
-      render :edit
+    respond_to do |format|
+      if @bill.update(bill_params)
+        format.js { render 'shared/update',
+                    locals:{obj:@bill}
+                  }
+      else
+        format.js { render "shared/errors",
+                    locals:{obj:@bill}
+                  }
+      end
     end
   end
 
