@@ -32,6 +32,10 @@ class ApplicationController < ActionController::Base
     session[:admin]
   end
 
+  def correct_parent
+
+  end
+
   def selected_tab
     params[:tab]
   end
