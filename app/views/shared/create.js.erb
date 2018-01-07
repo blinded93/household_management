@@ -1,7 +1,19 @@
-<% if current_url.include?("household") %>
-  $('#new_<%= obj.class_name %>').modal('toggle');
-  window.location.replace("<%= house_redirect(tab, scope) %>");
-<% elsif current_url.include?("member") %>
-  $('#new_<%= obj.class_name %>').modal('toggle');
-  window.location.replace("<%= member_redirect(tab, scope) %>");
+<% obj.completed_fields.each do |field| %>
+  <% unless field == :item_id || :password %>
+    var el = document.getElementById("<%= obj.id_name(field) %>");
+    el.classList.remove("border");
+    el.classList.remove("border-danger");
+  <% end %>
 <% end %>
+$('#<%= obj.error_div %>').html('');
+$('#new_<%= obj.class_name %>_dialog').modal('toggle');
+
+<% if obj.respond_to?(:scopes) %>
+  <% obj.scopes.each do |scope, scope_title| %>
+    $("#<%= obj.reload_div(scope) %>").html("<%= j render "#{obj.row_partial}s", {scope:scope, scope_title:scope_title}.merge(obj.objects_hash(scope)) %>");
+  <% end %>
+<% else %>
+  $("#<%= obj.reload_acc %>").html("<%= j render "#{obj.row_partial}s", obj.objects_hash %>");
+<% end %>
+
+$("#<%= obj.class_name %>_dialogs").append("<%= j render "#{obj.plural_name}/edit", obj.class_name.to_sym => obj %>");
