@@ -20,4 +20,8 @@ class Message < ActiveRecord::Base
   def cols
     [:subject, :body, :recipient_id, :sender_id]
   end
+
+  def reload_acc
+    "message_confirmation"
+  end
 end

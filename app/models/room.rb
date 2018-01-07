@@ -28,6 +28,14 @@ class Room < ActiveRecord::Base
   end
 
   def scope
-    "room_" + "#{id}" + "_inventory"
+    name.downcase.tr(" ", "_")
+  end
+
+  def reload_acc
+    "reload_rooms"
+  end
+
+  def objects_hash
+    {}
   end
 end
