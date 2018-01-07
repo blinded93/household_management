@@ -6,19 +6,28 @@ class RoomsController < ApplicationController
     @room = current_household.rooms.build(room_params)
     respond_to do |format|
       if @room.save
-        format.json { head :no_content }
-        format.js
+        format.js { render 'shared/create',
+                    locals:{obj:@room}
+                  }
       else
-        format.js
+        format.js { render 'shared/errors',
+                    locals:{obj:@room}
+                  }
       end
     end
   end
 
   def update
-    if @room.update(room_params)
-      redirect_helper
-    else
-      redirect_helper
+    respond_to do |format|
+      if @room.update(room_params)
+        format.js { render 'shared/update',
+                    locals:{obj:@room}
+                  }
+      else
+        format.js { render 'shared/errors',
+                    locals:{obj:@room}
+                  }
+      end
     end
   end
 
@@ -36,9 +45,5 @@ class RoomsController < ApplicationController
 
     def room_params
       params.require(:room).permit(:name)
-    end
-
-    def redirect_helper
-      redirect_to [current_household, :control, tab:'household', scope:'rooms']
     end
 end
