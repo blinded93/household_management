@@ -8,6 +8,11 @@ class ListItem < ActiveRecord::Base
   belongs_to :list
   belongs_to :item
 
+  scope :for, -> (member) {
+    joins(:list).
+    where(lists: {member_id: member.id})
+  }
+
   def self.find_or_create(attrs)
     new_li = ListItem.new(attrs)
     if list_item = ListItem.find_by(list_id:new_li.list_id, item_id:new_li.item_id)
@@ -34,5 +39,13 @@ class ListItem < ActiveRecord::Base
     if !persisted? && ListItem.find_by(list_id:list_id, item_id:item_id)
       errors.add(:item_id, "is already on that list.")
     end
+  end
+
+  def scopes
+    {list.name.downcase.tr(" ", "_").to_sym => list.name}
+  end
+
+  def objects_hash(scope)
+    {list:self.list}
   end
 end

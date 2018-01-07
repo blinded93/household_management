@@ -1,6 +1,6 @@
 class Bill < ActiveRecord::Base
   include Shared
-  
+
   belongs_to :household
 
   validates :company, :utility, :amount, :due_date, presence: true
@@ -27,5 +27,15 @@ class Bill < ActiveRecord::Base
 
   def cols
     [:company, :utility, :amount, :account_number, :due_date]
+  end
+
+  def scopes
+    Bill.scopes.select do |scope, scope_title|
+      Bill.send(scope).pluck(:id).include?(self.id)
+    end
+  end
+
+  def objects_hash(scope)
+    {bills:self.household.bills.send(scope)}
   end
 end

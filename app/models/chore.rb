@@ -42,4 +42,14 @@ class Chore < ActiveRecord::Base
       errors.add(:due_date, "can't be in the past.")
     end
   end
+
+  def scopes
+    Chore.scopes.select do |scope, scope_title|
+      Chore.send(scope).pluck(:id).include?(self.id)
+    end
+  end
+
+  def objects_hash(scope)
+    {chores:Chore.for(member.household).send(scope)}
+  end
 end
