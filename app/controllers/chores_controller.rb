@@ -2,25 +2,35 @@ class ChoresController < ApplicationController
   before_action :set_chores, only:[:show, :destroy]
   before_action :set_chore, only:[:show, :edit, :update, :complete]
   before_action :redirect_unless_logged_in
-  before_action :correct_parent, except: [:index, :show, :complete, :destroy]
 
   def create
+    @chores = Chore.for(current_household)
     @chore = Chore.new(chore_params)
     respond_to do |format|
       if @chore.save
-        format.json { head :no_content }
-        format.js
+        format.js { render 'shared/create',
+                    locals:locals
+                  }
       else
-        format.js
+        format.js { render 'shared/errors',
+                    locals:locals
+                  }
       end
     end
   end
 
   def update
-    if @chore.update(chore_params)
-      redirect_to :back
-    else
-      render :edit
+    respond_to do |format|
+      if @chore.update(chore_params)
+        format.json { head :no_content }
+        format.js { render 'shared/update',
+                    locals:{obj:@chore}
+                  }
+      else
+        format.js { render "shared/errors",
+                    locals:{obj:@chore}
+                  }
+      end
     end
   end
 
@@ -35,7 +45,11 @@ class ChoresController < ApplicationController
 
   def complete
     @chore.toggle!(:completed)
-    redirect_to :back
+    respond_to do |format|
+      format.js { render 'complete',
+                  locals:{chore_id:@chore.id}
+                }
+    end
   end
 
   private
