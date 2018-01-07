@@ -1,7 +1,6 @@
 class MembersController < ApplicationController
   before_action :redirect_unless_logged_in, except: [:new]
   before_action :set_member, only: [:show, :update, :destroy]
-  before_action :correct_parent, except: [:show]
 
   def show
     @chores = @member.chores
@@ -18,20 +17,32 @@ class MembersController < ApplicationController
   end
 
   def create
-    @member = current_household.members.build(member_params)
-    if @member.valid?
-      @member.save
-      redirect_to :back
-    else
-      render :new
+    @member = Member.new(member_params)
+    current_household.members << @member if current_household
+    respond_to do |format|
+      if @member.save
+        format.js { render 'shared/create',
+                    locals:{obj:@member}
+                  }
+      else
+        format.js { render "shared/errors",
+                    locals:{obj:@member}
+                  }
+      end
     end
   end
 
   def update
-    if @member.update(member_params)
-      redirect_to [current_household, :control, tab:'members']
-    else
-      render :edit
+    respond_to do |format|
+      if @member.update(member_params)
+        format.js { render 'shared/update',
+                    locals:{obj:@member}
+                  }
+      else
+        format.js { render 'shared/errors',
+                    locals:{obj:@member}
+                  }
+      end
     end
   end
 
