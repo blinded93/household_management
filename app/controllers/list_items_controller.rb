@@ -2,13 +2,32 @@ class ListItemsController < ApplicationController
   before_action :set_list_item, only: [:update, :destroy]
 
   def create
-    list_item = ListItem.find_or_create(list_item_params)
-    redirect_to [current_member, tab:'requests']
+    @list_item = ListItem.new(list_item_params)
+    respond_to do |format|
+      if @list_item.save
+        format.js { render 'shared/create',
+                    locals:{obj:@list_item}
+                  }
+      else
+        format.js { render 'shared/errors',
+                    locals:{obj:@list_item}
+                  }
+      end
+    end
   end
 
   def update
-    @list_item.update(list_item_params)
-    redirect_to [current_member, tab:'requests']
+    respond_to do |format|
+      if @list_item.update(list_item_params)
+        format.js { render 'shared/update',
+                    locals:{obj:@list_item}
+                  }
+      else
+        format.js { render 'shared/errors',
+                    locals:{obj:@list_item}
+                  }
+      end
+    end
   end
 
   def destroy
