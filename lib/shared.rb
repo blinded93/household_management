@@ -1,7 +1,11 @@
 module Shared
   def class_name
-    a = self.class.name.split(/(?=[A-Z])/)
+    a ||= self.class.name.split(/(?=[A-Z])/)
     a.join("_").downcase
+  end
+
+  def plural_name
+    class_name.pluralize
   end
 
   def id_name(field)
@@ -25,6 +29,10 @@ module Shared
     a.join.html_safe
   end
 
+  def tbody_id
+    class_name + "_tbody"
+  end
+
   def row_id
     class_name + "_" + id.to_s.html_safe
   end
@@ -35,5 +43,9 @@ module Shared
 
   def completed_fields
     cols - errors.keys
+  end
+
+  def reload_div(scope)
+    "#{scope.to_s}_#{plural_name}_collapse"
   end
 end
