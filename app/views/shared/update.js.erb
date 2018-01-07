@@ -5,12 +5,11 @@
     el.classList.remove("border-danger");
   <% end %>
 <% end %>
-document.getElementById("<%= obj.error_div %>").innerHTML = "";
+$('#<%= obj.error_div %>').html('');
+$('#edit_<%= obj.row_id %>').modal('toggle');
 <% if obj.class_name.include?("_item") %>
-    $('#edit_<%= obj.row_id %>').modal('toggle');
     $("#<%= obj.row_id %>").html("<%= j render 'items/item', item:obj.item, addee:obj.send(obj.addee) %>");
 <% else %>
-    $('#edit_<%= obj.row_id %>').modal('toggle');
     $(".<%= obj.row_id %>").html("<%= j render obj.row_partial, obj.class_name.to_sym => obj %>");
 <% end %>
 <% if obj.is_a?(Member) %>
