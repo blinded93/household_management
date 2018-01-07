@@ -49,3 +49,7 @@ td {
 .error {
   border: 1px solid red;
 }
+
+.strike, .strike:hover, .strike:active, .strike:focus {
+  text-decoration:line-through;
+}
