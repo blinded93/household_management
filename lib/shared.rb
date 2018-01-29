@@ -29,12 +29,12 @@ module Shared
     a.join.html_safe
   end
 
-  def tbody_id
-    class_name + "_tbody"
+  def tbody_id(scope)
+    [plural_name, "_", scope.to_s, "_tbody"].join.html_safe
   end
 
   def row_id
-    class_name + "_" + id.to_s.html_safe
+    [class_name, "_", id.to_s].join.html_safe
   end
 
   def row_partial
@@ -46,6 +46,18 @@ module Shared
   end
 
   def reload_div(scope)
-    "#{scope.to_s}_#{plural_name}_collapse"
+    [scope.to_s, "_", plural_name, "_collapse"].join.html_safe
+  end
+
+  def scope_table(scope)
+    [plural_name, "_", scope.to_s, "_tbody"].join.html_safe
+  end
+
+  def badge_span(scope)
+    [scope.to_s, "_", plural_name, "_badge"].join.html_safe
+  end
+
+  def objects_hash(scope, scope_title)
+    {scope:scope, scope_title:scope_title}
   end
 end
