@@ -1,1 +1,3 @@
-<%= render 'shared/create', obj:@room, tab:'household', scope:'rooms' %>
+$("#dialog").modal("toggle");
+$("#household_rooms").append("<tr class='<%= room.row_id %>'></tr>")
+$(".<%= room.row_id %>").html("<%= j render 'rooms/room', room:room %>")

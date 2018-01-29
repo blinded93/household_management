@@ -1,0 +1,5 @@
+$('#dialog').modal('toggle');
+<% room_item.scopes.each do |scope, scope_title| %>
+  $("#<%= room_item.tbody_id(scope) %>").append("<tr id='<%= room_item.row_id %>'</tr>");
+  $("#<%= room_item.row_id %>").html("<%= j render "items/item", addee:room, item:room_item.item %>");
+<% end %>

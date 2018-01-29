@@ -1,1 +1,6 @@
-<%= render 'shared/create', obj:@chore, tab:'chores', scope:nil %>
+$('#dialog').modal('toggle');
+<% chore.scopes.each do |scope, scope_title| %>
+  $("#<%= "#{scope.to_s}_chores_badge" %>").html("<%= Chore.send(scope).count %>");
+  $("#<%= "chores_#{scope.to_s}_tbody" %>").prepend("<tr class='<%= chore.row_id %>'></tr>");
+  $(".<%= chore.row_id %>").html("<%= j render "chores/chore", chore:chore %>");
+<% end %>
