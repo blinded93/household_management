@@ -1,6 +1,6 @@
 module ChoresHelper
   def strikeout(chore)
-    'strikeout' if chore.completed
+    'strike-through' if chore.completed
   end
 
   def badge_color(scope)
