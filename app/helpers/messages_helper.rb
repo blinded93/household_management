@@ -7,6 +7,10 @@ module MessagesHelper
     end
   end
 
+  def new_message?
+    !params[:reply_message_id]
+  end
+
   def field_id(field, id=nil)
     [action(id), field.to_s].join.html_safe
   end
@@ -15,4 +19,12 @@ module MessagesHelper
     [action(id), "errors"].join.html_safe
   end
 
+  def members_minus_self
+    a = current_household.members.dup
+    a -= [current_member]
+  end
+
+  def subject_value(message)
+    !!message ? "Re:#{message.subject}" : ""
+  end
 end
