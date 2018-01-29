@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
   include Shared
-  
+
   validates :name, presence:true
 
   has_many :list_items
@@ -10,8 +10,7 @@ class Item < ActiveRecord::Base
 
   def addee_item(addee)
     if addee.is_a?(List) || addee.is_a?(Room)
-      klass = addee.class.to_s.downcase
-      @addee_item ||= addee.send("#{klass}_items").find_by(item_id:self.id)
+      @addee_item ||= addee.send("#{addee.class_name}_items").find_by(item_id:self.id)
     end
   end
 end
