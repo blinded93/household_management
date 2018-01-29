@@ -1,0 +1,12 @@
+$("#dialog").modal("toggle");
+<% if @old_scopes != room_item.scopes %>
+  $("#<%= room_item.row_id %>").remove();
+  <% @old_scopes.each do |scope, scope_title| %>
+    $("#<%= room_item.badge_span(scope) %>").html("<%= restock_count(room.room_items) %>");
+  <% end %>
+  <% room_item.scopes.each do |scope, scope_title| %>
+    $("#<%= room_item.badge_span(scope) %>").html("<%= restock_count(room.room_items) %>");
+    $("#<%= room_item.tbody_id(scope) %>").append("<tr id='<%= room_item.row_id %>'></tr>");
+  <% end %>
+<% end %>
+$("#<%= room_item.row_id %>").html("<%= j render "items/item", addee:room_item.room, item:room_item.item %>");

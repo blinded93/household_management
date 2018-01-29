@@ -1,0 +1,14 @@
+$('#dialog').modal('toggle');
+<% if @old_scopes != bill.scopes %>
+  $(".<%= "bill_#{bill.id}" %>").remove();
+  <% @old_scopes.each do |scope, scope_title| %>
+    $("#<%= scope.to_s %>_bill_amount").html("Total expenses: <%= scope_bill_sum(Bill.send(scope), scope) %>");
+    $("#<%= "#{scope.to_s}_bills_badge" %>").html("<%= Bill.send(scope).count %>");
+  <% end %>
+  <% bill.scopes.each do |scope, scope_title| %>
+    $("#<%= scope.to_s %>_bill_amount").html("Total expenses: <%= scope_bill_sum(Bill.send(scope), scope) %>");
+    $("#<%= "#{scope.to_s}_bills_badge" %>").html("<%= Bill.send(scope).count %>");
+    $("#<%= "bills_#{scope.to_s}_tbody" %>").prepend("<tr class='<%= "bill_#{bill.id}" %>'></tr>");
+  <% end %>
+<% end %>
+$(".<%= "bill_#{bill.id}" %>").html("<%= j render "bills/bill", bill:bill %>");
