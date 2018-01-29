@@ -10,10 +10,4 @@ module MembersHelper
   def label_size
     logged_in? ? 'col-4': ''
   end
-
-  def member_redirect(tab, scope)
-    hash = {tab:tab}
-    hash[:scope] = scope if scope
-    member_path(current_member, hash)
-  end
 end
