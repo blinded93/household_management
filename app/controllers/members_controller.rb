@@ -1,10 +1,9 @@
 class MembersController < ApplicationController
   before_action :redirect_unless_logged_in, except: [:new]
-  before_action :set_member, only: [:show, :update, :destroy]
+  before_action :set_member, only: [:show, :edit, :update, :destroy]
 
   def show
     @chores = @member.chores
-    @message = Message.new
     @list_item = ListItem.new
     @item = @list_item.build_item
     @items = Item.all.pluck(:name)
@@ -13,7 +12,12 @@ class MembersController < ApplicationController
 
   def new
     @member = Member.new
-    render layout:false
+    respond_to do |format|
+      format.js {
+        render 'shared/new_edit',
+        locals:{obj:@member}
+      }
+    end
   end
 
   def create
@@ -21,34 +25,52 @@ class MembersController < ApplicationController
     current_household.members << @member if current_household
     respond_to do |format|
       if @member.save
-        format.js { render 'shared/create',
-                    locals:{obj:@member}
-                  }
+        format.js {
+          render 'create',
+          locals:{member:@member}
+        }
       else
-        format.js { render "shared/errors",
-                    locals:{obj:@member}
-                  }
+        format.js {
+          render "shared/errors",
+          locals:{obj:@member}
+        }
       end
+    end
+  end
+
+  def edit
+    respond_to do |format|
+      format.js {
+        render 'shared/new_edit',
+        locals:{obj:@member}
+      }
     end
   end
 
   def update
     respond_to do |format|
       if @member.update(member_params)
-        format.js { render 'shared/update',
-                    locals:{obj:@member}
-                  }
+        format.js {
+          render 'update',
+          locals:{member:@member}
+        }
       else
-        format.js { render 'shared/errors',
-                    locals:{obj:@member}
-                  }
+        format.js {
+          render 'shared/errors',
+          locals:{obj:@member}
+        }
       end
     end
   end
 
   def destroy
-    @member.destroy
-    redirect_to [current_household, :control]
+    respond_to do |format|
+      @member.destroy
+      format.js {
+        render 'shared/delete',
+        locals:{obj:@member}
+      }
+    end
   end
 
   private
