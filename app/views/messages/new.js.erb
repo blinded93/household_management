@@ -1,0 +1,10 @@
+<% if @reply_message %>
+  $("#modal-info").html("<%= j render 'content', message:@message, reply_message:@reply_message %>");
+<% else %>
+  $("#modal-info").html("<%= j render 'content', message:@message %>");
+<% end %>
+$("#modal-dialog").html("<%= j render 'shared/dialog' %>");
+$("#dialog").modal("toggle");
+<% if @message.read_at %>
+  $("#<%= "message_#{@message.id}" %>").removeClass("font-weight-bold");
+<% end %>
