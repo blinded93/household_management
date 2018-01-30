@@ -1,21 +1,24 @@
 class HouseholdsController < ApplicationController
   before_action :redirect_unless_logged_in, except: [:new, :create]
-  before_action :set_household, only: [:control, :update, :destroy]
-  before_action :correct_parent, only: [:control]
+  before_action :set_household, only: [:control, :edit, :update, :destroy]
 
   def control
-    @bill = Bill.new
     @chores = Chore.for(current_household)
-    @chore = Chore.new
     @lists = List.for(current_household)
-    @member = Member.new
-    @room = Room.new
-    @room_item = RoomItem.new
-    @item = @room_item.build_item
     @items = Item.all.pluck(:name)
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @events = current_household.bills.group_by(&:due_date).merge(@chores.group_by(&:due_date))
     session[:admin] = true
+  end
+
+  def new
+    @household = Household.new
+    respond_to do |format|
+      format.js {
+        render 'shared/new_edit',
+        locals:{obj:@household}
+      }
+    end
   end
 
   def create
@@ -26,27 +29,38 @@ class HouseholdsController < ApplicationController
         session[:member_id] = @household.members[0].id
         format.js
       else
-        format.js { render 'errors',
-                    locals:{ household:@household,
-                             member:member
-                            }
-                   }
+        format.js {
+          render 'errors',
+          locals:{
+            household:@household,
+            member:member
+          }
+        }
       end
+    end
+  end
+
+  def edit
+    respond_to do |format|
+      format.js {
+        render 'shared/new_edit',
+        locals:{obj:@household}
+      }
     end
   end
 
   def update
     respond_to do |format|
       if @household.update(household_params)
-        format.js { render 'update',
-                    locals:{ obj:@household
-                            }
-                   }
+        format.js {
+          render 'update',
+          locals:{household:@household}
+        }
       else
-        format.js { render 'shared/errors',
-                    locals: { obj:@household
-                            }
-                   }
+        format.js {
+          render 'shared/errors',
+          locals: { obj:@household}
+        }
       end
     end
   end
