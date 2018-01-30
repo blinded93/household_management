@@ -1,0 +1,40 @@
+<span id="<%= "#{room.scope}.room_items_badge" %>" class="badge badge-default">
+  <%= restock_count(room.room_items) if admin? %>
+</span>
+<a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_inventory" href="#room_<%= room.id %>_inventory" aria-expanded="true" aria-controls="room_<%= room.id %>_inventory">
+  <%= room.name %>
+</a>
+<div id="room_<%= room.id %>_inventory" class="collapse" role="tabpanel">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-11">
+      <table class='table table-sm table-hover'>
+        <thead>
+          <tr>
+            <th> </th>
+            <th class='tbl-col-6'>Name</th>
+            <th class='tbl-col-3'>Stock</th>
+            <th class='tbl-col-3'>Threshold</th>
+          </tr>
+        </thead>
+        <%= content_tag :tbody,
+          id:"room_items_#{room.scope}_tbody" do
+          %>
+          <% room.room_items.each do |room_item| %>
+            <%= content_tag :tr,
+              id:room_item.row_id,
+              class:requested?(room_item) do
+              %>
+              <%= render 'items/item',
+                {addee:room,
+                 item:room_item.item
+                 }
+                %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
