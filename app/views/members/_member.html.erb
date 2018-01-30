@@ -1,0 +1,77 @@
+<div class='row'>
+  <div class='col-1'>
+    <%= remove_btn(current_household, member) %>
+  </div>
+  <div class='col-11'>
+    <a class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_member" href="#member_<%= member.id %>" aria-expanded="true" aria-controls="member_<%= member.id %>">
+      <%= member.name %>
+    </a>
+  </div>
+</div>
+<div id="member_<%= member.id %>" class="collapse" role="tabpanel">
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <div class="<%= label_size %> text-right pl-3">
+          <p class='font-weight-bold'>First Name:</p>
+        </div>
+        <div class="<%= field_size %> text-left">
+          <%= member.first_name %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="<%= label_size %> text-right pl-3">
+          <p class='font-weight-bold'>Last Name:</p>
+        </div>
+        <div class="<%= field_size %> text-left">
+          <%= member.last_name %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="<%= label_size %> text-right pl-3">
+          <p class='font-weight-bold'>Family Title:</p>
+        </div>
+        <div class="<%= field_size %> text-left">
+          <%= member.family_title %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="<%= label_size %> text-right pl-3">
+          <p class='font-weight-bold'>Monthly Income:</p>
+        </div>
+        <div class="<%= field_size %> text-left">
+          <%= number_to_currency(member.monthly_income) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="<%= label_size %> text-right pl-3">
+          <p class='font-weight-bold'>
+            Email:
+          </p>
+        </div>
+        <div class="<%= field_size %> text-left">
+          <%= member.email %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="<%= label_size %> text-right pl-3">
+          <p class="font-weight-bold">
+            Admin?:
+          </p>
+        </div>
+        <div class="<%= field_size %> text-left">
+          <%= member.head_of_household ? "Yes" : "No" %>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div class="col-2">
+      <%= link_to "Edit",
+        edit_household_member_path(current_household, member),
+        remote:true,
+        class:btn %>
+    </div>
+  </div>
+</div>
