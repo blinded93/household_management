@@ -1,0 +1,63 @@
+<%= content_for :header do %>
+  <%= date.day %>
+<% end %>
+
+<%= content_for :body_footer do %>
+  <% if events %>
+    <div class="modal-body">
+      <div class='lg-font mx-auto day-cell-zoomed'>
+        <div class="row">
+          <div class="text-center col-6 pr-0">
+            <span class='h4 bg-warning d-block'>Chores</span>
+          </div>
+          <div class="text-center col-6 pl-0">
+            <span class='h4 bg-danger text-light d-block'>Bills</span><br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 pr-4 pl-4">
+            <% chores.group_by(&:member).each do |chore| %>
+              <dl>
+                <dt>
+                  <%= chore.first.name %>
+                </dt>
+                <% chore.second.each do |ch| %>
+                  <dd class='mb-0 pl-4 small'>
+                    <%= ch.task %>
+                  </dd>
+                <% end %>
+              </dl>
+            <% end %>
+          </div>
+          <div class="col-6 pr-4 pl-4">
+            <% bills.each do |bill| %>
+              <dl>
+                <dt>
+                  <%= bill.utility %>
+                </dt>
+                  <dd class='mb-0 pl-4 small'>
+                    <%= bill.company %>
+                    <%= " / #{bill.account_number}" if bill.account_number %>
+                  </dd>
+                  <dd class='mb-0 pl-4 small'>
+                    <%= number_to_currency(bill.amount) %>
+                  </dd>
+              </dl>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <% if bills %>
+        <strong class='sm-font'>
+          Total:
+        </strong>
+        <span>
+          <%= number_to_currency(bill_sum(date)) %>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
