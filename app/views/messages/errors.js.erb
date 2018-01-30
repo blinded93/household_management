@@ -1,4 +1,3 @@
-<%# binding.pry %>
 <% obj.completed_fields.each do |field| %>
     $("#<%= field_id(field, message_id) %>").removeClass('border');
     $("#<%= field_id(field, message_id) %>").removeClass('border-danger');

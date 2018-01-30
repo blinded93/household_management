@@ -5,7 +5,8 @@
   <div class="col-8">
     <%= f.number_field :stock,
       placeholder:"Stock",
-      class:'form-control form-control-sm'
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:stock)
       %>
   </div>
 </div>
@@ -17,7 +18,8 @@
   <div class="col-8">
     <%= f.number_field :threshold,
       placeholder:'Reorder Threshold',
-      class:'form-control form-control-sm'
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:threshold)
       %>
   </div>
 </div>
@@ -33,7 +35,9 @@
       :id,
       :name,
       {prompt:'Select Room'},
-      {class:'custom-select form-control-sm'})
+      {class:'custom-select form-control-sm',
+       id:f.object.id_name(:room_id)
+       })
       %>
   </div>
 </div>
