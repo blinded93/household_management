@@ -1,32 +1,40 @@
-<div class="bill-item">
-  <span class="badge badge-default <%= "badge-danger" if scope == :over_due %>">
-    <%= bills.send(scope).count %>
-  </span>
-  <a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_bill" href="#<%= scope.to_s %>_bills" aria-expanded="true" aria-controls="<%= scope.to_s %>_bills">
-    <%= scope_title %>
-  </a>
-  <div id="<%= scope.to_s %>_bills" class="collapse" role="tabpanel">
-    <div class="row">
-      <div class="col">
-      </div>
-      <div class="col-11">
-        <table class='table table-sm table-hover'>
-          <caption class='sm-font'>
-            Total expenses: <%= number_to_currency(bills.send(scope).sum(:amount)) %>
-          </caption>
-          <thead>
-            <tr>
-              <th class='col-5'>Company</th>
-              <th class='col-3'>Utility</th>
-              <th class='col-2'>Amount</th>
-              <th class='col-2'>Due</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render bills %>
-          </tbody>
-        </table>
-      </div>
+<%= content_tag :span,
+  class:badge_color(scope),
+  id:"#{scope.to_s}_bills_badge" do %>
+  <%= bills.send(scope).count %>
+<% end %>
+<a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_bill" href="#<%= scope.to_s %>_bills" aria-expanded="true" aria-controls="<%= scope.to_s %>_bills">
+  <%= scope_title %>
+</a>
+<div id="<%= scope.to_s %>_bills" class="collapse" role="tabpanel">
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-11">
+      <table class='table table-sm table-hover'>
+        <caption id="<%= scope.to_s %>_bill_amount" class='sm-font'>
+          Total expenses: <%= scope_bill_sum(bills, scope) %>
+        </caption>
+        <thead>
+          <tr>
+            <th class='tbl-col-1'></th>
+            <th class='tbl-col-5'>Company</th>
+            <th class='tbl-col-2'>Utility</th>
+            <th class='tbl-col-2'>Amount</th>
+            <th class='tbl-col-2'>Due</th>
+          </tr>
+        </thead>
+        <%= content_tag :tbody,
+          id:"bills_#{scope.to_s}_tbody" do %>
+          <% bills.each do |bill| %>
+            <%= content_tag :tr,
+              class:bill.row_id do %>
+              <%= render 'bills/bill',
+                bill:bill %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>
