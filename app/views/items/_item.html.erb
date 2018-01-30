@@ -1,14 +1,11 @@
-<tr>
+<td>
+  <%= item_remove_btn(item, addee) %>
+</td>
+<td>
+  <%= item_name(item, addee) %>
+</td>
+<% item.addee_item(addee).columns.each do |attr| %>
   <td>
-    <%= remove_button(item, addee) unless !admin? && addee.is_a?(Room) %>
+    <%= item.addee_item(addee).send(attr) %>
   </td>
-  <td class='<%= 'border border-danger' if item.addee_item(addee).try(:request) %>'>
-    <%= item_name(item, addee) %>
-    <%= render_edit(item, addee) if item_name(item, addee).include?("href") %>
-  </td>
-  <% item.addee_item(addee).columns.each do |attr| %>
-    <td>
-      <%= item.addee_item(addee).send(attr) %>
-    </td>
-  <% end %>
-</tr>
+<% end %>
