@@ -1,0 +1,13 @@
+<table class='table table-sm table-hover'>
+  <thead>
+    <tr>
+      <th></th>
+      <th class='tbl-col-6'>Subject</th>
+      <th class='tbl-col-4'>Sender</th>
+      <th class='tbl-col-2'>Date</th>
+    </tr>
+  </thead>
+  <tbody id='inbox_table'>
+    <%= render current_member.recieved_messages %>
+  </tbody>
+</table>
