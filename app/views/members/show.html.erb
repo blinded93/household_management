@@ -20,14 +20,23 @@
           <u class='lg-font'>
             Chores
           </u>
+          <span class="pb-2">
+            <%= link_to "Refresh",
+              member_chores_reload_path(current_member),
+              remote:true,
+              class:btn %>
+          </span>
         </span>
         <div id="accordion-chore" data-children=".chore-item">
           <% Chore.scopes.each do |scope, scope_title| %>
-            <%= render 'chores/chores',
-              {scope_title: scope_title,
-               scope: scope,
-               chores: @chores}
-              %>
+            <%= content_tag :div,
+              class:'chore_item',
+              id:"#{scope.to_s}_chores_collapse" do %>
+              <%= render 'chores/chores',
+                {scope_title: scope_title,
+                 scope: scope,
+                 chores: @chores.send(scope)} %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -36,23 +45,21 @@
   <div class='link'>
     <div class="collapse <%= show_tab("requests") %>" id="requests">
       <div class="card card-block p-3">
-        <% content_for :add_list_item do %>
           <span class='card-title'>
             <u class='lg-font'>
               Requests
             </u>
             <span class='pb-2'>
               <%= link_to "Add",
-                "add_item",
-                data:{toggle:'modal',
-                      target:"#add_list_item"},
-                class:'btn btn-sm btn-outline-secondary text-dark ml-2'
-                %>
+                new_member_list_item_path(current_member),
+                remote:true,
+                class:btn %>
              </span>
            </span>
-           <%= render 'list_items/add', list_item:@list_item %>
-         <% end %>
-         <%= render 'lists/list', list:current_member.list %>
+         <div>
+           <%= render 'list_items/list_items',
+             list:current_member.list %>
+         </div>
       </div>
     </div>
   </div>
@@ -65,26 +72,20 @@
           </u>
           <span class="pb-2">
             <%= link_to "New",
-              "new_message",
-              data:{toggle:'modal',
-                    target:'#new_message'},
-              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
-              %>
+              new_member_message_path(current_member),
+              remote:true,
+              class:btn %>
+            <%= link_to "Check Messages",
+              [current_member, :check, :messages],
+              remote:true,
+              class:btn %>
+            <span class='text-success small pl-2' id='message_confirmation'>
+            </span>
           </span>
         </span>
-        <%= render 'messages/new', message:@message %>
-        <table class='table table-sm table-hover'>
-          <thead>
-            <tr>
-              <th>Subject</th>
-              <th>Sender</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render current_member.recieved_messages %>
-          </tbody>
-        </table>
+        <div>
+          <%= render 'messages/messages' %>
+        </div>
       </div>
     </div>
   </div>
@@ -95,8 +96,19 @@
           <u class='lg-font'>
             Inventory
           </u>
+          <span class='text-success small pl-2' id='inventory_request'>
+          </span>
+          <span class='text-danger small pl-2' id='undo_request'>
+          </span>
+        </span>
         <div id="accordion_inventory" data-children=".room-item">
-          <%= render current_household.rooms.unowned %>
+          <% current_household.rooms.unowned.each do |room| %>
+            <%= content_tag :div,
+              class:'room-item' do
+              %>
+              <%= render 'room_items/room_items', room:room %>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
