@@ -1,41 +1,43 @@
-<div class='form-group row'>
-  <%= f.label :recipient_id,
-    "To:",
-    class: 'text-center col-md-4 col-form-label'
-    %>
-  <div class='col-sm-8'>
-    <%= f.collection_select(:recipient_id,
-      current_household.members,
-      :id,
-      :first_name,
-      {prompt: 'Select Member'},
-      {class: 'custom-select form-control-sm'})
-      %>
+<% if new_message? %>
+  <div class='form-group row'>
+    <%= f.label :recipient_id,
+      "To:",
+      class:'text-center col-sm-3 col-form-label' %>
+    <div class='col-sm-9'>
+      <%= f.collection_select(:recipient_id,
+        members_minus_self,
+        :id,
+        :first_name,
+        {prompt:'Select Member'},
+        {class:'custom-select form-control-sm',
+         id:'new_message_recipient_id'}) %>
+    </div>
   </div>
-</div>
+<% else %>
+  <%= f.hidden_field :recipient_id,
+    value: message.sender_id %>
+<% end %>
 <div class='form-group row'>
   <%= f.label :subject,
-    class:'text-center col-sm-4 col-form-label'
-    %>
-  <div class='col-sm-8'>
+    class:'text-center col-sm-3 col-form-label' %>
+  <div class='col-sm-9'>
     <%= f.text_field :subject,
       class:'form-control form-control-sm',
-      placeholder: "Subject"
-      %>
+      value:subject_value(message),
+      placeholder:"Subject",
+      id:"new_message_subject" %>
   </div>
 </div>
 <div class='form-group row'>
   <%= f.label :body,
     "Message",
-    class:'text-center col-sm-4 col-form-label'
-    %>
-  <div class='col-sm-8'>
+    class:'text-center col-sm-3 col-form-label' %>
+  <div class='col-sm-9'>
     <%= f.text_area :body,
-      placeholder: "Message",
-      class:'form-control form-control-sm'
-      %>
+      placeholder:"Message",
+      class:'form-control form-control-sm',
+      id:'new_message_body' %>
   </div>
   <%= f.hidden_field :sender_id,
-    value: current_member.id
-    %>
+    value: current_member.id %>
 </div>
