@@ -1,27 +1,35 @@
 <div class="row">
-  <div class="col-2 text-left">
+  <div class="col-3 text-left">
     <span class="small text-left bg-danger text-light p-1">Bills</span>
     <span class="small text-left bg-warning p-1">Chores</span>
   </div>
-  <div class="col-8 text-center">
+  <div class="col-6 text-center">
     <div class="">
-      <%= link_to [current_household, :control, date:@date - 1.month],
-        class:"btn btn-default font-blk" do
+      <%= link_to household_calendar_load_path(current_household, date:@date - 1.month),
+        class:"btn btn-default font-blk",
+        remote:true do
         %>
         <i class="glyphicon glyphicon-backward"><</i>
       <% end %>
       <%= "#{@date.strftime("%b")} #{@date.year}" %>
-      <%= link_to [current_household, :control, date:@date + 1.month],
-        class: "btn btn-sm font-blk" do
+      <%= link_to household_calendar_load_path(current_household, date:@date + 1.month),
+        class: "btn btn-sm font-blk",
+        remote:true do
         %>
         <i class="glyphicon glyphicon-forward">></i>
       <% end %>
     </div>
   </div>
-  <div class="col-2 text-right">
+  <div class="col-3 text-right">
+    <%= link_to "Refresh",
+      household_calendar_load_path(current_household, date: @date),
+      class:btn,
+      remote:true
+      %>
     <%= link_to "Today",
-      [current_household, :control, date: Date.today],
-      class:"btn btn-sm text-success small"
+      household_calendar_load_path(current_household, date: Date.today),
+      class:btn,
+      remote:true
       %>
   </div>
 </div>
@@ -30,22 +38,12 @@
     <%= calendar @date do |date| %>
       <% if @events[date] %>
         <%= link_to date.day,
-          [current_household, :calendar, date:date],
-          data:
-            {toggle:'modal',
-             target:"#day_#{date.to_s}"
-            },
-          class:'btn btn-sm btn-block text-left font-blk'
-          %>
+          household_calendar_day_path(current_household, date:date),
+          remote:true,
+          class:'btn btn-sm btn-block text-left font-blk' %>
           <% @events[date].each do |event| %>
             <%= display_event(event) %>
           <% end %>
-        <%= render 'calendar/day',
-          events:@events,
-          bills:bill_events(date),
-          chores:chore_events(date),
-          date:date
-          %>
       <% else %>
         <%= date.day %>
       <% end %>
