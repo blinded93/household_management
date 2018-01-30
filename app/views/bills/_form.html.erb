@@ -1,70 +1,69 @@
 <div class="form-group row">
   <%= f.label :company,
-    class:'text-center col-4 col-form-label'
-    %>
+    class:'text-center col-4 col-form-label' %>
   <div class="col-8">
     <%= f.text_field :company,
       placeholder:'Company',
-      class:'form-control form-control-sm'
-    %>
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:company) %>
   </div>
 </div>
 
 <div class="form-group row">
   <%= f.label :utility,
-    class:'text-center col-4 col-form-label'
-    %>
+    class:'text-center col-4 col-form-label' %>
   <div class="col-8">
     <%= f.text_field :utility,
       placeholder:'Utility',
-      class:'form-control form-control-sm'
-    %>
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:utility) %>
   </div>
 </div>
 
 <div class="form-group row">
   <%= f.label :amount,
-    class:'text-center col-4 col-form-label'
-    %>
+    class:'text-center col-4 col-form-label' %>
   <div class="input-group col-8">
     <div class='input-group-addon'>
       $
     </div>
       <%= f.number_field :amount,
         placeholder:'Amount',
-        class:'form-control form-control-sm'
-        %>
+        class:'form-control form-control-sm',
+        id:f.object.id_name(:amount) %>
   </div>
 </div>
 
 <div class="form-group row">
   <%= f.label :account_number, "Account#",
-    class:'text-center col-4 col-form-label'
-    %>
+    class:'text-center col-4 col-form-label' %>
   <div class="col-8">
     <%= f.number_field :account_number,
       placeholder:'Account No. (optional)',
-      class:'form-control form-control-sm'
-    %>
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:account_number) %>
   </div>
 </div>
 
 <div class='form-group form-inline row'>
   <%= f.label :due_date, 'Due',
-    class:'col-4 col-form-label'
-    %>
+    class:'col-4 col-form-label' %>
   <div class='col-8'>
-    <%= f.date_select :due_date,
-    { use_two_digit_numbers:true,
-      start_year:Date.today.year,
-      end_year:Date.today.year + 1,
-      order: [:year, :month, :day],
-      prompt:{ year:'Yr',
-               month:'Mo',
-               day:'Day'
-              }
-     },
-      {class:'form-control form-control-sm'}
-     %>
+    <%= content_tag :div,
+      id:f.object.id_name(:due_date) do %>
+      <%= f.date_select :due_date,
+        {   use_two_digit_numbers:true,
+            start_year:Date.today.year,
+            end_year:Date.today.year + 1,
+            order: [:year, :month, :day],
+            prompt:{
+              year:'Yr',
+              month:'Mo',
+              day:'Day'
+            }
+         },
+          {class:'form-control form-control-sm',
+           id:f.object.id_name(:due_date)} %>
+    <% end %>
   </div>
 </div>
