@@ -1,41 +1,67 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only:[:update, :destroy]
+  before_action :set_room, only: [:edit, :update, :destroy]
   before_action :redirect_unless_logged_in
+
+  def new
+    @room = Room.new
+    respond_to do |format|
+      format.js {
+        render 'shared/new_edit',
+        locals:{obj:@room}
+      }
+    end
+  end
 
   def create
     @room = current_household.rooms.build(room_params)
     respond_to do |format|
       if @room.save
-        format.js { render 'shared/create',
-                    locals:{obj:@room}
-                  }
+        format.js {
+          render 'create',
+          locals:{room:@room}
+        }
       else
-        format.js { render 'shared/errors',
-                    locals:{obj:@room}
-                  }
+        format.js {
+          render 'shared/errors',
+          locals:{obj:@room}
+        }
       end
+    end
+  end
+
+  def edit
+    respond_to do |format|
+      format.js {
+        render 'shared/new_edit',
+        locals:{obj:@room}
+      }
     end
   end
 
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.js { render 'shared/update',
-                    locals:{obj:@room}
-                  }
+        format.js {
+          render 'update',
+          locals:{room:@room}
+        }
       else
-        format.js { render 'shared/errors',
-                    locals:{obj:@room}
-                  }
+        format.js {
+          render 'shared/errors',
+          locals:{obj:@room}
+        }
       end
     end
   end
 
   def destroy
-    if @room
+    respond_to do |format|
       @room.destroy
+      format.js {
+        render 'shared/delete',
+        locals:{obj:@room}
+      }
     end
-    redirect_helper
   end
 
   private
