@@ -1,0 +1,91 @@
+<%= content_for :header do %>
+  <% if new_message? %>
+    New Message
+  <% else %>
+    <small>
+      From:
+    </small>
+    <strong>
+      <%= message.sender.name %>
+    </strong>
+    <br>
+    <small>
+      Subject: <%= message.subject %>
+    </small>
+  <% end %>
+<% end %>
+<% if new_message? %>
+  <%= content_for :new do %>
+    <div class="modal-body">
+      <div class="mr-4">
+        <%= form_for [current_member, message],
+          remote:true do |f| %>
+          <%= render 'messages/form', f:f, message:nil %>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= content_tag :div,
+        class:'text-danger small mr-auto',
+        id:"new_message_errors" do
+        %>
+      <% end %>
+          <%= f.submit "Send",
+            form:"new_message",
+            class:btn %>
+        <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <%= content_for :reply do %>
+    <div class="modal-body" style='padding:2px; !important'>
+      <div class='card card-footer'>
+        <%= message.body %>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-sm btn-outline-secondary text-dark mr-auto" data-toggle="collapse" href="#reply_<%= message.id %>" aria-expanded="false" aria-controls="reply">
+        Reply
+      </a>
+      <%= link_to "Delete",
+        member_message_path(current_member, @message),
+        class:btn_delete,
+        method:'delete',
+        data:{confirm:"Delete message?"} %>
+    </div>
+    <div class="collapse" id="reply_<%= message.id %>">
+      <div class="card card-block p-4">
+        <%= form_for [current_member, reply_message],
+          remote:true do |f| %>
+          <%= render 'messages/form', f:f, message:message %>
+            <div class='text-left d-inline'>
+              <%= content_tag :div,
+                class:errors,
+                id:message_errors(message.id) do %>
+              <% end %>
+            </div>
+            <div class='row'>
+              <div class='col text-left d-inline'>
+                <%= content_tag :div,
+                  class:'text-danger small mr-auto',
+                  id:'new_message_errors' do
+                    %>
+                <% end %>
+              </div>
+              <div class="col text-right d-inline">
+                <%= f.submit "Send",
+                  class:btn %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+  <% end %>
+<% end %>
+
+<%= content_for :body_footer do %>
+  <% if new_message? %>
+    <%= yield :new %>
+  <% else %>
+    <%= yield :reply %>
+  <% end %>
+<% end %>
