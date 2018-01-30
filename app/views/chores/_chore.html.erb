@@ -1,31 +1,31 @@
-<tr>
+<% if admin? %>
   <td>
-    <% if admin? %>
-      <span title='Edit'>
-        <%= link_to chore.task,
-          edit_household_chore_path(current_household, chore),
-          data:{
-            toggle:'modal',
-            target:"#edit_chore_#{chore.id}"},
-          class:"btn btn-sm text-info #{strikeout(chore)}"
-          %>
-      </span>
-    <% else %>
-      <span title='Complete'>
-        <%= link_to chore.task, complete_chores_path(chore),
-          class:"btn btn-sm text-info #{strikeout(chore)}",
-          method:'patch'
-          %>
-      </span>
-    <% end %>
+    <%= remove_btn(current_household, chore) %>
   </td>
-  <% if admin? %>
-    <td class="<%= strikeout(chore) %>">
-      <%= chore.member.name %>
-    </td>
+  <td>
+    <span title='Edit'>
+      <%= link_to chore.task,
+        edit_household_chore_path(current_household, chore),
+        remote:true,
+        class:"btn btn-sm text-info #{strikeout(chore)}" %>
+    </span>
+  </td>
+  <%= content_tag :td,
+    class:strikeout(chore) do %>
+    <%= chore.member.name %>
   <% end %>
-  <td class="<%= strikeout(chore) %>">
-    <%= chore.due_date %>
+<% else %>
+  <td>
+    <span title='Complete'>
+      <%= link_to chore.task,
+        complete_chore_path(chore),
+        class:"btn btn-sm text-info complete_chore_#{chore.id} #{strikeout(chore)}",
+        method:'patch',
+        remote:true %>
+    </span>
   </td>
-  <%= render 'chores/edit', chore: chore %>
-</tr>
+<% end %>
+<%= content_tag :td,
+  class:strikeout(chore) do %>
+  <%= chore.due_date %>
+<% end %>
