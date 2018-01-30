@@ -1,24 +1,21 @@
 <table class='table table-sm table-hover'>
   <thead>
-    <%# yield(:add_list_item) unless admin? %>
     <tr>
       <th></th>
-      <th class='col-3'>Name</th>
-      <th class='col-3'>Brand</th>
-      <th class='col-4'>Info</th>
-      <th class='col-2'>Quantity</th>
+      <th class='tbl-col-3'>Name</th>
+      <th class='tbl-col-2'>Brand</th>
+      <th class='tbl-col-4'>Info</th>
+      <th class='tbl-col-2'>Quantity</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="list_items_tbody">
     <% list.list_items.each do |list_item| %>
       <%= content_tag :tr,
-        id:list_item.row_id do
-        %>
+        id:list_item.row_id do %>
         <%= render 'items/item',
           {addee:list,
            item:list_item.item
-           }
-          %>
+           } %>
       <% end %>
     <% end %>
   </tbody>
