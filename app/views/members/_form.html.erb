@@ -1,80 +1,84 @@
-<div class="form-group row">
-  <%= f.label :first_name,
-    "First Name",
-    class:"col-3 col-form-label #{hide_if_logged_in}"
-    %>
+<div class="form-group row text-center">
+  <div class="<%= label_size %> <%= hide_unless_logged_in %>">
+    <%= f.label :first_name,
+      "First Name",
+      class:"text-center col-form-label" %>
+    </div>
   <div class="<%= field_size %>">
     <%= f.text_field :first_name,
       placeholder: "First Name",
-      class:'form-control form-control-sm'
-      %>
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:first_name) %>
   </div>
 </div>
-
-<div class="form-group row">
-  <%= f.label :last_name,
-    "Last Name",
-    class:"col-3 col-form-label #{hide_if_logged_in}"
-    %>
+<div class="form-group row text-center">
+  <div class="<%= label_size %> <%= hide_unless_logged_in %>">
+    <%= f.label :last_name,
+      "Last Name",
+      class:"text-center col-form-label" %>
+    </div>
   <div class="<%= field_size %>">
     <%= f.text_field :last_name,
       placeholder: "Last Name",
-      class:'form-control form-control-sm'
-      %>
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:last_name) %>
   </div>
 </div>
-<div class="form-group row">
-  <%= f.label :family_title,
-    "Family Title",
-    class:"col-3 col-form-label #{hide_if_logged_in}"
-    %>
+<div class="form-group row text-center">
+  <div class="<%= label_size %> <%= hide_unless_logged_in %>">
+    <%= f.label :family_title,
+      "Family Title",
+      class:"text-center col-form-label" %>
+    </div>
   <div class="<%= field_size %>">
     <%= f.text_field :family_title,
       placeholder: "Family Title",
-      class:'form-control form-control-sm'
-      %>
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:family_title) %>
   </div>
 </div>
-<div class="form-group row">
-  <%= f.label :monthly_income,
-    "Income",
-    class:"col-3 col-form-label #{hide_if_logged_in}"
-    %>
+<div class="form-group row text-center">
+  <div class="<%= label_size %> <%= hide_unless_logged_in %>">
+    <%= f.label :monthly_income,
+      "Income",
+      class:"text-center col-form-label" %>
+    </div>
   <div class="input-group input-group-sm <%= field_size %>">
     <div class="input-group-addon">
       $
     </div>
     <%= f.number_field :monthly_income,
       placeholder: "Monthly Income",
-      class:'form-control form-control-sm'
-      %>
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:monthly_income) %>
     <div class="input-group-addon">
       /month
     </div>
   </div>
 </div>
-<div class="form-group row">
-  <%= f.label :email,
-    "Email",
-    class:"col-3 col-form-label #{hide_if_logged_in}"
-    %>
+<div class="form-group row text-center">
+  <div class="<%= label_size %> <%= hide_unless_logged_in %>">
+    <%= f.label :email,
+      "Email",
+      class:"text-center col-form-label" %>
+    </div>
   <div class="<%= field_size %>">
     <%= f.email_field :email,
       placeholder: "Email",
-      class:'form-control form-control-sm'
-      %>
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:email) %>
   </div>
 </div>
-<div class="form-group row">
-  <%= f.label :password,
-    "Password",
-    class:"col-3 col-form-label #{hide_if_logged_in}"
-    %>
+<div class="form-group row text-center">
+  <div class="<%= label_size %> <%= hide_unless_logged_in %>">
+    <%= f.label :password,
+      "Password",
+      class:"text-center col-form-label" %>
+    </div>
   <div class="<%= field_size %>">
     <%= f.password_field :password,
       placeholder: "Password",
-      class:'form-control form-control-sm'
-      %>
+      class:'form-control form-control-sm',
+      id:f.object.id_name(:password) %>
   </div>
 </div>
-</p>
