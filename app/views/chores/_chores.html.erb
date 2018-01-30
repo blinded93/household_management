@@ -1,47 +1,55 @@
-<div class="chore-item">
-  <span class="badge badge-success <%= "badge-danger" if scope == :over_due %> <%= "badge-warning" if scope == :due_today %>">
-    <%= chores.send(scope).count %>
-  </span>
-  <a class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion-chore" href="#<%= scope.to_s %>_chores" aria-expanded="true" aria-controls="<%= scope.to_s %>_chores">
-    <%= scope_title %>
-  </a>
-  <div id="<%= scope.to_s %>_chores" class="collapse" role="tabpanel">
-    <% if scope_title == "Completed" && admin? %>
-      <div class="row pt-2">
-        <div class="col-1">
-        </div>
-        <div class="col-11">
-          <%= link_to "Clear Completed", clear_chores_path,
-            method: :delete,
-            data:{confirm: "Clear all completed chores?" },
-            class:'btn btn-sm btn-outline-secondary text-dark',
-            params:{scope:scope}
-            %>
-        </div>
-      </div>
-    <% end %>
-    <div class="row">
-      <div class="col">
+<%= content_tag :span,
+  class:badge_color(scope),
+  id:"#{scope.to_s}_chores_badge" do %>
+  <%= chores.send(scope).count %>
+<% end %>
+<a class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion-chore" href="#<%= scope.to_s %>_chores" aria-expanded="true" aria-controls="<%= scope.to_s %>_chores">
+  <%= scope_title %>
+</a>
+<div id="<%= scope.to_s %>_chores" class="collapse" role="tabpanel">
+  <% if scope_title == "Completed" && admin? %>
+    <div class="row pt-2">
+      <div class="col-1">
       </div>
       <div class="col-11">
-        <table class='table table-sm table-hover'>
-          <thead>
-            <tr>
-              <% if admin? %>
-                <th class='col-8'>Task</th>
-                <th class='col-2'>Member</th>
-                <th class='col-2'>Due</th>
-              <% else %>
-                <th class='col-10'>Task</th>
-                <th class='col-2'>Due</th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render chores %>
-          </tbody>
-        </table>
+        <%= link_to "Clear Completed", clear_chores_path,
+          method: :delete,
+          data:{confirm: "Clear all completed chores?" },
+          class:btn,
+          remote:true %>
       </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-11">
+      <table class='table table-sm table-hover'>
+        <thead>
+          <tr>
+            <% if admin? %>
+              <th class='tbl-col-1'></th>
+              <th class='tbl-col-7'>Task</th>
+              <th class='tbl-col-2'>Member</th>
+              <th class='tbl-col-2'>Due</th>
+            <% else %>
+              <th class='tbl-col-9'>Task</th>
+              <th class='tbl-col-3'>Due</th>
+            <% end %>
+          </tr>
+        </thead>
+        <%= content_tag :tbody,
+          id:"chores_#{scope.to_s}_tbody" do %>
+          <% chores.each do |chore| %>
+            <%= content_tag :tr,
+              class:chore.row_id do %>
+              <%= render 'chores/chore',
+                chore:chore,
+                scope:scope %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>
