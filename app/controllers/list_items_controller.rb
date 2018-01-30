@@ -1,38 +1,85 @@
 class ListItemsController < ApplicationController
-  before_action :set_list_item, only: [:update, :destroy]
+  before_action :set_list_item, only: [:edit, :update, :destroy]
+
+  def new
+    @list_item = ListItem.new
+    @item = @list_item.build_item
+    @items = Item.all.pluck(:name)
+    respond_to do |format|
+      format.js {
+        render 'shared/new_edit',
+        locals:{obj:@list_item}
+      }
+    end
+  end
 
   def create
     @list_item = ListItem.new(list_item_params)
     respond_to do |format|
       if @list_item.save
-        format.js { render 'shared/create',
-                    locals:{obj:@list_item}
-                  }
+        format.js {
+          render 'create',
+          locals:{
+            list_item:@list_item,
+            list:@list_item.list
+          }
+        }
       else
-        format.js { render 'shared/errors',
-                    locals:{obj:@list_item}
-                  }
+        format.js {
+          render 'shared/errors',
+          locals:{obj:@list_item}
+        }
       end
     end
   end
 
+  def edit
+    @items = Item.all.pluck(:name)
+    respond_to do |format|
+      format.js {
+        render 'shared/new_edit',
+        locals:{obj:@list_item}
+      }
+    end
+  end
+
   def update
+    @old_scopes = @list_item.scopes.dup
     respond_to do |format|
       if @list_item.update(list_item_params)
-        format.js { render 'shared/update',
-                    locals:{obj:@list_item}
-                  }
+        format.js {
+          render 'update',
+          locals:{
+            list_item:@list_item,
+            list:@list_item.list
+          }
+        }
       else
-        format.js { render 'shared/errors',
-                    locals:{obj:@list_item}
-                  }
+        format.js {
+          render 'shared/errors',
+          locals:{obj:@list_item}
+        }
       end
     end
   end
 
   def destroy
-    @list_item.destroy
-    redirect_to :back
+    respond_to do |format|
+      locals = {objs:ListItem.for(current_member)}
+      locals[:obj] = @list_item
+      @list_item.delete
+      format.js {
+        render 'shared/delete',
+        locals:locals
+      }
+    end
+  end
+
+  def reload
+    @lists = List.for(current_household)
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
