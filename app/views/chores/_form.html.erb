@@ -7,18 +7,23 @@
        current_household.members,
        :id,
        :first_name,
-       {prompt: 'Select Member'},
-       {class:'custom-select form-control-sm'})
+       {prompt:'Select Member'},
+       {class:'custom-select form-control-sm',
+        id:f.object.id_name(:member_id)
+         })
        %>
   </div>
 </div>
+
 <div class='form-group form-inline row'>
   <%= f.label :due_date,
-   'Due',
-   class:'col-4 col-form-label'
+    'Due',
+    class:'col-4 col-form-label'
     %>
   <div class='col-8'>
-    <div class='' id='chore_due_date'>
+    <%= content_tag :div,
+      id:f.object.id_name(:due_date) do
+      %>
       <%= f.date_select :due_date,
         { use_two_digit_numbers:true,
           start_year:Date.today.year,
@@ -31,9 +36,10 @@
          },
         {class:'form-control form-control-sm'}
         %>
-    </div>
+    <% end %>
   </div>
 </div>
+
 <div class='form-group row'>
   <%= f.label :task,
     class:'text-center col-4 col-form-label'
@@ -41,7 +47,8 @@
   <div class='col-8'>
     <%= f.text_area :task,
      placeholder: "Task",
-     class:'form-control form-control-sm'
+     class:'form-control form-control-sm',
+     id:f.object.id_name(:task)
      %>
   </div>
 </div>
