@@ -3,8 +3,9 @@ class Member < ActiveRecord::Base
 
   has_secure_password
 
-  validates_presence_of :first_name, :last_name, :family_title, :monthly_income, :email
+  validates_presence_of :first_name, :last_name, :email
   validate :positive_income
+  validate :household_auth
 
   belongs_to :household
   has_many :chores, dependent: :destroy
@@ -22,6 +23,15 @@ class Member < ActiveRecord::Base
 
   def self.scopes
     {member.name.downcase.to_sym => member.name}
+  end
+
+  def self.find_or_create_by_oauth(auth_hash)
+    name = auth_hash[:name].split(" ")
+    self.where(email:auth_hash["email"]).first_or_create do |member|
+      member.first_name = name.first
+      member.last_name = name.last
+      member.password = SecureRandom.hex
+    end
   end
 
   def self.find_or_create_from_household_by(house, attrs)
@@ -48,8 +58,14 @@ class Member < ActiveRecord::Base
   end
 
   def positive_income
-    if monthly_income < 0
+    if monthly_income == nil && monthly_income < 0
       errors.add(:monthly_income, "cannot be below zero.")
+    end
+  end
+
+  def household_auth
+    if !head_of_household && household_id == nil
+      errors.add(:base, "Household ID/passphrase don't match our records.")
     end
   end
 
