@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :redirect_unless_logged_in, except: [:new]
+  before_action :redirect_unless_logged_in, except: [:new, :create]
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
   def show
@@ -13,18 +13,19 @@ class MembersController < ApplicationController
   def new
     @member = Member.new
     respond_to do |format|
-      format.js {
-        render 'shared/new_edit',
-        locals:{obj:@member}
-      }
+      format.js
     end
   end
 
   def create
     @member = Member.new(member_params)
-    current_household.members << @member if current_household
+    household = Household.find_by(id:household_params[:household_id])
+    if household && household.authenticate(household_params[:household_passphrase])
+      @member.household_id = household_params[:household_id]
+    end
     respond_to do |format|
       if @member.save
+        session[:member_id] = @member.id
         format.js {
           render 'create',
           locals:{member:@member}
@@ -80,5 +81,9 @@ class MembersController < ApplicationController
 
     def member_params
       params.require(:member).permit(:first_name, :last_name, :family_title, :monthly_income, :head_of_household, :email, :password)
+    end
+
+    def household_params
+      params.permit(:household_id, :household_passphrase)
     end
 end
