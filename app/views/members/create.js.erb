@@ -1,3 +1,6 @@
 $("#dialog").modal("toggle");
-$("#accordion_member").append("<div class='<%= member.row_id %> member_edit' id='reload_<%= member.row_id %>'></div>");
-$("#reload_<%= member.row_id %>").html("<%= j render 'members/member', member:member %>");
+<% if member.head_of_household %>
+
+<% else %>
+  window.location = "/members/<%= member.id %>";
+<% end %>
