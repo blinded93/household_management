@@ -1,0 +1,24 @@
+<%= content_for :header do %>
+  Create Member
+<% end %>
+
+<%= content_for :body_footer do %>
+  <div class="modal-body">
+    <div class="mr-4">
+      <%= form_for member,
+        remote:true do |f| %>
+        <%= render "members/form", f:f %>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <%= content_tag :div,
+      id:"member_errors",
+      class:errors do %>
+    <% end %>
+      <%= f.submit "Create",
+        class:btn,
+        form:"new_member" %>
+    <% end %>
+  </div>
+<% end %>
