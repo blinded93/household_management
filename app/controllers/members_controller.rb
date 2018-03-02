@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
   before_action :redirect_unless_logged_in, except: [:new, :create]
   before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_unless_complete, only: [:show]
 
   def show
     @chores = @member.chores
@@ -19,9 +20,10 @@ class MembersController < ApplicationController
 
   def create
     @member = Member.new(member_params)
+    @household = Household.new
     household = Household.find_by(id:household_params[:household_id])
     if household && household.authenticate(household_params[:household_passphrase])
-      @member.household_id = household_params[:household_id]
+      @member.household = household
     end
     respond_to do |format|
       if @member.save
@@ -77,6 +79,12 @@ class MembersController < ApplicationController
   private
     def set_member
       @member ||= Member.find_by(id: params[:id])
+    end
+
+    def redirect_unless_complete
+      if !current_household || current_member.household_id == 0
+        redirect_to join_complete_path
+      end
     end
 
     def member_params
