@@ -14,6 +14,7 @@ class Chore < ActiveRecord::Base
   scope :due_tomorrow, -> { where(due_date: Date.today + 1) }
   scope :future, -> { where("due_date > ?", Date.today + 1) }
   scope :completed, -> { where(completed: true) }
+  scope :for_member, -> (member) { where(member:member) }
   scope :for, -> (household) {
     joins(:member).
     where(members: {household_id: household.id})
@@ -47,9 +48,5 @@ class Chore < ActiveRecord::Base
     Chore.scopes.select do |scope, scope_title|
       Chore.send(scope).pluck(:id).include?(self.id)
     end
-  end
-
-  def objects_hash(scope)
-    {chores:Chore.for(member.household).send(scope)}
   end
 end
