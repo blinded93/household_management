@@ -66,7 +66,7 @@ class ChoresController < ApplicationController
           locals:locals
         }
       else
-        @chores = locals[:chores].completed
+        @chores = locals[:objs].completed
         locals[:chore_ids] = @chores.pluck(:id)
         @chores.delete_all
         format.js {

@@ -4,36 +4,55 @@ class HouseholdsController < ApplicationController
 
   def control
     @chores = Chore.for(current_household)
+    @chores_by_date = @chores.group_by(&:due_date)
     @lists = List.for(current_household)
     @items = Item.all.pluck(:name)
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @events = current_household.bills.group_by(&:due_date).merge(@chores.group_by(&:due_date))
+    @bills = current_household.bills.group_by(&:due_date)
+    @events = @bills.merge(@chores_by_date)
     session[:admin] = true
+  end
+
+  def join
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def join_household
+    household = Household.find_by(id:params[:household_id])
+    respond_to do |format|
+      if household && household.authenticate(params[:household_passphrase])
+        current_member.join_household(household)
+        format.js {
+          render 'create'
+        }
+      else
+        format.js {
+          render 'join_errors'
+        }
+      end
+    end
   end
 
   def new
     @household = Household.new
     respond_to do |format|
-      format.js {
-        render 'shared/new_edit',
-        locals:{obj:@household}
-      }
+      format.js
     end
   end
 
   def create
     @household = Household.new(household_params)
-    member = @household.members[0]
     respond_to do |format|
       if @household.save
-        session[:member_id] = @household.members[0].id
+        current_member.join_household(@household)
         format.js
       else
         format.js {
           render 'errors',
           locals:{
             household:@household,
-            member:member
           }
         }
       end
