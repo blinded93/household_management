@@ -56,8 +56,4 @@ module Shared
   def badge_span(scope)
     [scope.to_s, "_", plural_name, "_badge"].join.html_safe
   end
-
-  def objects_hash(scope, scope_title)
-    {scope:scope, scope_title:scope_title}
-  end
 end
