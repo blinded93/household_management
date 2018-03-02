@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121030654) do
+ActiveRecord::Schema.define(version: 20180225011453) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "company"
@@ -20,8 +20,10 @@ ActiveRecord::Schema.define(version: 20171121030654) do
     t.date     "due_date"
     t.integer  "account_number"
     t.integer  "household_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "recurring"
+    t.boolean  "paid",           default: false
   end
 
   add_index "bills", ["household_id"], name: "index_bills_on_household_id"
