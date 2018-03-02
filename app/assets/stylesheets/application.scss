@@ -50,8 +50,14 @@ td {
   border: 1px solid red;
 }
 
-.strike, .strike:hover, .strike:active, .strike:focus {
+.strike-through, .strike-through:hover, .strike-through:active, .strike-through:focus {
   text-decoration:line-through;
+}
+
+.vert-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .tbl-col-1 {
