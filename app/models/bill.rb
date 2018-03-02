@@ -5,7 +5,9 @@ class Bill < ActiveRecord::Base
 
   validates :company, :utility, :amount, :due_date, presence: true
 
-
+  default_scope { order(due_date: :asc) }
+  scope :paid, -> { where(paid:true) }
+  scope :unpaid, -> { where(paid:false) }
   scope :over_due, -> { where("due_date < ?", Date.today) }
   scope :within_week, -> { where(due_date: Date.today..Date.today + 1.week) }
   scope :this_month, -> {
@@ -21,7 +23,8 @@ class Bill < ActiveRecord::Base
       over_due: "Over Due",
       within_week: "Within 7 Days",
       this_month: "This Month",
-      next_month: "Next Month"
+      next_month: "Next Month",
+      paid: "Paid"
     }
   end
 
@@ -33,9 +36,5 @@ class Bill < ActiveRecord::Base
     Bill.scopes.select do |scope, scope_title|
       Bill.send(scope).pluck(:id).include?(self.id)
     end
-  end
-
-  def objects_hash(scope)
-    {bills:self.household.bills.send(scope)}
   end
 end
