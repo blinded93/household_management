@@ -13,16 +13,6 @@ class ListItem < ActiveRecord::Base
     where(lists: {member_id: member.id})
   }
 
-  def self.find_or_create(attrs)
-    new_li = ListItem.new(attrs)
-    if list_item = ListItem.find_by(list_id:new_li.list_id, item_id:new_li.item_id)
-      list_item.update(attrs)
-    else
-      new_li.save
-      new_li
-    end
-  end
-
   def item_attributes=(attrs)
     self.item = Item.find_or_create_by(attrs)
   end
@@ -43,9 +33,5 @@ class ListItem < ActiveRecord::Base
 
   def scopes
     {list.name.downcase.tr(" ", "_").to_sym => list.name}
-  end
-
-  def objects_hash(scope)
-    {list:self.list}
   end
 end
