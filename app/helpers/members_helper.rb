@@ -10,4 +10,12 @@ module MembersHelper
   def label_size
     logged_in? ? 'col-4': ''
   end
+
+  def update_collapse(collapse)
+    if collapse
+      "collapse show"
+    else
+      "collapse"
+    end
+  end
 end
