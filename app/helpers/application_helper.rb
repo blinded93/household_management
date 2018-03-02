@@ -42,12 +42,4 @@ module ApplicationHelper
           form:( obj.new_record? ? "new_#{obj.class_name}" : "edit_#{obj.row_id}" )
             )
   end
-
-  def objects_hash(scope, scope_title, objects)
-    {
-      scope:scope,
-      scope_title:scope_title,
-      objects.first.plural_name.to_sym => objects
-    }
-  end
 end
