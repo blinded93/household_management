@@ -1,5 +1,5 @@
 class BillsController < ApplicationController
-  before_action :set_bill, only: [:update, :destroy]
+  before_action :set_bill, only: [:update, :destroy, :pay]
   before_action :redirect_unless_logged_in
 
   def new
@@ -58,19 +58,30 @@ class BillsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      locals = {objs:current_household.bills}
-      locals[:obj] = @bill
+      locals = {bills:current_household.bills}
+      locals[:bill] = @bill
       @bill.destroy
       format.js {
-        render 'shared/delete',
+        render 'destroy',
         locals:locals
+      }
+    end
+  end
+
+  def pay
+    @old_scopes = @bill.scopes.dup
+    @bill.toggle!(:paid)
+    respond_to do |format|
+      format.js {
+        render 'update',
+        locals:{bill:@bill}
       }
     end
   end
 
   private
     def bill_params
-      params.require(:bill).permit(:company, :utility, :amount, :due_date, :account_number)
+      params.require(:bill).permit(:company, :utility, :amount, :due_date, :account_number, :recurring, :paid)
     end
 
     def set_bill

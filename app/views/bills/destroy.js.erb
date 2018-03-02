@@ -1,0 +1,5 @@
+$(".<%= bill.row_id %>").remove();
+<% Bill.scopes.keys.each do |scope| %>
+  $("#<%= bill.badge_span(scope) %>").html("<%= bills.send(scope).count %>");
+<% end %>
+$("#remaining_bills_amount").html("Remaining Monthly Expenses: <%= remaining_expenses %>");
