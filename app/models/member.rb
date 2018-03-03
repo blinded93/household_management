@@ -17,8 +17,19 @@ class Member < ActiveRecord::Base
   after_create :assign_list_and_room
 
   def assign_list_and_room
-    create_list(name: self.name)
-    create_room(name: self.name, household_id:self.household.id)
+    if self.household
+      create_list(name: self.name)
+      create_room(name: self.name, household_id: self.household.id)
+    end
+  end
+
+  def join_household(household)
+    if !household.members.empty?
+      self.head_of_household = false
+    end
+    self.household = household
+    self.save
+    self.assign_list_and_room
   end
 
   def self.scopes
@@ -31,6 +42,8 @@ class Member < ActiveRecord::Base
       member.first_name = name.first
       member.last_name = name.last
       member.password = SecureRandom.hex
+      member.household_id = 0
+      member.head_of_household = true
     end
   end
 
@@ -58,7 +71,7 @@ class Member < ActiveRecord::Base
   end
 
   def positive_income
-    if monthly_income == nil && monthly_income < 0
+    if monthly_income == nil || monthly_income < 0
       errors.add(:monthly_income, "cannot be below zero.")
     end
   end
@@ -73,7 +86,7 @@ class Member < ActiveRecord::Base
     "accordion_member"
   end
 
-  def objects_hash
-    {members:self.household.members}
+  def first_head?
+    self == self.household.members.first
   end
 end
