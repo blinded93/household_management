@@ -1,0 +1,49 @@
+<%= content_for :header do %>
+  Join Household
+<% end %>
+
+<%= content_for :body_footer do %>
+  <div class="modal-body">
+    <div class="mr-4">
+      <%= form_tag join_household_path,
+        id:"join_household",
+        method:'post',
+        remote:true do %>
+        <div class="form-group row text-center">
+          <div class="col-4">
+            <%= label_tag 'household_id',
+              'Household ID',
+              class:"col-form-label" %>
+          </div>
+          <div class="col-8">
+            <%= number_field_tag :household_id,
+              nil,
+              class:'form-control form-control-sm' %>
+          </div>
+        </div>
+        <div class="form-group row text-center">
+          <div class="col-4">
+            <%= label_tag 'household_passphrase',
+              'Passphrase',
+              class:'text-center col-form-label' %>
+          </div>
+          <div class="col-8">
+            <%= text_field_tag :household_passphrase,
+              nil,
+              class:'form-control form-control-sm' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= content_tag :div,
+        id:"join_household_errors",
+        class:errors do %>
+      <% end %>
+        <%= submit_tag "Join",
+          form:"join_household",
+          class:btn %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
