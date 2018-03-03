@@ -12,10 +12,8 @@
         </button>
       </div>
         <div class="modal-body">
-          <%= form_tag ({controller: 'sessions',
-                         action: 'create',
-                         method: 'post'}) do
-                         %>
+          <%= form_tag login_path,
+            id:'login_form' do %>
             <div class="form-group row">
               <%= label_tag :email,
                   nil,
@@ -44,8 +42,8 @@
         </div>
           <div class="modal-footer">
             <%= submit_tag "Sign In",
-                class:'btn btn-sm btn-outline-secondary text-dark'
-                %>
+                class:'btn btn-sm btn-outline-secondary text-dark',
+                form:'login_form' %>
           </div>
         <% end %>
     </div>
