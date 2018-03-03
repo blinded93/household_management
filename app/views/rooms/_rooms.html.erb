@@ -1,13 +1,10 @@
 <div class="row">
   <div class="col text-right">
     <%= link_to "Add Room",
-      'rooms/new',
-      data:{toggle:'modal',
-            target:'#new_room'},
-      class:btn_classes
-      %>
+      new_household_room_path,
+      remote:true,
+      class:btn %>
       <br>
-    <%= render 'rooms/new' %>
   </div>
 </div>
 <div class='row'>
@@ -17,23 +14,16 @@
     <table class="table table-sm" id='community_rooms'>
       <thead>
         <tr>
-          <th>Community</th>
+          <th class='tbl-col-1'></th>
+          <th class='tbl-col-11'>Community</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id='household_rooms'>
         <% current_household.rooms.unowned.each do |room| %>
-          <tr>
-            <td>
-              <%= link_to room.name,
-                "edit_room_#{room.id}",
-                data:{toggle:'modal',
-                      target:"#edit_room_#{room.id}"
-                      },
-                      class:link_classes
-                  %>
-              <%= render 'rooms/edit', room:room %>
-            </td>
-          </tr>
+          <%= content_tag :tr,
+            class:room.row_id do %>
+            <%= render 'rooms/room', room:room %>
+          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -49,7 +39,9 @@
         <% current_household.rooms.owned.each do |room| %>
           <tr>
             <td>
-              <%= room.member.name %>
+              <span class='btn btn-sm'>
+                <%= room.member.name %>
+              </span>
             </td>
           </tr>
         <% end %>
