@@ -11,8 +11,7 @@
             </span>
             (<%= link_to current_member.name,
               member_path(current_member),
-              class:'btn btn-sm text-warning p-0 m-0'
-              %>)
+              class:'btn btn-sm text-warning p-0 m-0' %>)
           <% else %>
             <span class='text-success'>
               <%= current_member.first_name %>
@@ -20,8 +19,7 @@
             <% if current_member.head_of_household? %>
               (<%= link_to "Admin",
                 [current_household, :control],
-                class:'btn btn-sm text-warning p-0 m-0'
-                %>)
+                class:'btn btn-sm text-warning p-0 m-0' %>)
             <% end %>
           <% end %>
         </small>
