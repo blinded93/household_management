@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
   root 'welcome#home'
+  get '/join/complete' => 'welcome#complete'
+  get '/join' => 'members#new', as: :join
+  get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
+  get '/auth/facebook/callback' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
   patch '/chores/:id/complete' => 'chores#complete', as: :complete_chore
   delete '/chores/clear' => 'chores#destroy', as: :clear_chores
+  get '/households/join' => 'households#join', as: :join_household_modal
+  post '/households/join' => 'households#join_household', as: :join_household
+  patch '/bills/:id/pay' => 'bills#pay', as: :pay_household_bill
 
   resources :households, except: [:index] do
     get '/calendar/day' => 'calendar#day'
@@ -19,6 +26,7 @@ Rails.application.routes.draw do
     resources :room_items, except: [:index]
   end
 
+  resources :members, only: [:create]
   resources :members, only: [:show] do
     get '/chores/reload' => 'chores#reload'
     get '/messages/inbox' => 'messages#inbox', as: :inbox
