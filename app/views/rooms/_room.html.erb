@@ -1,29 +1,10 @@
-<div class="item">
-  <span class="badge badge-default">
-    <%= restock_count(room.room_items) if admin? %>
-  </span>
-  <a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_inventory" href="#room_<%= room.id %>_inventory" aria-expanded="true" aria-controls="room_<%= room.id %>_inventory">
-   <%= room.name %>
-  </a>
-  <div id="room_<%= room.id %>_inventory" class="collapse" role="tabpanel">
-    <div class="row">
-      <div class="col">
-      </div>
-      <div class="col-11">
-        <table class='table table-sm table-hover'>
-          <thead>
-            <tr>
-              <th> </th>
-              <th class='col-6'>Name</th>
-              <th class='col-3'>Stock</th>
-              <th class='col-3'>Threshold</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render room.items, addee:room %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+<td>
+  <%= remove_btn(current_household, room) %>
+</td>
+<td>
+  <%= link_to room.name,
+    edit_household_room_path(current_household, room),
+    remote:true,
+    class:link
+    %>
+</td>
