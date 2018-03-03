@@ -34,8 +34,4 @@ class Room < ActiveRecord::Base
   def reload_acc
     "reload_rooms"
   end
-
-  def objects_hash
-    {}
-  end
 end
