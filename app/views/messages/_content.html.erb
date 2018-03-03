@@ -46,11 +46,6 @@
       <a class="btn btn-sm btn-outline-secondary text-dark mr-auto" data-toggle="collapse" href="#reply_<%= message.id %>" aria-expanded="false" aria-controls="reply">
         Reply
       </a>
-      <%= link_to "Delete",
-        member_message_path(current_member, @message),
-        class:btn_delete,
-        method:'delete',
-        data:{confirm:"Delete message?"} %>
     </div>
     <div class="collapse" id="reply_<%= message.id %>">
       <div class="card card-block p-4">
