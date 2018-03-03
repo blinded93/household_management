@@ -13,9 +13,9 @@ module MembersHelper
 
   def update_collapse(collapse)
     if collapse
-      "collapse show"
+      "show"
     else
-      "collapse"
+      ""
     end
   end
 end

@@ -3,6 +3,7 @@
     class:"#{member.row_id} member_edit",
     id:"reload_#{member.row_id}" do %>
       <%= render 'members/member',
-        member:member %>
+        member:member,
+        collapse:false %>
   <% end %>
 <% end %>
