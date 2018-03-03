@@ -50,10 +50,8 @@ class HouseholdsController < ApplicationController
         format.js
       else
         format.js {
-          render 'errors',
-          locals:{
-            household:@household,
-          }
+          render 'shared/errors',
+          locals: {obj:@household}
         }
       end
     end
