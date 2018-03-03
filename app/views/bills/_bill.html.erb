@@ -2,12 +2,22 @@
   <%= remove_btn(current_household, bill) %>
 </td>
 <td>
-  <span title='Edit'>
-    <%= link_to bill.company,
-      edit_household_bill_path(current_household, bill),
-      remote:true,
-      class:link%>
-  </span>
+  <% if bill.paid %>
+    <span title='Mark as Unpaid'>
+      <%= link_to bill.company,
+        pay_household_bill_path(bill),
+        remote:true,
+        class:link,
+        method:'patch' %>
+    </span>
+  <% else %>
+    <span title='Edit'>
+      <%= link_to bill.company,
+        edit_household_bill_path(current_household, bill),
+        remote:true,
+        class:link%>
+    </span>
+  <% end %>
 </td>
 <td>
   <%= bill.utility %>
