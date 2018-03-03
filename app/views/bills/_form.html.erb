@@ -67,3 +67,17 @@
     <% end %>
   </div>
 </div>
+
+<div class="form-group row text-center">
+  <div class="col-4 col-form-label">
+    <%= f.label :recurring,
+      "Recurring?",
+      class:'text-center col-form-label' %>
+  </div>
+  <div class="col-8 vert-center">
+    <%= f.check_box :recurring,
+      class:'form-control form-control-sm',
+      style: 'width: 15px;',
+      id:f.object.id_name(:recurring) %>
+  </div>
+</div>
