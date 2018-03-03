@@ -1,17 +1,17 @@
-<div class="modal fade" id="dialog1" tabindex="-1" role="dialog" aria-labelledby="dialogtitle" aria-hidden="true">
+<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="dialog-title" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="dialogtitle">
+        <h5 class="modal-title" id="dialog-title">
+          <strong>
+            <%= yield :header if content_for?(:header) %>
+          </strong>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-      </div>
+      <%= yield :body_footer if content_for?(:body_footer) %>
     </div>
   </div>
 </div>
