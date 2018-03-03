@@ -16,48 +16,37 @@
         </div>
         <div class="row">
           <div class="col-6 pr-4 pl-4">
-            <% chores.group_by(&:member).each do |chore| %>
-              <dl>
-                <dt>
-                  <%= chore.first.name %>
-                </dt>
-                <% chore.second.each do |ch| %>
-                  <dd class='mb-0 pl-4 small'>
-                    <%= ch.task %>
-                  </dd>
-                <% end %>
-              </dl>
+            <% if chores %>
+              <% chores.group_by(&:member).each do |member, chores| %>
+                <dl>
+                  <dt>
+                    <%= member.name %>
+                  </dt>
+                  <% chores.each do |chore| %>
+                    <li class='circle mb-0 pl-4 small'>
+                      <%= chore.task %>
+                    </li>
+                  <% end %>
+                </dl>
+              <% end %>
             <% end %>
           </div>
           <div class="col-6 pr-4 pl-4">
-            <% bills.each do |bill| %>
-              <dl>
-                <dt>
-                  <%= bill.utility %>
-                </dt>
-                  <dd class='mb-0 pl-4 small'>
-                    <%= bill.company %>
-                    <%= " / #{bill.account_number}" if bill.account_number %>
-                  </dd>
-                  <dd class='mb-0 pl-4 small'>
-                    <%= number_to_currency(bill.amount) %>
-                  </dd>
-              </dl>
+            <% if bills %>
+              <% bills.each do |bill| %>
+                <dl>
+                  <dt>
+                    <%= bill.utility %>
+                  </dt>
+                    <dd class='mb-0 pl-4 small'>
+                      <%= bill.company %>
+                    </dd>
+                </dl>
+              <% end %>
             <% end %>
           </div>
         </div>
-
       </div>
-    </div>
-    <div class="modal-footer">
-      <% if bills %>
-        <strong class='sm-font'>
-          Total:
-        </strong>
-        <span>
-          <%= number_to_currency(bill_sum(date)) %>
-        </span>
-      <% end %>
     </div>
   <% end %>
 <% end %>
