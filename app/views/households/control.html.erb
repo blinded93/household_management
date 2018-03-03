@@ -27,7 +27,9 @@
       <div class="card card-block p-3">
         <span class="card-title">
         </span>
-        <%= render 'calendar/show' %>
+        <div id='calendar_load'>
+          <%= render 'calendar/show' %>
+        </div>
       </div>
     </div>
   </div>
@@ -41,20 +43,24 @@
           <span class='pb-2'>
             <%= link_to "New",
               new_household_chore_path(current_household),
-              data:{toggle:'modal',
-                    target:'#new_chore'},
-              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
-              %>
-            <%= render 'chores/new', chore: @chore %>
+              remote:true,
+              class:btn %>
+            <%= link_to "Refresh",
+              household_chores_reload_path(current_household),
+              remote:true,
+              class:btn %>
           </span>
         </span>
         <div id="accordion-chore" data-children=".chore-item">
-          <% @chores.scopes.each do |scope, scope_title| %>
-            <%= render 'chores/chores',
-              {scope_title: scope_title,
-                scope: scope,
-                chores: @chores.send(scope)}
-              %>
+          <% Chore.scopes.each do |scope, scope_title| %>
+            <%= content_tag :div,
+              class:'chore_item',
+              id:"#{scope.to_s}_chores_collapse" do %>
+              <%= render 'chores/chores',
+                {scope_title: scope_title,
+                 scope: scope,
+                 chores: @chores.send(scope)} %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -70,20 +76,24 @@
           <span class='pb-2'>
             <%= link_to "Add",
               new_household_bill_path(current_household),
-              data:{toggle:'modal',
-                    target:'#new_bill'},
-              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
-              %>
-            <%= render 'bills/new', bill:@bill %>
+              remote:true,
+              class:btn %>
           </span>
+          <small id="remaining_bills_amount" class='text-muted sm-font pl-3'>
+            Remaining Monthly Expenses: <strong><%= remaining_expenses %></strong>
+          </small>
         </span>
         <div id="accordion_bill" data-children=".bill-item">
           <% Bill.scopes.each do |scope, scope_title| %>
-            <%= render 'bills/bills',
-              {scope_title:scope_title,
-               scope:scope,
-               bills:current_household.bills.send(scope)}
-              %>
+          <%# binding.pry %>
+            <%= content_tag :div,
+              class:"bill_item",
+              id:"#{scope.to_s}_bills_collapse" do %>
+              <%= render 'bills/bills',
+                {scope_title:scope_title,
+                 scope:scope,
+                 bills:current_household.bills.send(scope)} %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -96,10 +106,20 @@
           <u class='lg-font'>
             Requests
           </u>
+          <span class="pb-2">
+            <%= link_to "Refresh",
+              household_list_items_reload_path(current_household),
+              remote:true,
+              class:btn %>
+          </span>
         </span>
         <div id="accordion_request" data-children=".request-item">
           <% @lists.each do |list| %>
-            <%= render 'lists/lists', list:list %>
+            <%= content_tag :div,
+              class:'item',
+              id:"list_#{list.id}_collapse" do %>
+              <%= render 'lists/lists', list:list %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -113,17 +133,21 @@
             Inventory
           </u>
           <span class='pb-2'>
-            <%= link_to "Add",
-              "add_item",
-              data:{toggle:'modal',
-                    target:'#add_room_item'},
-              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
-              %>
+              <%= link_to "Add",
+                new_household_room_item_path(current_household),
+                remote:true,
+                class:btn %>
           </span>
         </span>
-        <%= render 'room_items/add', room_item:@room_item %>
         <div id="accordion_inventory" data-children=".room-item">
-          <%= render current_household.rooms.unowned %>
+          <% current_household.rooms.unowned.each do |room| %>
+            <%= content_tag :div,
+              class:'room-item',
+              id:"#{room.scope}_room_items_collapse" do %>
+              <%= render 'room_items/room_items',
+                room:room %>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -136,20 +160,15 @@
             Members
           </u>
           <span class='pb-2'>
-            <%= link_to "New",
-              new_household_member_path(current_household),
-              data:{toggle:'modal',
-                    target:'#new_member'},
-              class:'btn btn-sm btn-outline-secondary text-dark ml-2'
-              %>
-              <%= render 'members/new' %>
+            <%# link_to "Refresh",
+              household_members_reload_path(current_household),
+              remote:true,
+              class:btn %>
           </span>
         </span>
-        <div id="accordion_member" data-children=".member-edit">
-          <%= render partial:'members/edit',
-            collection:current_household.members,
-            as: :member
-            %>
+        <div id="accordion_member" data-children=".member_edit">
+          <%= render 'members/members',
+            members:current_household.members %>
         </div>
       </div>
     </div>
@@ -162,22 +181,30 @@
             Household
           </u>
           <span class='pb-2'>
+            <%= link_to "Edit",
+              edit_household_path(current_household),
+              remote:true,
+              class:btn %>
             <a class="btn btn-sm btn-outline-secondary text-dark ml-2" data-parent='#household' data-toggle="collapse" href="#rooms" aria-expanded="false" aria-controls="rooms">
               Rooms
             </a>
           </span>
         </span>
         <div class='room-tab pb-2'>
-          <div class="collapse border border-left-0 border-right-0 <%= show_scope("rooms") %>"  id='rooms'>
-            <div class="card-block p-3">
+          <div class="collapse border border-left-0 border-right-0" id='rooms'>
+            <div id='reload_rooms' class="card-block p-3">
               <%= render 'rooms/rooms' %>
             </div>
           </div>
         </div>
-        <div class='text-muted pl-3'>
+        <div class='d-inline text-muted pl-3'>
           ID#: <%= current_household.id %>
         </div>
-        <%= render 'households/edit', household:current_household %>
+        <%= content_tag :div,
+          id:'edit_household' do %>
+          <%= render 'households/household',
+            household:current_household %>
+        <% end %>
       </div>
     </div>
   </div>
