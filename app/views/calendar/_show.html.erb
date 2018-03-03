@@ -1,36 +1,32 @@
 <div class="row">
   <div class="col-3 text-left">
-    <span class="small text-left bg-danger text-light p-1">Bills</span>
-    <span class="small text-left bg-warning p-1">Chores</span>
+    <%= link_to "Refresh",
+      household_calendar_load_path(current_household, date: @date),
+      class:btn,
+      remote:true %>
   </div>
   <div class="col-6 text-center">
     <div class="">
       <%= link_to household_calendar_load_path(current_household, date:@date - 1.month),
         class:"btn btn-default font-blk",
-        remote:true do
-        %>
+        remote:true do %>
         <i class="glyphicon glyphicon-backward"><</i>
       <% end %>
-      <%= "#{@date.strftime("%b")} #{@date.year}" %>
+      <strong class='h5'>
+        <%= "#{@date.strftime("%b")} #{@date.year}" %>
+      </strong>
       <%= link_to household_calendar_load_path(current_household, date:@date + 1.month),
         class: "btn btn-sm font-blk",
-        remote:true do
-        %>
+        remote:true do %>
         <i class="glyphicon glyphicon-forward">></i>
       <% end %>
     </div>
   </div>
   <div class="col-3 text-right">
-    <%= link_to "Refresh",
-      household_calendar_load_path(current_household, date: @date),
-      class:btn,
-      remote:true
-      %>
     <%= link_to "Today",
       household_calendar_load_path(current_household, date: Date.today),
       class:btn,
-      remote:true
-      %>
+      remote:true %>
   </div>
 </div>
 <div class="row">
@@ -41,9 +37,16 @@
           household_calendar_day_path(current_household, date:date),
           remote:true,
           class:'btn btn-sm btn-block text-left font-blk' %>
-          <% @events[date].each do |event| %>
-            <%= display_event(event) %>
-          <% end %>
+        <%= content_tag :div,
+          id:'calendar_bills',
+          class:'small bg-danger text-light pl-1 pr-1' do %>
+          <%= display_bills(@bills, date) %>
+        <% end %>
+        <%= content_tag :div,
+          id:'calendar_chores',
+          class:'small bg-warning pl-1 pr-1' do %>
+          <%= display_chore(@chores_by_date, date) %>
+        <% end %>
       <% else %>
         <%= date.day %>
       <% end %>
