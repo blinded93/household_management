@@ -5,7 +5,8 @@
     <div class="col-8">
       <%= f.text_field :name,
         placeholder:"Name",
-        class:'form-control form-control-sm'
+        class:'form-control form-control-sm',
+        id:f.object.id_name(:name)
         %>
     </div>
 </div>
