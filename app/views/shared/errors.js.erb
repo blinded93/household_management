@@ -1,13 +1,9 @@
 <% obj.completed_fields.each do |field| %>
-  <% unless field == :item_id || :password %>
-    var el = document.getElementById("<%= obj.id_name(field) %>");
-    el.classList.remove("border");
-    el.classList.remove("border-danger");
+  <% if field != :item_id || :password %>
+    $("#<%= obj.id_name(field) %>").removeClass("border border-danger");
   <% end %>
 <% end %>
 <% obj.errors.messages.each do |field, error| %>
-    var el = document.getElementById("<%= obj.id_name(field) %>");
-    el.classList.add("border");
-    el.classList.add("border-danger");
+  $("#<%= obj.id_name(field) %>").addClass("border border-danger");
 <% end %>
-document.getElementById("<%= obj.error_div %>").innerHTML = "<%= j render 'shared/errors', obj:obj %>";
+$("#<%= obj.error_div %>").html("<%= j render 'shared/errors', obj:obj %>");
