@@ -4,3 +4,4 @@ $('#dialog').modal('toggle');
   $("#<%= "bills_#{scope.to_s}_tbody" %>").prepend("<tr class='<%= bill.row_id %>'></tr>");
   $(".<%= bill.row_id %>").html("<%= j render "bills/bill", bill:bill %>");
 <% end %>
+$("#remaining_bills_amount").html("Remaining Monthly Expenses: <%= remaining_expenses %>");
