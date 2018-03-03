@@ -1,0 +1,25 @@
+<div class="text-center">
+  <h3 class='mb-0'>Household Management</h3>
+  <small class='text-muted'>
+    You are signed in as <span class='text-success'><%= current_member.try(:email) %></span>, but have not completed registration.
+    <br>
+    If this is not your account, please
+    <%= link_to "logout",
+      logout_path,
+      class:'text-warning',
+      method: 'delete',
+      data:{confirm: "Are you sure you want to log out?"} %>
+      and sign-in again.
+  </small>
+  <div class='mt-2'>
+    <%= link_to "New Household",
+      new_household_path,
+      remote:true,
+      class:'btn btn-sm btn-outline-info mr-2' %>
+     |
+    <%= link_to "Join Household",
+      join_household_modal_path,
+      remote:true,
+      class:'btn btn-sm btn-outline-info ml-2' %>
+  </div>
+</div>
