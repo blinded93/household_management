@@ -70,7 +70,7 @@ class ChoresController < ApplicationController
         locals[:chore_ids] = @chores.pluck(:id)
         @chores.delete_all
         format.js {
-          render 'delete',
+          render 'destroy',
           locals:locals
         }
       end
