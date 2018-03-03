@@ -22,6 +22,7 @@
       id:f.object.error_div,
       class:errors do %>
     <% end %>
+      <%= mark_bill_as_paid_btn(obj) %>
       <%= f.submit ( f.object.new_record? ? "Create" : "Update" ),
         class:btn,
         form:( f.object.new_record? ? "new_#{obj.class_name}" : "edit_#{obj.row_id}" ) %>
