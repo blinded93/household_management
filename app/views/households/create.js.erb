@@ -1,2 +1,2 @@
-$('#new_household').modal('toggle');
-window.location.replace("<%= household_control_path(@household) %>");
+$('#dialog').modal('toggle');
+window.location = "<%= member_path(current_member) %>";
