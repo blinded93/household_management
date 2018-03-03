@@ -1,7 +1,7 @@
 <%= content_tag :span,
   class:badge_color(scope),
   id:"#{scope.to_s}_chores_badge" do %>
-  <%= chores.send(scope).count %>
+  <%= chores.count %>
 <% end %>
 <a class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion-chore" href="#<%= scope.to_s %>_chores" aria-expanded="true" aria-controls="<%= scope.to_s %>_chores">
   <%= scope_title %>
