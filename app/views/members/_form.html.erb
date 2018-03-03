@@ -76,55 +76,72 @@
       class:'form-control form-control-sm' %>
   </div>
 </div>
-<!-- <br> -->
-<div class="form-group row text-center">
-  <div class="col-2">
-    <%= f.check_box :head_of_household,
-      {class:'ml-3 form-control form-control-sm d-inline',
-       id:'household_check_box'}, "false", "true" %>
-  </div>
-  <div class="col-5">
-    <%= f.label :head_of_household,
-      "Joining a household?",
-      class:"text-center col-form-label d-inline" %>
-  </div>
-</div>
-<div id="household_fields" style="display:none;">
-  <div class="form-group row text-center">
+<% if logged_in? %>
+  <div class="form-group row">
     <div class="col-4">
-      <%= f.label :household_id, "",
-        class:"col-form-label" %>
+      <%= f.check_box :head_of_household,
+        {class:'form-control form-control-sm d-inline',
+         id:'household_check_box',
+         disabled:f.object.first_head?},
+         "true",
+         "false" %>
     </div>
     <div class="col-8">
-      <%= number_field_tag :household_id,
-        nil,
-        class:'form-control form-control-sm',
-        id:f.object.id_name(:household_id) %>
+      <%= f.label :head_of_household,
+        "Admin",
+        class:"col-form-label d-inline" %>
     </div>
   </div>
+<% else %>
   <div class="form-group row text-center">
-    <div class="col-4">
-      <%= f.label :household_passphrase,
-        "Passphrase",
-        class:'text-center col-form-label' %>
+    <div class="col-4 col-form-label">
+      <%= f.label :head_of_household,
+        "Joining a household?",
+        class:"text-center col-form-label" %>
     </div>
-    <div class="col-8">
-      <%= text_field_tag :household_passphrase,
-        nil,
-        class:'form-control form-control-sm' %>
+    <div class="col-8 vert-center">
+      <%= f.check_box :head_of_household,
+        {class:'form-control form-c ontrol-sm',
+        style:'width:15px;',
+        id:'household_check_box'}, "false", "true" %>
     </div>
   </div>
-</div>
+  <div id="household_fields" style="display:none;">
+    <div class="form-group row text-center">
+      <div class="col-4">
+        <%= f.label :household_id, "",
+          class:"col-form-label" %>
+      </div>
+      <div class="col-8">
+        <%= number_field_tag :household_id,
+          nil,
+          class:'form-control form-control-sm',
+          id:f.object.id_name(:household_id) %>
+      </div>
+    </div>
+    <div class="form-group row text-center">
+      <div class="col-4">
+        <%= f.label :household_passphrase,
+          "Passphrase",
+          class:'text-center col-form-label' %>
+      </div>
+      <div class="col-8">
+        <%= text_field_tag :household_passphrase,
+          nil,
+          class:'form-control form-control-sm' %>
+      </div>
+    </div>
+  </div>
 
-
-<script type="text/javascript">
-  var checkbox = document.getElementById('household_check_box');
-  var household_fields = document.getElementById('household_fields');
-  checkbox.onchange = function() {
-    if(this.checked) {
-      household_fields.style['display'] = 'block';
-    } else {
-      household_fields.style['display'] = 'none';
-    }
-  };
-</script>
+  <script type="text/javascript">
+    var checkbox = document.getElementById('household_check_box');
+    var household_fields = document.getElementById('household_fields');
+    checkbox.onchange = function() {
+      if(this.checked) {
+        household_fields.style['display'] = 'block';
+      } else {
+        household_fields.style['display'] = 'none';
+      }
+    };
+  </script>
+<% end %>
