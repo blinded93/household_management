@@ -23,13 +23,10 @@
         </thead>
         <%= content_tag :tbody,
           id:"bills_#{scope.to_s}_tbody" do %>
-          <% bills.each do |bill| %>
-            <%= content_tag :tr,
-              class:bill.row_id do %>
-              <%= render 'bills/bill',
-                bill:bill %>
-            <% end %>
-          <% end %>
+          <%= render partial:'bills/bills_tr',
+            collection:bills,
+            as: :bill,
+            locals:{scope:scope}%>
         <% end %>
       </table>
     </div>
