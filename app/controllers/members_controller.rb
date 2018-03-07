@@ -88,7 +88,7 @@ class MembersController < ApplicationController
     end
 
     def member_params
-      params.require(:member).permit(:first_name, :last_name, :family_title, :monthly_income, :head_of_household, :email, :password)
+      params.require(:member).permit(:first_name, :last_name, :monthly_income, :head_of_household, :email, :password)
     end
 
     def household_params
