@@ -55,7 +55,7 @@ class Member < ActiveRecord::Base
   end
 
   def cols
-    [:first_name, :last_name, :family_title, :monthly_income, :email, :password]
+    [:first_name, :last_name, :monthly_income, :email, :password]
   end
 
   def name
