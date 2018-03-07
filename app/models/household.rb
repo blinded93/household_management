@@ -23,4 +23,8 @@ class Household < ActiveRecord::Base
   def cols
     [:name, :address1, :city, :state, :zip_code, :password]
   end
+
+  def income
+    self.members.pluck(:monthly_income).sum
+  end
 end
