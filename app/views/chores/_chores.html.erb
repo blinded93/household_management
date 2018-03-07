@@ -40,14 +40,10 @@
         </thead>
         <%= content_tag :tbody,
           id:"chores_#{scope.to_s}_tbody" do %>
-          <% chores.each do |chore| %>
-            <%= content_tag :tr,
-              class:chore.row_id do %>
-              <%= render 'chores/chore',
-                chore:chore,
-                scope:scope %>
-            <% end %>
-          <% end %>
+          <%= render partial:'chores/chores_tr',
+            collection:chores,
+            as: :chore,
+            locals:{scope:scope} %>
         <% end %>
       </table>
     </div>
