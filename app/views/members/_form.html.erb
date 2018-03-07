@@ -22,36 +22,26 @@
       class:'form-control form-control-sm' %>
   </div>
 </div>
-<div class="form-group row text-center">
-  <div class="col-4">
-    <%= f.label :family_title,
-      "Family Title",
-      class:"text-center col-form-label" %>
-    </div>
-  <div class="col-8">
-    <%= f.text_field :family_title,
-      placeholder: "Family Title",
-      class:'form-control form-control-sm' %>
-  </div>
-</div>
-<div class="form-group row text-center">
-  <div class="col-4">
-    <%= f.label :monthly_income,
-      "Income",
-      class:"text-center col-form-label" %>
-    </div>
-  <div class="input-group input-group-sm col-8">
-    <div class="input-group-addon">
-      $
-    </div>
-    <%= f.number_field :monthly_income,
-      placeholder: "Monthly Income",
-      class:'form-control form-control-sm' %>
-    <div class="input-group-addon">
-      /month
+<% if admin? %>
+  <div class="form-group row text-center">
+    <div class="col-4">
+      <%= f.label :monthly_income,
+        "Income",
+        class:"text-center col-form-label" %>
+      </div>
+    <div class="input-group input-group-sm col-8">
+      <div class="input-group-addon">
+        $
+      </div>
+      <%= f.number_field :monthly_income,
+        placeholder: "Monthly Income",
+        class:'form-control form-control-sm' %>
+      <div class="input-group-addon">
+        /month
+      </div>
     </div>
   </div>
-</div>
+<% end %>
 <div class="form-group row text-center">
   <div class="col-4">
     <%= f.label :email,
@@ -76,7 +66,7 @@
       class:'form-control form-control-sm' %>
   </div>
 </div>
-<% if logged_in? %>
+<% if logged_in? && admin? %>
   <div class="form-group row">
     <div class="col-4">
       <%= f.check_box :head_of_household,
@@ -92,6 +82,7 @@
         class:"col-form-label d-inline" %>
     </div>
   </div>
+<% elsif logged_in? %>
 <% else %>
   <div class="form-group row text-center">
     <div class="col-4 col-form-label">
