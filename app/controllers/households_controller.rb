@@ -9,7 +9,7 @@ class HouseholdsController < ApplicationController
     @items = Item.all.pluck(:name)
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @bills = current_household.bills.group_by(&:due_date)
-    @events = @bills.merge(@chores_by_date)
+    @events = @bills.merge(@chores_by_date) {|k, v1, v2| [*v1, *v2]}
     session[:admin] = true
   end
 
@@ -92,6 +92,6 @@ class HouseholdsController < ApplicationController
     end
 
     def household_params
-      params.require(:household).permit(:name, :address1, :address2, :city, :state, :zip_code, :password, members_attributes: [:first_name, :last_name, :family_title, :monthly_income, :email, :password, :head_of_household])
+      params.require(:household).permit(:name, :address1, :address2, :city, :state, :zip_code, :password)
     end
 end
