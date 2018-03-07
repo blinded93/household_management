@@ -12,6 +12,9 @@
     <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#inventory"  aria-expanded="false" aria-controls="inventory">
       Inventory
     </a>
+    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#profile"  aria-expanded="false" aria-controls="profile">
+      Profile
+    </a>
   </div><br>
   <div class='link'>
     <div class="collapse <%= 'show' unless selected_tab %>" id="chores">
@@ -102,12 +105,28 @@
           </span>
         </span>
         <div id="accordion_inventory" data-children=".room-item">
-          <% current_household.rooms.unowned.each do |room| %>
-            <%= content_tag :div,
-              class:'room-item' do
-              %>
-              <%= render 'room_items/room_items', room:room %>
-            <% end %>
+          <%= render partial:'room_items/room_items_div',
+            collection:current_household.rooms.unowned,
+            as: :room %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='link'>
+    <div class="collapse <%= show_tab("profile") %>" id="profile">
+      <div class="card card-block p-3">
+        <span class="card-title">
+          <u class='lg-font'>
+            Profile
+          </u>
+        </span>
+        <div id="accordion_profile">
+          <%= content_tag :div,
+            class:"#{current_member.row_id} member_edit",
+            id:"reload_#{current_member.row_id}" do %>
+              <%= render 'members/member',
+                member:current_member,
+                collapse:true %>
           <% end %>
         </div>
       </div>

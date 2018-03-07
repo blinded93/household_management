@@ -9,14 +9,9 @@
     </tr>
   </thead>
   <tbody id="list_items_tbody">
-    <% list.list_items.each do |list_item| %>
-      <%= content_tag :tr,
-        id:list_item.row_id do %>
-        <%= render 'items/item',
-          {addee:list,
-           item:list_item.item
-           } %>
-      <% end %>
-    <% end %>
+    <%= render partial:'list_items/list_items_tr',
+      collection:list.list_items,
+      as: :list_item,
+      locals:{list:list}%>
   </tbody>
 </table>

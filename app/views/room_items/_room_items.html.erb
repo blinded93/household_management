@@ -1,4 +1,4 @@
-<span id="<%= "#{room.scope}.room_items_badge" %>" class="badge badge-default">
+<span id="<%= "#{room.scope}_room_items_badge" %>" class="badge badge-default">
   <%= restock_count(room.room_items) if admin? %>
 </span>
 <a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_inventory" href="#room_<%= room.id %>_inventory" aria-expanded="true" aria-controls="room_<%= room.id %>_inventory">

@@ -85,7 +85,6 @@
         </span>
         <div id="accordion_bill" data-children=".bill-item">
           <% Bill.scopes.each do |scope, scope_title| %>
-          <%# binding.pry %>
             <%= content_tag :div,
               class:"bill_item",
               id:"#{scope.to_s}_bills_collapse" do %>
@@ -114,13 +113,9 @@
           </span>
         </span>
         <div id="accordion_request" data-children=".request-item">
-          <% @lists.each do |list| %>
-            <%= content_tag :div,
-              class:'item',
-              id:"list_#{list.id}_collapse" do %>
-              <%= render 'lists/lists', list:list %>
-            <% end %>
-          <% end %>
+          <%= render partial:'lists/lists_div',
+            collection:@lists,
+            as: :list %>
         </div>
       </div>
     </div>
@@ -140,14 +135,9 @@
           </span>
         </span>
         <div id="accordion_inventory" data-children=".room-item">
-          <% current_household.rooms.unowned.each do |room| %>
-            <%= content_tag :div,
-              class:'room-item',
-              id:"#{room.scope}_room_items_collapse" do %>
-              <%= render 'room_items/room_items',
-                room:room %>
-            <% end %>
-          <% end %>
+          <%= render partial:'room_items/room_items_div',
+            collection:current_household.rooms.unowned,
+            as: :room %>
         </div>
       </div>
     </div>
@@ -167,8 +157,9 @@
           </span>
         </span>
         <div id="accordion_member" data-children=".member_edit">
-          <%= render 'members/members',
-            members:current_household.members %>
+          <%= render partial:'members/members',
+            collection:current_household.members,
+            as: :member %>
         </div>
       </div>
     </div>
