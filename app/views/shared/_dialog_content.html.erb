@@ -1,31 +1,18 @@
-<% if item?(obj) %>
-  <%= content_for :header do %>
-    <%= obj.new_record? ? "Add Item" : "Edit #{obj.item.name}" %>
-  <% end %>
-<% else %>
-  <%= content_for :header do %>
-    <%= obj.new_record? ? "Create #{obj.class}" : "Edit #{obj.class}" %>
-  <% end %>
-<% end %>
+<%= form_header(obj) %>
 
 <%= content_for :body_footer do %>
   <div class="modal-body">
     <div class="mr-4">
-      <%= form_for dialog_form(obj),
+      <%= form_for dialog_form_path(obj),
         remote:true do |f| %>
-        <%= render 'items/form', f:f if item?(obj) && obj.new_record? %>
-        <%= render "#{obj.plural_name}/form", f:f %>
+        <%= item_form(f) %>
+        <%= form_render(f) %>
     </div>
   </div>
   <div class="modal-footer">
-    <%= content_tag :div,
-      id:f.object.error_div,
-      class:errors do %>
-    <% end %>
+    <%= form_error_div(obj) %>
       <%= mark_bill_as_paid_btn(obj) %>
-      <%= f.submit ( f.object.new_record? ? "Create" : "Update" ),
-        class:btn,
-        form:( f.object.new_record? ? "new_#{obj.class_name}" : "edit_#{obj.row_id}" ) %>
+      <%= dialog_submit_btn(f) %>
     <% end %>
   </div>
 <% end %>

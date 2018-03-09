@@ -24,7 +24,7 @@ module ApplicationHelper
     'text-danger small mr-auto'
   end
 
-  def dialog_form(obj)
+  def dialog_form_path(obj)
     case obj
     when ListItem
       [current_member, obj]
@@ -38,8 +38,29 @@ module ApplicationHelper
   def dialog_submit_btn(f)
     obj = f.object
     f.submit((obj.new_record? ? "Create" : "Update"),
-          class:btn,
-          form:( obj.new_record? ? "new_#{obj.class_name}" : "edit_#{obj.row_id}" )
-            )
+      class:btn,
+      form:( obj.new_record? ? "new_#{obj.class_name}" : "edit_#{obj.row_id}" )
+    ).html_safe
+  end
+
+  def form_render(f)
+    render "#{f.object.plural_name}/form", f:f
+  end
+
+  def form_header(obj)
+    content_for :header do
+      if item?(obj)
+        obj.new_record? ? "Add Item" : "Edit #{obj.item.name}"
+      else
+        obj.new_record? ? "Create #{obj.class}" : "Edit #{obj.class}"
+      end
+    end
+  end
+
+  def form_error_div(obj)
+    content_tag :div,
+      id:obj.error_div_id,
+      class:errors do
+    end
   end
 end

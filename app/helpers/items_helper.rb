@@ -57,4 +57,10 @@ module ItemsHelper
   def item?(obj)
     obj.class_name.include?("_item")
   end
+
+  def item_form(f)
+    if item?(f.object) && f.object.new_record?
+      render 'items/form', f:f
+    end
+  end
 end
