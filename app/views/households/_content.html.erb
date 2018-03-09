@@ -1,0 +1,42 @@
+<%= content_for :header do %>
+  <%= @household.new_record? ? "Create Household" : "Edit Household" %>
+<% end %>
+
+<%= content_for :body_footer do %>
+<div class="modal-body">
+  <div class="mr-4">
+    <%= form_for @household,
+      remote:true do |f| %>
+      <%= render "households/form", f:f %>
+      <div class="form-group row">
+        <%= f.label :password,
+        "Password",
+        class:"col-4 col-form-label text-center" %>
+        <div class="col-8">
+          <%= f.password_field :password,
+            placeholder:"Password",
+            class:'form-control form-control-sm',
+            aria:{describedby:"passwordHelpBlock"} %>
+          <small id='passwordHelpBlock' class='form-text text-muted'>
+            This password will be used to invite new members to your household.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <%= content_tag :div,
+      id:"household_errors",
+      class:errors do %>
+    <% end %>
+    <%= content_tag :div,
+      id:"member_errors",
+      class:errors do %>
+    <% end %>
+      <%= f.submit "Create",
+        class:btn,
+        form:"new_household" %>
+    <% end %>
+  </div>
+<% end %>
