@@ -1,9 +1,9 @@
 <% obj.completed_fields.each do |field| %>
   <% if field != :item_id || :password %>
-    $("#<%= obj.id_name(field) %>").removeClass("border border-danger");
+    $("#<%= obj.form_input_id(field) %>").removeClass("border border-danger");
   <% end %>
 <% end %>
 <% obj.errors.messages.each do |field, error| %>
-  $("#<%= obj.id_name(field) %>").addClass("border border-danger");
+  $("#<%= obj.form_input_id(field) %>").addClass("border border-danger");
 <% end %>
-$("#<%= obj.error_div %>").html("<%= j render 'shared/errors', obj:obj %>");
+$("#<%= obj.error_div_id %>").html("<%= j render 'shared/errors', obj:obj %>");
