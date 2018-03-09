@@ -1,42 +1,32 @@
 <div class="form-group row">
   <%= f.label :quantity,
-    class:'text-center col-sm-4 col-form-label'
-    %>
+    class:'text-center col-sm-4 col-form-label' %>
   <div class="col-sm-8">
     <%= f.number_field :quantity,
       placeholder:"Quantity",
-      class:'form-control form-control-sm',
-      id:f.object.id_name(:quantity)
-      %>
+      class:'form-control form-control-sm' %>
   </div>
 </div>
 
 <div class="form-group row">
   <%= f.label :brand,
-    class:'text-center col-sm-4 col-form-label'
-      %>
+    class:'text-center col-sm-4 col-form-label' %>
   <div class="col-sm-8">
     <%= f.text_field :brand,
       placeholder:'Brand',
-      class:'form-control form-control-sm',
-      id:f.object.id_name(:brand)
-      %>
+      class:'form-control form-control-sm' %>
   </div>
 </div>
 
 <div class="form-group row">
   <%= f.label :info,
-    class:'text-center col-sm-4 col-form-label'
-    %>
+    class:'text-center col-sm-4 col-form-label' %>
   <div class="col-sm-8">
     <%= f.text_field :info,
       placeholder:'Info',
-      class:'form-control form-control-sm',
-      id:f.object.id_name(:info)
-        %>
+      class:'form-control form-control-sm' %>
   </div>
 </div>
 
 <%= f.hidden_field :list_id,
-  value:current_member.list.id
-  %>
+  value:current_member.list.id %>
