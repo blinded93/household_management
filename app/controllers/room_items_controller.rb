@@ -73,7 +73,7 @@ class RoomItemsController < ApplicationController
     }
     if locals[:a] == "request"
       @room_item.toggle!(:request)
-    else
+    elsif locals[:a] == "undo"
       @room_item.request = false
       @room_item.save
     end
