@@ -8,6 +8,13 @@ module ApplicationHelper
       data:{confirm:"<div class='text-center h5 pt-3'>Delete #{obj.class_name}?</div>"}
   end
 
+  def refresh_btn(object_type)
+    link_to("Refresh",
+      [current_household, object_type, :reload],
+      remote:true,
+      class:btn).html_safe
+  end
+
   def link
     'btn btn-sm text-info ml-2'
   end
