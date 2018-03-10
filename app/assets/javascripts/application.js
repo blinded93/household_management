@@ -18,3 +18,11 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require data-confirm-modal
+
+
+
+dataConfirmModal.setDefaults({
+  title: '',
+  commit: 'Yes',
+  cancel: 'No',
+});
