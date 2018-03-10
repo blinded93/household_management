@@ -8,9 +8,9 @@ module ApplicationHelper
       data:{confirm:"<div class='text-center h5 pt-3'>Delete #{obj.class_name}?</div>"}
   end
 
-  def refresh_btn(object_type)
+  def refresh_btn(scope, object_type)
     link_to("Refresh",
-      [current_household, object_type, :reload],
+      [scope, object_type, :reload],
       remote:true,
       class:btn).html_safe
   end
