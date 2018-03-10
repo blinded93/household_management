@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     get '/calendar/load' => 'calendar#load'
     get 'control' => 'households#control'
     resources :members, except: [:show]
+    get '/members/reload' => 'members#reload'
     resources :rooms, except: [:index]
+    get '/room_items/reload' => 'room_items#reload'
     resources :bills, except: [:index]
     get '/chores/reload' => 'chores#reload'
     resources :chores, except: [:index]
@@ -35,5 +37,6 @@ Rails.application.routes.draw do
     resources :messages, except: [:index, :update]
     resources :list_items, except: [:index]
     patch 'request/room_item/:id' => 'room_items#inventory_request', as: :room_item_request
+    get '/room_items/reload' => 'room_items#reload'
   end
 end
