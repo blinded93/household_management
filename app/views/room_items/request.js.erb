@@ -1,3 +1,4 @@
+$("#<%= room_item.row_id %>_link").html("<%= inventory_request(room_item.item, room_item.room) %>")
 <% if request_action %>
   $("#room_item_<%= room_item.id %>").toggleClass("table-danger");
   <% if @room_item.request %>
