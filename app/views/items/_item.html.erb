@@ -1,7 +1,7 @@
 <td>
   <%= item_remove_btn(item, addee) %>
 </td>
-<td>
+<td id="<%= item.addee_item(addee).row_id %>_link">
   <%= item_name(item, addee) %>
 </td>
 <% item.addee_item(addee).columns.each do |attr| %>
