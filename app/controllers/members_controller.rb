@@ -76,6 +76,13 @@ class MembersController < ApplicationController
     end
   end
 
+  def reload
+    @members = current_household.members
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     def set_member
       @member ||= Member.find_by(id: params[:id])
