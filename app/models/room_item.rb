@@ -12,11 +12,12 @@ class RoomItem < ActiveRecord::Base
   scope :with_requests, -> { where(request: true) }
   scope :need_purchased, -> { where("stock <= threshold") }
   scope :entire_stock, -> { where("stock > threshold") }
+  scope :in, -> (room) { where(room: room) }
   scope :for, -> (household) {
     joins(:room).
     where(rooms: {household_id: household.id})
   }
-  
+
   def item_attributes=(attrs)
     self.item = Item.find_or_create_by(attrs)
   end
@@ -40,7 +41,7 @@ class RoomItem < ActiveRecord::Base
   end
 
   def stock_threshold_level
-    if stock && threshold && stock < threshold
+    if !persisted? && stock && threshold && stock < threshold
       errors.add(:stock, "must be greater than Threshold.")
     end
   end
