@@ -14,7 +14,7 @@
       <div class="col-11">
         <%= link_to "Clear Completed", clear_chores_path,
           method: :delete,
-          data:{confirm: "Clear all completed chores?" },
+          data:{confirm:"<div class='text-center h5 pt-3'>Clear all completed chores?</div>"},
           class:btn,
           remote:true %>
       </div>
