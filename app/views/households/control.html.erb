@@ -45,10 +45,7 @@
               new_household_chore_path(current_household),
               remote:true,
               class:btn %>
-            <%= link_to "Refresh",
-              household_chores_reload_path(current_household),
-              remote:true,
-              class:btn %>
+            <%= refresh_btn(current_household, :chores) %>
           </span>
         </span>
         <div id="accordion-chore" data-children=".chore-item">
@@ -106,10 +103,7 @@
             Requests
           </u>
           <span class="pb-2">
-            <%= link_to "Refresh",
-              household_list_items_reload_path(current_household),
-              remote:true,
-              class:btn %>
+            <%= refresh_btn(current_household, :list_items) %>
           </span>
         </span>
         <div id="accordion_request" data-children=".request-item">
@@ -132,6 +126,7 @@
                 new_household_room_item_path(current_household),
                 remote:true,
                 class:btn %>
+              <%= refresh_btn(current_household, :room_items) %>
           </span>
         </span>
         <div id="accordion_inventory" data-children=".room-item">
@@ -150,10 +145,7 @@
             Members
           </u>
           <span class='pb-2'>
-            <%# link_to "Refresh",
-              household_members_reload_path(current_household),
-              remote:true,
-              class:btn %>
+            <%= refresh_btn(current_household, :members) %>
           </span>
         </span>
         <div id="accordion_member" data-children=".member_edit">
