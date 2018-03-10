@@ -1,11 +1,12 @@
 $("#dialog").modal("toggle");
+<%# binding.pry %>
 <% if @old_scopes != room_item.scopes %>
   $("#<%= room_item.row_id %>").remove();
   <% @old_scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_bills_badge" %>").html("<%= restock_count(room.room_items) %>");
+    $("#<%= "#{scope.to_s}_room_items_badge" %>").html("<%= restock_count(@old_room.room_items) %>");
   <% end %>
   <% room_item.scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_bills_badge" %>").html("<%= restock_count(room.room_items) %>");
+    $("#<%= "#{scope.to_s}_room_items_badge" %>").html("<%= restock_count(room.room_items) %>");
     $("#<%= "room_items_#{scope.to_s}_tbody" %>").append("<tr id='<%= room_item.row_id %>'></tr>");
   <% end %>
 <% end %>
