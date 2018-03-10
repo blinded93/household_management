@@ -1,13 +1,13 @@
 $('#dialog').modal('toggle');
 <% if @old_scopes != bill.scopes %>
-  $(".<%= "bill_#{bill.id}" %>").remove();
+  $(".<%= bill.row_id %>").remove();
   <% @old_scopes.each do |scope, scope_title| %>
     $("#<%= "#{scope.to_s}_bills_badge" %>").html("<%= Bill.send(scope).count %>");
   <% end %>
   <% bill.scopes.each do |scope, scope_title| %>
     $("#<%= "#{scope.to_s}_bills_badge" %>").html("<%= Bill.send(scope).count %>");
-    $("#<%= "bills_#{scope.to_s}_tbody" %>").prepend("<tr class='<%= "bill_#{bill.id}" %>'></tr>");
+    $("#<%= "bills_#{scope.to_s}_tbody" %>").prepend("<tr class='<%= bill.row_id %>'></tr>");
   <% end %>
 <% end %>
-$(".<%= "bill_#{bill.id}" %>").html("<%= j render "bills/bill", bill:bill %>");
+$(".<%= bill.row_id %>").html("<%= j render "bills/bill", bill:bill %>");
 $("#remaining_bills_amount").html("Remaining Monthly Expenses: <%= remaining_expenses %>");
