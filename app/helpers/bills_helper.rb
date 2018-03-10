@@ -15,6 +15,6 @@ module BillsHelper
 
   def remaining_expenses
     bills = current_household.bills
-    number_to_currency(bills.this_month.sum(:amount) + bills.unpaid.sum(:amount))
+    number_to_currency(bills.this_month.sum(:amount) + bills.over_due.sum(:amount))
   end
 end
