@@ -5,7 +5,7 @@ module ApplicationHelper
       class:'btn btn-sm text-muted close',
       method:'delete',
       remote:true,
-      data:{confirm:"Delete #{obj.class_name}?"}
+      data:{confirm:"<div class='text-center h5 pt-3'>Delete #{obj.class_name}?</div>"}
   end
 
   def link
