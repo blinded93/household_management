@@ -44,6 +44,7 @@ class RoomItemsController < ApplicationController
   end
 
   def update
+    @old_room = current_household.rooms.find(@room_item.room_id)
     @old_scopes = @room_item.scopes.dup
     if room_item_params[:stock].to_i > @room_item.stock
       @room_item.request = false
@@ -94,6 +95,13 @@ class RoomItemsController < ApplicationController
         render 'shared/delete',
         locals:locals
       }
+    end
+  end
+
+  def reload
+    @rooms = current_household.rooms.unowned
+    respond_to do |format|
+      format.js
     end
   end
 
