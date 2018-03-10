@@ -34,6 +34,6 @@ Rails.application.routes.draw do
     post '/messages/reply' => 'messages#reply'
     resources :messages, except: [:index, :update]
     resources :list_items, except: [:index]
-    post 'request/room_item/:id' => 'room_items#inventory_request', as: :room_item_request
+    patch 'request/room_item/:id' => 'room_items#inventory_request', as: :room_item_request
   end
 end
