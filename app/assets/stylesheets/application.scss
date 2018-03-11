@@ -3,29 +3,16 @@
   padding: 3px 10px !important;
 }
 
-.strikeout {
-  text-decoration: line-through;
-}
-
 .form-check-input {
   margin-left:0 !important;
 }
 
-.sm-font {
-  font-size: .85em;
+.lg-font {
+  font-size: 1.25rem !important;
 }
 
 .font-blk {
   color: black;
-}
-
-td {
-  font-size: .85em;
-  vertical-align: middle !important;
-}
-
-.lg-font {
-  font-size: 1.25rem !important;
 }
 
 .day-cell {
@@ -42,14 +29,6 @@ td {
   /*padding:0 !important;*/
 }
 
-.new-form {
-  width:400px !important;
-}
-
-.error {
-  border: 1px solid red;
-}
-
 .strike-through, .strike-through:hover, .strike-through:active, .strike-through:focus {
   text-decoration:line-through;
 }
@@ -58,6 +37,11 @@ td {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+td {
+  font-size: .85em;
+  vertical-align: middle !important;
 }
 
 .tbl-col-1 {
