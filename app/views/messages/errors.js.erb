@@ -1,10 +1,10 @@
-<% obj.completed_fields.each do |field| %>
+<% @message.completed_fields.each do |field| %>
     $("#<%= field_id(field, message_id) %>")
         .removeClass('border border-danger');
 <% end %>
-<% obj.errors.messages.each do |field, error| %>
+<% @message.errors.messages.each do |field, error| %>
     $("#<%= field_id(field, message_id) %>")
         .addClass("border border-danger");
 <% end %>
 $('#<%= message_errors(message_id) %>')
-    .html("<%= j render 'shared/errors', obj:obj %>");
+    .html("<%= j render 'shared/errors', obj:@message %>");

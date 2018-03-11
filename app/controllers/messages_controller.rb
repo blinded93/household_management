@@ -12,17 +12,11 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     respond_to do |format|
       if @message.save
-        format.js {
-          render "create",
-          locals:{obj:@message}
-        }
+        format.js
       else
         format.js {
           render "errors",
-          locals:{
-            obj:@message,
-            message_id:nil
-          }
+          locals:{ message_id:nil }
         }
       end
     end
@@ -36,7 +30,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.js {
         render 'new',
-        locals:{message:@message}
+        locals:{ message:@message }
       }
     end
   end
@@ -46,8 +40,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if @message.save
         format.js {
-          render 'create',
-          locals:{obj:@message}
+          render 'create'
         }
       else
         format.js {
@@ -72,7 +65,7 @@ class MessagesController < ApplicationController
       @message.destroy
       format.js {
         render 'shared/delete',
-        locals:{obj:@message}
+        locals:{ obj:@message }
       }
     end
   end
