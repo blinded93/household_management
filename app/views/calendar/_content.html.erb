@@ -39,7 +39,7 @@
                     <%= bill.utility %>
                   </dt>
                     <dd class='mb-0 pl-4 small'>
-                      <%= bill.company %>
+                      <%= bill.company %> <%= paid_or_overdue(bill) %>
                     </dd>
                 </dl>
               <% end %>

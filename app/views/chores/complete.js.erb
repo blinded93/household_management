@@ -1,22 +1,22 @@
-$(".<%= "chore_#{chore.id}" %>").remove();
+$(".<%= @chore.row_id %>").remove();
 
 <% @old_scopes.each do |scope, scope_title| %>
   $("#<%= "#{scope.to_s}_chores_badge" %>")
       .html("<%= current_member.chores.send(scope).count %>");
 <% end %>
 
-<% chore.scopes.each do |scope, scope_title| %>
+<% @chore.scopes.each do |scope, scope_title| %>
   $("#<%= "#{scope.to_s}_chores_badge" %>")
       .html("<%= current_member.chores.send(scope).count %>");
   $("#<%= "chores_#{scope.to_s}_tbody" %>")
-      .append("<tr class='<%= "chore_#{chore.id}" %>'></tr>");
+      .append("<tr class='<%= @chore.row_id %>'></tr>");
 <% end %>
 
-$(".<%= "chore_#{chore.id}" %>")
-    .html("<%= j render "chores/chore", chore:chore %>");
+$(".<%= @chore.row_id %>")
+    .html("<%= j render "chores/chore", chore:@chore %>");
 
-<% if chore.completed %>
-  $(".complete_chore_<%= chore.id %>").addClass("strike");
+<% if @chore.completed %>
+  $(".complete_<%= @chore.row_id %>").addClass("strike");
 <% else %>
-  $(".complete_chore_<%= chore.id %>").removeClass("strike");
+  $(".complete_<%= @chore.row_id %>").removeClass("strike");
 <% end %>
