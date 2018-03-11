@@ -22,7 +22,7 @@
 
 
 dataConfirmModal.setDefaults({
-  title: '',
+  title: "",
   commit: 'Yes',
   cancel: 'No',
 });

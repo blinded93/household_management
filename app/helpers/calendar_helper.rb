@@ -14,4 +14,16 @@ module CalendarHelper
       "Bills(#{bills[date].count})"
     end
   end
+
+  def paid_or_overdue(bill)
+    if bill.paid?
+      content_tag :span, class:'small text-success' do
+        "- Paid!"
+      end
+    elsif bill.over_due?
+      content_tag :span, class:'small text-danger' do
+        "- Over Due!"
+      end
+    end
+  end
 end

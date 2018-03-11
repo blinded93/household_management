@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  
   helper_method :current_member, :current_household, :logged_in?, :head_of_household?, :admin?, :selected_tab, :selected_scope, :current_url
 
   def current_member
