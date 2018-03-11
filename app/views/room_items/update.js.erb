@@ -1,5 +1,4 @@
 $("#dialog").modal("toggle");
-<%# binding.pry %>
 <% if @old_scopes != room_item.scopes %>
   $("#<%= room_item.row_id %>").remove();
   <% @old_scopes.each do |scope, scope_title| %>

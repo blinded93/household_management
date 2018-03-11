@@ -1,13 +1,8 @@
 $("#<%= room_item.row_id %>_link").html("<%= inventory_request(room_item.item, room_item.room) %>")
-<% if request_action %>
+<% if @room_item.request %>
   $("#room_item_<%= room_item.id %>").toggleClass("table-danger");
-  <% if @room_item.request %>
-    $("#inventory_request").html("<%= room_item.item.name %> requested.");
-    $("#undo_request").html("<%= j undo_btn %>");
-  <% else %>
-    $("#inventory_request").html("Request for <%= room_item.item.name %> undone.");
-    $("#undo_request").html("");
-  <% end %>
+  $("#inventory_request").html("<%= room_item.item.name %> requested.");
+  $("#undo_request").html("<%= j undo_btn %>");
 <% else %>
   $("#room_item_<%= room_item.id %>").removeClass("table-danger");
   $("#inventory_request").html("Request for <%= room_item.item.name %> undone.");
