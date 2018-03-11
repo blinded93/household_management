@@ -22,10 +22,6 @@ class RoomItem < ActiveRecord::Base
     self.item = Item.find_or_create_by(attrs)
   end
 
-  def requested?
-    !!request
-  end
-
   def cols
     [:item_id, :stock, :threshold, :room_id]
   end
