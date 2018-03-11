@@ -20,8 +20,7 @@ module MessagesHelper
   end
 
   def members_minus_self
-    a = current_household.members.dup
-    a -= [current_member]
+    current_household.members.select {|m| m != current_member}
   end
 
   def subject_value(message)
