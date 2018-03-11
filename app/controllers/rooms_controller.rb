@@ -16,10 +16,7 @@ class RoomsController < ApplicationController
     @room = current_household.rooms.build(room_params)
     respond_to do |format|
       if @room.save
-        format.js {
-          render 'create',
-          locals:{room:@room}
-        }
+        format.js
       else
         format.js {
           render 'shared/errors',
@@ -41,10 +38,7 @@ class RoomsController < ApplicationController
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.js {
-          render 'update',
-          locals:{room:@room}
-        }
+        format.js
       else
         format.js {
           render 'shared/errors',

@@ -17,13 +17,7 @@ class RoomItemsController < ApplicationController
     @room_item = RoomItem.new(room_item_params)
     respond_to do |format|
       if @room_item.save
-        format.js {
-          render 'create',
-          locals:{
-            room_item:@room_item,
-            room:@room_item.room
-          }
-        }
+        format.js
       else
         format.js {
           render 'shared/errors',
@@ -51,13 +45,7 @@ class RoomItemsController < ApplicationController
     end
     respond_to do |format|
       if @room_item.update(room_item_params)
-        format.js {
-          render 'update',
-          locals:{
-            room_item:@room_item,
-            room:@room_item.room
-          }
-        }
+        format.js
       else
         format.js {
           render 'shared/errors',
@@ -68,10 +56,7 @@ class RoomItemsController < ApplicationController
   end
 
   def inventory_request
-    locals = {
-      room_item:@room_item,
-      a:params[:a]
-    }
+    locals = { a:params[:a] }
     if locals[:a] == "request"
       @room_item.toggle!(:request)
     elsif locals[:a] == "undo"
@@ -88,8 +73,7 @@ class RoomItemsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      locals = {objs:RoomItem.for(current_member)}
-      locals[:obj] = @room_item
+      locals = {obj:@room_item}
       @room_item.delete
       format.js {
         render 'shared/delete',
