@@ -3,7 +3,7 @@ class RoomItem < ActiveRecord::Base
   include Shared
 
   validates :stock, :room_id, :item_id, :threshold, presence:true
-  validate :stock_threshold_level
+  validate :positive_stock, :positive_threshold
   validate :unique?
 
   belongs_to :room
@@ -36,9 +36,15 @@ class RoomItem < ActiveRecord::Base
     end
   end
 
-  def stock_threshold_level
-    if !persisted? && stock && threshold && stock < threshold
-      errors.add(:stock, "must be greater than Threshold.")
+  def positive_stock
+    if stock && stock < 0
+      errors.add(:stock, "cannot be negative.")
+    end
+  end
+
+  def positive_threshold
+    if threshold && threshold < 0
+      errors.add(:threshold, "cannot be negative.")
     end
   end
 
