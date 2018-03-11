@@ -21,18 +21,10 @@
         <%= content_tag :tbody,
           id:"room_items_#{room.scope}_tbody" do
           %>
-          <% room.room_items.each do |room_item| %>
-            <%= content_tag :tr,
-              id:room_item.row_id,
-              class:requested?(room_item) do
-              %>
-              <%= render 'items/item',
-                {addee:room,
-                 item:room_item.item
-                 }
-                %>
-            <% end %>
-          <% end %>
+          <%= render partial:'room_items/room_item_tr',
+            collection:room.room_items,
+            as: :room_item,
+            locals:{addee:room} %>
         <% end %>
       </table>
     </div>
