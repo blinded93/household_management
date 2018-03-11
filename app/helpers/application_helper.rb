@@ -31,6 +31,22 @@ module ApplicationHelper
     'text-danger small mr-auto'
   end
 
+  def show_tab(tab)
+    'show' if tab == selected_tab
+  end
+
+  def badge_color(scope)
+    str = "badge"
+    case scope
+    when :over_due
+      str + " badge-danger"
+    when :due_today
+      str + " badge-warning"
+    else
+      str + " badge-success"
+    end
+  end
+
   def dialog_form_path(obj)
     case obj
     when ListItem

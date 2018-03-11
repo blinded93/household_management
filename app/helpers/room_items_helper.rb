@@ -4,7 +4,7 @@ module RoomItemsHelper
   end
 
   def requested?(room_item)
-    if room_item.requested?
+    if room_item.request
       "table-danger"
     end
   end
@@ -27,7 +27,7 @@ module RoomItemsHelper
         [ current_member,
           room_item,
           :request,
-          a:'request' ],
+          a:(room_item.request ? "undo" : "request") ],
         class:'btn btn-sm text-info',
         method:'patch',
         remote:true,
@@ -35,7 +35,7 @@ module RoomItemsHelper
   end
 
   def inventory_confirmation(item, addee)
-    body = item.addee_item(addee).request ? "Un-Request Item?" : "Request Item?"
+    body = item.addee_item(addee).request ? "Undo Item Request?" : "Request Item?"
     "<div class='text-center h5 pt-3'>#{body}</div>"
   end
 

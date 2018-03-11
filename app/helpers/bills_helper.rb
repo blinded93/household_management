@@ -1,8 +1,4 @@
 module BillsHelper
-  def bill_sum(date)
-    current_household.bills.due_on(date).sum(:amount)
-  end
-
   def mark_bill_as_paid_btn(bill)
     if bill.is_a?(Bill) && bill.persisted?
       (link_to (bill.paid ? "Mark as Unpaid" : "Mark as Paid"),
