@@ -69,14 +69,11 @@ class HouseholdsController < ApplicationController
   def update
     respond_to do |format|
       if @household.update(household_params)
-        format.js {
-          render 'update',
-          locals:{household:@household}
-        }
+        format.js
       else
         format.js {
           render 'shared/errors',
-          locals: { obj:@household}
+          locals: {obj:@household}
         }
       end
     end

@@ -16,10 +16,7 @@ class BillsController < ApplicationController
     @bill = current_household.bills.build(bill_params)
     respond_to do |format|
       if @bill.save
-        format.js {
-          render 'create',
-          locals:{bill:@bill}
-        }
+        format.js
       else
         format.js {
           render "shared/errors",
@@ -43,10 +40,7 @@ class BillsController < ApplicationController
     @old_scopes = @bill.scopes.dup
     respond_to do |format|
       if @bill.update(bill_params)
-        format.js {
-          render 'update',
-          locals:{bill:@bill}
-        }
+        format.js
       else
         format.js {
           render "shared/errors",

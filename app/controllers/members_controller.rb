@@ -28,10 +28,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       if @member.save
         session[:member_id] = @member.id
-        format.js {
-          render 'create',
-          locals:{member:@member}
-        }
+        format.js
       else
         format.js {
           render "shared/errors",
@@ -53,10 +50,7 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(member_params)
-        format.js {
-          render 'update',
-          locals:{member:@member}
-        }
+        format.js
       else
         format.js {
           render 'shared/errors',

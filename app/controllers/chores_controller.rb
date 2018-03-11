@@ -16,10 +16,7 @@ class ChoresController < ApplicationController
     @chore = Chore.new(chore_params)
     respond_to do |format|
       if @chore.save
-        format.js {
-          render 'create',
-          locals:{chore:@chore}
-        }
+        format.js
       else
         format.js {
           render 'shared/errors',
@@ -42,10 +39,7 @@ class ChoresController < ApplicationController
     @old_scopes = @chore.scopes.dup
     respond_to do |format|
       if @chore.update(chore_params)
-        format.js {
-          render 'update',
-          locals:{chore:@chore}
-        }
+        format.js
       else
         format.js {
           render "shared/errors",
@@ -81,10 +75,7 @@ class ChoresController < ApplicationController
     @old_scopes = @chore.scopes.dup
     @chore.toggle!(:completed)
     respond_to do |format|
-      format.js {
-        render 'complete',
-        locals:{chore:@chore}
-      }
+      format.js
     end
   end
 
