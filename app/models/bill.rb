@@ -7,14 +7,14 @@ class Bill < ActiveRecord::Base
 
   default_scope { order(due_date: :asc) }
   scope :paid, -> { where(paid:true) }
-  scope :unpaid, -> { where(paid:false) }
-  scope :over_due, -> { where("due_date < ?", Date.today) }
-  scope :within_week, -> { where(due_date: Date.today..Date.today + 1.week) }
+  scope :unpaid, -> { where.not(paid:true) }
+  scope :over_due, -> { unpaid.where("due_date < ?", Date.today) }
+  scope :within_week, -> { unpaid.where(due_date: Date.today..Date.today + 1.week) }
   scope :this_month, -> {
-    where(due_date: Date.today.beginning_of_month..Date.today.end_of_month)
+    unpaid.where(due_date: Date.today.beginning_of_month..Date.today.end_of_month)
     }
   scope :next_month, -> {
-    where(due_date: Date.today.next_month.beginning_of_month..Date.today.next_month.end_of_month)
+    unpaid.where(due_date: Date.today.next_month.beginning_of_month..Date.today.next_month.end_of_month)
     }
   scope :due_on, -> (date) { where(due_date: date) }
 
@@ -36,5 +36,9 @@ class Bill < ActiveRecord::Base
     Bill.scopes.select do |scope, scope_title|
       Bill.send(scope).pluck(:id).include?(self.id)
     end
+  end
+
+  def over_due?
+    self.due_date < Date.today    
   end
 end
