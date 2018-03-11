@@ -1,2 +1,3 @@
 $("#dialog").modal("toggle");
-$("#reload_member_<%= member.id %>").html("<%= j render 'members/member', member:member, collapse:true %>");
+$("#reload_member_<%= member.id %>")
+    .html("<%= j render 'members/member', member:member, collapse:true %>");

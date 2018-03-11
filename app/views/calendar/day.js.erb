@@ -1,3 +1,5 @@
-$("#modal-info").html("<%= j render 'content', events:@events, bills:@bills[@date], chores:@chores_by_date[@date], date:@date %>");
-$("#modal-dialog").html("<%= j render 'shared/dialog' %>");
+$("#modal-info")
+    .html("<%= j render 'content', events:@events, bills:@bills[@date], chores:@chores_by_date[@date], date:@date %>");
+$("#modal-dialog")
+    .html("<%= j render 'shared/dialog' %>");
 $("#dialog").modal("toggle");

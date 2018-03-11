@@ -1,3 +1,4 @@
 <% @lists.each do |list| %>
-  $("#list_<%= list.id %>_collapse").html("<%= j render 'lists/lists', list:list %>")
+  $("#list_<%= list.id %>_collapse")
+      .html("<%= j render 'lists/lists', list:list %>");
 <% end %>

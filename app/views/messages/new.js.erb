@@ -1,7 +1,9 @@
 <% if @reply_message %>
-  $("#modal-info").html("<%= j render 'content', message:@message, reply_message:@reply_message %>");
+  $("#modal-info")
+      .html("<%= j render 'content', message:@message, reply_message:@reply_message %>");
 <% else %>
-  $("#modal-info").html("<%= j render 'content', message:@message %>");
+  $("#modal-info")
+      .html("<%= j render 'content', message:@message %>");
 <% end %>
 $("#modal-dialog").html("<%= j render 'shared/dialog' %>");
 $("#dialog").modal("toggle");

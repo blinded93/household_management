@@ -1,13 +1,15 @@
 <% if item?(obj) %>
   $("#<%= obj.row_id %>").remove();
   <% obj.scopes.keys.each do |scope| %>
-    $("#<%= obj.badge_span(scope) %>").html("<%= obj.send(obj.addee).size %>");
+    $("#<%= obj.badge_span(scope) %>")
+        .html("<%= obj.send(obj.addee).size %>");
   <% end %>
 <% else %>
   $(".<%= obj.row_id %>").remove();
   <% if obj.respond_to?(:scopes) %>
     <% obj.class.scopes.keys.each do |scope| %>
-      $("#<%= obj.badge_span(scope) %>").html("<%= objs.send(scope).count %>");
+      $("#<%= obj.badge_span(scope) %>")
+          .html("<%= objs.send(scope).count %>");
     <% end %>
   <% end %>
 <% end %>

@@ -1,6 +1,7 @@
 $("#dialog").modal("toggle");
 <% if member.head_of_household %>
-  $("#modal-info").html("<%= j render 'households/content', household:@household %>");
+  $("#modal-info")
+      .html("<%= j render 'households/content', household:@household %>");
   $("#modal-dialog").html("<%= j render 'shared/dialog' %>");
   $("#dialog").modal("toggle");
 <% else %>

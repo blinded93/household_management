@@ -1,12 +1,18 @@
 $('#dialog').modal('toggle');
+
 <% if @old_scopes != chore.scopes %>
   $(".<%= "chore_#{chore.id}" %>").remove();
   <% @old_scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_chores_badge" %>").html("<%= Chore.send(scope).count %>");
+    $("#<%= "#{scope.to_s}_chores_badge" %>")
+        .html("<%= Chore.send(scope).count %>");
   <% end %>
+
   <% chore.scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_chores_badge" %>").html("<%= Chore.send(scope).count %>");
-    $("#<%= "chores_#{scope.to_s}_tbody" %>").append("<tr class='<%= "chore_#{chore.id}" %>'></tr>");
+    $("#<%= "#{scope.to_s}_chores_badge" %>")
+        .html("<%= Chore.send(scope).count %>");
+    $("#<%= "chores_#{scope.to_s}_tbody" %>")
+        .append("<tr class='<%= "chore_#{chore.id}" %>'></tr>");
   <% end %>
 <% end %>
-$(".<%= "chore_#{chore.id}" %>").html("<%= j render "chores/chore", chore:chore %>");
+$(".<%= "chore_#{chore.id}" %>")
+    .html("<%= j render "chores/chore", chore:chore %>");

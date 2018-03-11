@@ -1,3 +1,4 @@
 <% Chore.scopes.each do |scope, scope_title| %>
-  $("#<%= scope.to_s %>_chores_collapse").html("<%= j render "chores/chores", chores_hash(scope, scope_title, @chores.send(scope)) %>")
+  $("#<%= scope.to_s %>_chores_collapse")
+      .html("<%= j render "chores/chores", chores_hash(scope, scope_title, @chores.send(scope)) %>");
 <% end %>
