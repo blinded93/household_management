@@ -1,0 +1,14 @@
+<span class="card-title">
+  <u class='lg-font'>
+    Members
+  </u>
+  <span class='pb-2'>
+    <%= refresh_btn(current_household, :members) %>
+  </span>
+</span>
+
+<div id="accordion_member" data-children=".member_edit">
+  <%= render partial:'members/members',
+    collection:current_household.members,
+    as: :member %>
+</div>

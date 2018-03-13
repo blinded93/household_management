@@ -8,167 +8,49 @@
   <div class='link'>
     <div class="collapse <%= 'show' unless selected_tab %>" id="calendar">
       <div class="card card-block p-3">
-        <div id='calendar_load'>
-          <%= render 'calendar/show' %>
-        </div>
+        <%= render 'calendar/admin_calendar_card' %>
       </div>
     </div>
   </div>
   <div class='link'>
     <div class="collapse <%= show_tab("chores") %>" id="chores">
       <div class="card card-block p-3">
-        <span class="card-title">
-          <u class='lg-font'>
-            Chores
-          </u>
-          <span class='pb-2'>
-            <%= link_to "New",
-              new_household_chore_path(current_household),
-              remote:true,
-              class:btn %>
-            <%= refresh_btn(current_household, :chores) %>
-          </span>
-        </span>
-        <div id="accordion-chore" data-children=".chore-item">
-          <% Chore.scopes.each do |scope, scope_title| %>
-            <%= content_tag :div,
-              class:'chore_item',
-              id:"#{scope.to_s}_chores_collapse" do %>
-              <%= render 'chores/chores',
-                {scope_title: scope_title,
-                 scope: scope,
-                 chores: @chores.send(scope)} %>
-            <% end %>
-          <% end %>
-        </div>
+        <%= render 'chores/admin_chore_card' %>
       </div>
     </div>
   </div>
   <div class='link'>
     <div class="collapse <%= show_tab("bills") %>" id="bills">
       <div class="card card-block p-3">
-        <span class="card-title">
-          <u class='lg-font'>
-            Bills
-          </u>
-          <span class='pb-2'>
-            <%= link_to "Add",
-              new_household_bill_path(current_household),
-              remote:true,
-              class:btn %>
-          </span>
-          <small id="remaining_bills_amount" class='text-muted small pl-3'>
-            Remaining Monthly Expenses: <strong><%= remaining_expenses %></strong>
-          </small>
-        </span>
-        <div id="accordion_bill" data-children=".bill-item">
-          <% Bill.scopes.each do |scope, scope_title| %>
-            <%= content_tag :div,
-              class:"bill_item",
-              id:"#{scope.to_s}_bills_collapse" do %>
-              <%= render 'bills/bills',
-                {scope_title:scope_title,
-                 scope:scope,
-                 bills:current_household.bills.send(scope)} %>
-            <% end %>
-          <% end %>
-        </div>
+        <%= render 'bills/admin_bill_card' %>
       </div>
     </div>
   </div>
   <div class='link'>
     <div class="collapse <%= show_tab("requests") %>" id="requests">
       <div class="card card-block p-3">
-        <span class="card-title">
-          <u class='lg-font'>
-            Requests
-          </u>
-          <span class="pb-2">
-            <%= refresh_btn(current_household, :list_items) %>
-          </span>
-        </span>
-        <div id="accordion_request" data-children=".request-item">
-          <%= render partial:'lists/lists_div',
-            collection:@lists,
-            as: :list %>
-        </div>
+        <%= render 'list_items/admin_list_item_card' %>
       </div>
     </div>
   </div>
   <div class='link'>
     <div class="collapse <%= show_tab("inventory") %>" id="inventory">
       <div class="card card-block p-3">
-        <span class="card-title">
-          <u class='lg-font'>
-            Inventory
-          </u>
-          <span class='pb-2'>
-              <%= link_to "Add",
-                new_household_room_item_path(current_household),
-                remote:true,
-                class:btn %>
-              <%= refresh_btn(current_household, :room_items) %>
-          </span>
-        </span>
-        <div id="accordion_inventory" data-children=".room-item">
-          <%= render partial:'room_items/room_items_div',
-            collection:current_household.rooms.unowned,
-            as: :room %>
-        </div>
+        <%= render 'room_items/admin_room_item_card' %>
       </div>
     </div>
   </div>
   <div class='link'>
     <div class="collapse <%= show_tab("members") %>" id="members">
       <div class="card card-block p-3">
-        <span class="card-title">
-          <u class='lg-font'>
-            Members
-          </u>
-          <span class='pb-2'>
-            <%= refresh_btn(current_household, :members) %>
-          </span>
-        </span>
-        <div id="accordion_member" data-children=".member_edit">
-          <%= render partial:'members/members',
-            collection:current_household.members,
-            as: :member %>
-        </div>
+        <%= render 'members/admin_member_card' %>
       </div>
     </div>
   </div>
   <div class='link'>
     <div class="collapse <%= show_tab("household") %>" id="household" data-children="room-tab">
       <div class="card card-block p-3">
-        <span class="card-title">
-          <u class='lg-font'>
-            Household
-          </u>
-          <span class='pb-2'>
-            <%= link_to "Edit",
-              edit_household_path(current_household),
-              remote:true,
-              class:btn %>
-            <a class="btn btn-sm btn-outline-secondary text-dark ml-2" data-parent='#household' data-toggle="collapse" href="#rooms" aria-expanded="false" aria-controls="rooms">
-              Rooms
-            </a>
-          </span>
-        </span>
-        <div class='room-tab pb-2'>
-          <div class="collapse border border-left-0 border-right-0" id='rooms'>
-            <div id='reload_rooms' class="card-block p-3">
-              <%= render 'rooms/rooms' %>
-            </div>
-          </div>
-        </div>
-        <div class='d-inline text-muted pl-3'>
-          ID#: <%= current_household.id %>
-        </div>
-        <%= content_tag :div,
-          id:'edit_household' do %>
-          <%= render 'households/household',
-            household:current_household %>
-        <% end %>
+        <%= render 'households/admin_household_card' %>
       </div>
     </div>
   </div>

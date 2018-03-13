@@ -1,0 +1,27 @@
+<span class="card-title">
+  <u class='lg-font'>
+    Bills
+  </u>
+  <span class='pb-2'>
+    <%= link_to "Add",
+      new_household_bill_path(current_household),
+      remote:true,
+      class:btn %>
+  </span>
+  <small id="remaining_bills_amount" class='text-muted small pl-3'>
+    Remaining Monthly Expenses: <strong><%= remaining_expenses %></strong>
+  </small>
+</span>
+
+<div id="accordion_bill" data-children=".bill-item">
+  <% Bill.scopes.each do |scope, scope_title| %>
+    <%= content_tag :div,
+      class:"bill_item",
+      id:"#{scope.to_s}_bills_collapse" do %>
+      <%= render 'bills/bills',
+        {scope_title:scope_title,
+         scope:scope,
+         bills:current_household.bills.send(scope)} %>
+    <% end %>
+  <% end %>
+</div>

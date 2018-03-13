@@ -1,0 +1,25 @@
+<span class="card-title">
+  <u class='lg-font'>
+    Chores
+  </u>
+  <span class='pb-2'>
+    <%= link_to "New",
+      new_household_chore_path(current_household),
+      remote:true,
+      class:btn %>
+    <%= refresh_btn(current_household, :chores) %>
+  </span>
+</span>
+
+<div id="accordion-chore" data-children=".chore-item">
+  <% Chore.scopes.each do |scope, scope_title| %>
+    <%= content_tag :div,
+      class:'chore_item',
+      id:"#{scope.to_s}_chores_collapse" do %>
+      <%= render 'chores/chores',
+        {scope_title: scope_title,
+         scope: scope,
+         chores: @chores.send(scope)} %>
+    <% end %>
+  <% end %>
+</div>

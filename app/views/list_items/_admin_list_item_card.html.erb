@@ -1,0 +1,14 @@
+<span class="card-title">
+  <u class='lg-font'>
+    Requests
+  </u>
+  <span class="pb-2">
+    <%= refresh_btn(current_household, :list_items) %>
+  </span>
+</span>
+
+<div id="accordion_request" data-children=".request-item">
+  <%= render partial:'lists/lists_div',
+    collection:@lists,
+    as: :list %>
+</div>
