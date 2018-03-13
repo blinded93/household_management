@@ -1,32 +1,13 @@
 <div id='admin-control' data-children='.link'>
   <div class='text-center'>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#calendar" aria-expanded="false" aria-controls="calendar">
-      Calendar
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#chores" aria-expanded="false" aria-controls="chores">
-      Chores
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#bills" aria-expanded="false" aria-controls="bills">
-      Bills
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#requests" aria-expanded="false" aria-controls="requests">
-      Requests
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#inventory" aria-expanded="false" aria-controls="inventory">
-      Inventory
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#admin-control' data-toggle="collapse" href="#members" aria-expanded="false" aria-controls="members">
-      Members
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent="#admin-control" data-toggle="collapse" href="#household" aria-expanded="false" aria-controls="household">
-      Household
-    </a>
+    <% menu_links = %w(Calendar Chores Bills Requests Inventory Members Household) %>
+    <% menu_links.each do |link| %>
+      <%= menu_link(link) %>
+    <% end %>
   </div><br>
   <div class='link'>
     <div class="collapse <%= 'show' unless selected_tab %>" id="calendar">
       <div class="card card-block p-3">
-        <span class="card-title">
-        </span>
         <div id='calendar_load'>
           <%= render 'calendar/show' %>
         </div>
