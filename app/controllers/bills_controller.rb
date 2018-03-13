@@ -68,7 +68,9 @@ class BillsController < ApplicationController
     respond_to do |format|
       format.js {
         render 'update',
-        locals:{bill:@bill}
+        locals:{
+          bill:@bill,
+          modal:params[:m]}
       }
     end
   end
