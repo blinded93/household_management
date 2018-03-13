@@ -5,7 +5,7 @@
   <% if bill.paid %>
     <span title='Mark as Unpaid'>
       <%= link_to bill.company,
-        pay_household_bill_path(bill),
+        pay_household_bill_path(bill, m:false),
         remote:true,
         class:link,
         method:'patch' %>
@@ -15,7 +15,7 @@
       <%= link_to bill.company,
         edit_household_bill_path(current_household, bill),
         remote:true,
-        class:link%>
+        class:link %>
     </span>
   <% end %>
 </td>

@@ -1,11 +1,11 @@
 module BillsHelper
   def mark_bill_as_paid_btn(bill)
     if bill.is_a?(Bill) && bill.persisted?
-      (link_to (bill.paid ? "Mark as Unpaid" : "Mark as Paid"),
+      link_to (bill.paid ? "Mark as Unpaid" : "Mark as Paid"),
         pay_household_bill_path(bill),
         class:"btn btn-sm btn-outline-success text-dark ml-2",
         method:'patch',
-        remote:true).html_safe
+        remote:true
     end
   end
 
