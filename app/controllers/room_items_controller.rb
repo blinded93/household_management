@@ -73,11 +73,10 @@ class RoomItemsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      locals = {obj:@room_item}
       @room_item.delete
       format.js {
         render 'shared/delete',
-        locals:locals
+        locals:{obj:@room_item}
       }
     end
   end

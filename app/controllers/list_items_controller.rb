@@ -17,13 +17,7 @@ class ListItemsController < ApplicationController
     @list_item = ListItem.new(list_item_params)
     respond_to do |format|
       if @list_item.save
-        format.js {
-          render 'create',
-          locals:{
-            list_item:@list_item,
-            list:@list_item.list
-          }
-        }
+        format.js
       else
         format.js {
           render 'shared/errors',
@@ -47,13 +41,7 @@ class ListItemsController < ApplicationController
     @old_scopes = @list_item.scopes.dup
     respond_to do |format|
       if @list_item.update(list_item_params)
-        format.js {
-          render 'update',
-          locals:{
-            list_item:@list_item,
-            list:@list_item.list
-          }
-        }
+        format.js
       else
         format.js {
           render 'shared/errors',
@@ -65,12 +53,10 @@ class ListItemsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      locals = {objs:ListItem.for(current_member)}
-      locals[:obj] = @list_item
       @list_item.delete
       format.js {
         render 'shared/delete',
-        locals:locals
+        locals:{obj:@list_item}
       }
     end
   end

@@ -1,5 +1,5 @@
 $('#dialog').modal('toggle');
 $("#list_items_tbody")
-    .append("<tr id='<%= list_item.row_id %>'</tr>");
-$("#<%= list_item.row_id %>")
-    .html("<%= j render "items/item", addee:list, item:list_item.item %>");
+    .append("<tr id='<%= @list_item.row_id %>'</tr>");
+$("#<%= @list_item.row_id %>")
+    .html("<%= j render "items/item", addee:@list_item.list, item:@list_item.item %>");
