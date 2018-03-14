@@ -1,0 +1,15 @@
+<span class='card-title'>
+  <u class='lg-font'>
+    Requests
+  </u>
+  <span class='pb-2'>
+    <%= link_to "Add",
+      new_member_list_item_path(current_member),
+      remote:true,
+      class:btn %>
+   </span>
+</span>
+<div>
+ <%= render 'list_items/list_items',
+   list:current_member.list %>
+</div>

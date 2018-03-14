@@ -1,0 +1,14 @@
+<span class="card-title">
+  <u class='lg-font'>
+    Profile
+  </u>
+</span>
+<div id="accordion_profile">
+  <%= content_tag :div,
+    class:"#{current_member.row_id} member_edit",
+    id:"reload_#{current_member.row_id}" do %>
+      <%= render 'members/member',
+        member:current_member,
+        collapse:true %>
+  <% end %>
+</div>

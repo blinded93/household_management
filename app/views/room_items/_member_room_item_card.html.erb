@@ -1,0 +1,17 @@
+<span class="card-title">
+  <u class='lg-font'>
+    Inventory
+  </u>
+  <span class="pb-2">
+    <%= refresh_btn(current_member, :room_items) %>
+  </span>
+  <span class='text-success small pl-2' id='inventory_request'>
+  </span>
+  <span class='text-danger small pl-2' id='undo_request'>
+  </span>
+</span>
+<div id="accordion_inventory" data-children=".room-item">
+  <%= render partial:'room_items/room_items_div',
+    collection:current_household.rooms.unowned,
+    as: :room %>
+</div>
