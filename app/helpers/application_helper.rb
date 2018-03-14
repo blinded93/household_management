@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def new_btn
+
+  end
+
   def remove_btn(scope, obj)
     link_to "&times;".html_safe,
       [scope, obj],
@@ -108,9 +112,17 @@ module ApplicationHelper
     end
   end
 
+  def show_collapse(key)
+    if admin? && key == :calendar
+      " show"
+    elsif !admin? && key == :chores
+      " show"
+    end
+  end
+
   def collapse_div(key, value)
     content_tag :div,
-      class:"collapse #{" show" if key == :calendar}",
+      class:"collapse #{show_collapse(key)}",
       id:key.to_s do
         card_div(key, value)
     end
@@ -120,7 +132,7 @@ module ApplicationHelper
     content_tag :div,
       class:'card card-block p-3' do
         dir = (key == :calendar ? key.to_s : value.pluralize)
-        admin? ? render "#{dir}/admin_#{value}_card" : render "#{dir}/member_#{value}_card"
+        admin? ? (render "#{dir}/admin_#{value}_card") : (render "#{dir}/member_#{value}_card")
     end
   end
 end
