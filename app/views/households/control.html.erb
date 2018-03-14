@@ -2,56 +2,20 @@
   <div class='text-center'>
     <% menu_links = %w(Calendar Chores Bills Requests Inventory Members Household) %>
     <% menu_links.each do |link| %>
-      <%= menu_link(link) %>
+      <%= menu_link("admin-control", link) %>
     <% end %>
-  </div><br>
-  <div class='link'>
-    <div class="collapse <%= 'show' unless selected_tab %>" id="calendar">
-      <div class="card card-block p-3">
-        <%= render 'calendar/admin_calendar_card' %>
-      </div>
-    </div>
   </div>
-  <div class='link'>
-    <div class="collapse <%= show_tab("chores") %>" id="chores">
-      <div class="card card-block p-3">
-        <%= render 'chores/admin_chore_card' %>
-      </div>
-    </div>
-  </div>
-  <div class='link'>
-    <div class="collapse <%= show_tab("bills") %>" id="bills">
-      <div class="card card-block p-3">
-        <%= render 'bills/admin_bill_card' %>
-      </div>
-    </div>
-  </div>
-  <div class='link'>
-    <div class="collapse <%= show_tab("requests") %>" id="requests">
-      <div class="card card-block p-3">
-        <%= render 'list_items/admin_list_item_card' %>
-      </div>
-    </div>
-  </div>
-  <div class='link'>
-    <div class="collapse <%= show_tab("inventory") %>" id="inventory">
-      <div class="card card-block p-3">
-        <%= render 'room_items/admin_room_item_card' %>
-      </div>
-    </div>
-  </div>
-  <div class='link'>
-    <div class="collapse <%= show_tab("members") %>" id="members">
-      <div class="card card-block p-3">
-        <%= render 'members/admin_member_card' %>
-      </div>
-    </div>
-  </div>
-  <div class='link'>
-    <div class="collapse <%= show_tab("household") %>" id="household" data-children="room-tab">
-      <div class="card card-block p-3">
-        <%= render 'households/admin_household_card' %>
-      </div>
-    </div>
-  </div>
+  <br>
+  <% menu_collapse = {
+        calendar:"calendar",
+        chores:"chore",
+        bills:"bill",
+        requests:"list_item",
+        inventory:"room_item",
+        members:"member",
+        household:"household"
+    } %>
+  <% menu_collapse.each do |key, value| %>
+    <%= link_div(key, value) %>
+  <% end %>
 </div>
