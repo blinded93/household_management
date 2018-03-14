@@ -1,21 +1,18 @@
 <div id='member-show' data-children='.link'>
   <div class='text-center'>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#chores" aria-expanded="false" aria-controls="chores">
-      Chores
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#requests"  aria-expanded="false" aria-controls="list">
-      Requests
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#inbox"  aria-expanded="false" aria-controls="inbox">
-      Inbox
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#inventory"  aria-expanded="false" aria-controls="inventory">
-      Inventory
-    </a>
-    <a class="btn btn-sm btn-outline-secondary text-dark" data-parent='#member-show' data-toggle="collapse" href="#profile"  aria-expanded="false" aria-controls="profile">
-      Profile
-    </a>
-  </div><br>
+    <% menu_links = %w(Chores Requests Inbox Inventory Profile) %>
+    <% menu_links.each do |link| %>
+      <%= menu_link("member-show", link) %>
+    <% end %>
+  </div>
+  <br>
+  <% menu_collapse = {
+    chores:'chore',
+    request:'list_item',
+    inbox:'message',
+    inventory:'room_item',
+    profile:'member'
+    } %>
   <div class='link'>
     <div class="collapse <%= 'show' unless selected_tab %>" id="chores">
       <div class="card card-block p-3">
