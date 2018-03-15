@@ -7,9 +7,7 @@
       edit_household_path(current_household),
       remote:true,
       class:btn %>
-    <a class="btn btn-sm btn-outline-secondary text-dark ml-2" data-parent='#household' data-toggle="collapse" href="#rooms" aria-expanded="false" aria-controls="rooms">
-      Rooms
-    </a>
+    <%= menu_link("household", "Rooms") %>
   </span>
 </span>
 
@@ -29,3 +27,4 @@
   <%= render 'households/household',
     household:current_household %>
 <% end %>
+<%= household_destroy_btn %>

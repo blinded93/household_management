@@ -50,7 +50,7 @@ module ApplicationHelper
       str + " badge-success"
     end
   end
-  # Dialog form
+  # Modal Dialog form
   def form_header(obj)
     content_for :header do
       if item?(obj)
