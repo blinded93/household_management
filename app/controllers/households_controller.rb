@@ -80,7 +80,8 @@ class HouseholdsController < ApplicationController
   end
 
   def destroy
-
+    @household.destroy
+    redirect_to root_path
   end
 
   private
