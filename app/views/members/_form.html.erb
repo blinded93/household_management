@@ -64,6 +64,9 @@
     <%= f.password_field :password,
       placeholder: "Password",
       class:'form-control form-control-sm' %>
+    <small id='passwordHelpBlock' class='form-text text-muted text-left'>
+      Leave password field blank unless changing password.
+    </small>
   </div>
 </div>
 <% if logged_in? && admin? %>

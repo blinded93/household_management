@@ -8,20 +8,6 @@
     <%= form_for @household,
       remote:true do |f| %>
       <%= render "households/form", f:f %>
-      <div class="form-group row">
-        <%= f.label :password,
-        "Password",
-        class:"col-4 col-form-label text-center" %>
-        <div class="col-8">
-          <%= f.password_field :password,
-            placeholder:"Password",
-            class:'form-control form-control-sm',
-            aria:{describedby:"passwordHelpBlock"} %>
-          <small id='passwordHelpBlock' class='form-text text-muted'>
-            This password will be used to invite new members to your household.
-          </small>
-        </div>
-      </div>
     </div>
   </div>
 
