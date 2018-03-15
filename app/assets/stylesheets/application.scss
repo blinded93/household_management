@@ -1,4 +1,10 @@
 @import "bootstrap";
+.justify-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content:flex-end;
+}
 .list-group-item {
   padding: 3px 10px !important;
 }
