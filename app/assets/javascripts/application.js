@@ -22,7 +22,9 @@
 
 
 dataConfirmModal.setDefaults({
-  title: "",
+  title: '',
   commit: 'Yes',
   cancel: 'No',
+  commitClass: 'btn btn-sm btn-danger',
+  cancelClass: 'btn btn-sm btn-outline-secondary'
 });
