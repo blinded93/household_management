@@ -8,6 +8,9 @@
       remote:true,
       class:btn %>
     <%= menu_link("household", "Rooms") %>
+    <small class='text-muted small pl-2'>
+      Monthly Income: <strong><%= household_income %></strong>
+    </small>
   </span>
 </span>
 
@@ -18,7 +21,6 @@
     </div>
   </div>
 </div>
-
 <div class='d-inline text-muted pl-3'>
   ID#: <%= current_household.id %>
 </div>
