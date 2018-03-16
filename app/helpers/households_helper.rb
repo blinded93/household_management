@@ -12,4 +12,8 @@ module HouseholdsHelper
         }
     end
   end
+
+  def household_income
+    number_to_currency(current_household.members.pluck(:monthly_income).sum)
+  end
 end
