@@ -19,12 +19,11 @@
           </tr>
         </thead>
         <%= content_tag :tbody,
-          id:"room_items_#{room.scope}_tbody" do
-          %>
+              id:"room_items_#{room.scope}_tbody" do %>
           <%= render partial:'room_items/room_item_tr',
-            collection:room.room_items,
-            as: :room_item,
-            locals:{addee:room} %>
+                collection:room.room_items,
+                as: :room_item,
+                locals:{addee:room} %>
         <% end %>
       </table>
     </div>

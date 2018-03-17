@@ -1,33 +1,33 @@
 <div class="form-group row">
   <%= f.label :stock,
-    class:'text-center col-4 col-form-label' %>
+        class:'text-center col-4 col-form-label' %>
   <div class="col-8">
     <%= f.number_field :stock,
-      placeholder:"Stock",
-      class:'form-control form-control-sm' %>
+          placeholder:"Stock",
+          class:'form-control form-control-sm' %>
   </div>
 </div>
 
 <div class="form-group row">
   <%= f.label :threshold,
-    class:'text-center col-4 col-form-label' %>
+        class:'text-center col-4 col-form-label' %>
   <div class="col-8">
     <%= f.number_field :threshold,
-      placeholder:'Reorder Threshold',
-      class:'form-control form-control-sm' %>
+          placeholder:'Reorder Threshold',
+          class:'form-control form-control-sm' %>
   </div>
 </div>
 
 <div class='form-group row'>
   <%= f.label :room_id,
-    "For:",
-    class: 'text-center col-4 col-form-label' %>
+        "For:",
+        class: 'text-center col-4 col-form-label' %>
   <div class='col-8'>
     <%= f.collection_select(:room_id,
-      current_household.rooms.unowned,
-      :id,
-      :name,
-      {prompt:'Select Room'},
-      {class:'custom-select form-control-sm'}) %>
+          current_household.rooms.unowned,
+          :id,
+          :name,
+          {prompt:'Select Room'},
+          {class:'custom-select form-control-sm'}) %>
   </div>
 </div>
