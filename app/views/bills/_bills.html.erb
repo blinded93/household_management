@@ -5,7 +5,10 @@
 <% end %>
 <%= accordion_link("#{scope.to_s}_bills",
         "bill") {scope_title} %>
-<div id="<%= scope.to_s %>_bills" class="collapse" role="tabpanel">
+<%= content_tag :div,
+      id:"#{scope.to_s}_bills",
+      class:"collapse",
+      role:"tabpanel" do %>
   <div class="row">
     <div class="col-1">
     </div>
@@ -30,4 +33,4 @@
       </table>
     </div>
   </div>
-</div>
+<% end %>
