@@ -27,5 +27,5 @@
 <% end %>
 <%= content_tag :td,
   class:strikeout(chore) do %>
-  <%= chore.due_date %>
+  <%= formatted_due_date(chore.due_date) %>
 <% end %>

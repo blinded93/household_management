@@ -135,4 +135,8 @@ module ApplicationHelper
         admin? ? (render "#{dir}/admin_#{value}_card") : (render "#{dir}/member_#{value}_card")
     end
   end
+
+  def formatted_due_date(date)
+    date.strftime("%D")
+  end
 end
