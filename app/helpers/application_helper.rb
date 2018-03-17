@@ -16,10 +16,10 @@ module ApplicationHelper
   end
 
   def refresh_btn(scope, obj_type)
-    link_to("Refresh",
+    link_to "Refresh",
       [scope, obj_type, :reload],
       remote:true,
-      class:btn).html_safe
+      class:btn
   end
 
   def logout_btn
@@ -28,6 +28,16 @@ module ApplicationHelper
           class:'text-danger',
           method: 'delete',
           data:{confirm:"<div class='text-center h5 pt-3'>Are you sure you want to log out?</div>"}
+  end
+
+  def accordion_link(href, obj_type, &block)
+    link_to yield,
+        "##{href}",
+        class:'btn btn-sm text-info',
+        data:{toggle:'collapse',
+              parent:"#accordion-#{obj_type}"},
+        aria:{expanded:true,
+              controls:"#{href}"}
   end
 
   def link
@@ -97,9 +107,8 @@ module ApplicationHelper
   def dialog_submit_btn(f)
     obj = f.object
     f.submit((obj.new_record? ? "Create" : "Update"),
-    class:btn,
-      form:(obj.new_record? ? "new_#{obj.class_name}" : "edit_#{obj.row_id}")
-    ).html_safe
+        class:btn,
+        form:(obj.new_record? ? "new_#{obj.class_name}" : "edit_#{obj.row_id}"))
   end
   # Main menu
   def menu_link(parent, link_name)
