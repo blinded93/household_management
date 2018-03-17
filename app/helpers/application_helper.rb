@@ -22,6 +22,14 @@ module ApplicationHelper
       class:btn).html_safe
   end
 
+  def logout_btn
+    link_to "logout",
+          logout_path,
+          class:'text-danger',
+          method: 'delete',
+          data:{confirm:"<div class='text-center h5 pt-3'>Are you sure you want to log out?</div>"}
+  end
+
   def link
     'btn btn-sm text-info ml-2'
   end
