@@ -13,12 +13,12 @@
 <div id="accordion_bill" data-children=".bill-item">
   <% Bill.scopes.each do |scope, scope_title| %>
     <%= content_tag :div,
-      class:"bill_item",
-      id:"#{scope.to_s}_bills_collapse" do %>
+          class:"bill_item",
+          id:"#{scope.to_s}_bills_collapse" do %>
       <%= render 'bills/bills',
-        {scope_title:scope_title,
-         scope:scope,
-         bills:current_household.bills.send(scope)} %>
+            {scope_title:scope_title,
+             scope:scope,
+             bills:current_household.bills.send(scope)} %>
     <% end %>
   <% end %>
 </div>

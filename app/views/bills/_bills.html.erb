@@ -1,6 +1,6 @@
 <%= content_tag :span,
-  class:badge_color(scope),
-  id:"#{scope.to_s}_bills_badge" do %>
+      class:badge_color(scope),
+      id:"#{scope.to_s}_bills_badge" do %>
   <%= bills.send(scope).count %>
 <% end %>
 <a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_bill" href="#<%= scope.to_s %>_bills" aria-expanded="true" aria-controls="<%= scope.to_s %>_bills">
@@ -22,11 +22,11 @@
           </tr>
         </thead>
         <%= content_tag :tbody,
-          id:"bills_#{scope.to_s}_tbody" do %>
+              id:"bills_#{scope.to_s}_tbody" do %>
           <%= render partial:'bills/bills_tr',
-            collection:bills,
-            as: :bill,
-            locals:{scope:scope}%>
+                collection:bills,
+                as: :bill,
+                locals:{scope:scope} %>
         <% end %>
       </table>
     </div>
