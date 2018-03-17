@@ -25,12 +25,8 @@
         </small>
       </h4>
     </div>
-    <div class='col-1'>
-      <%= link_to "Logout",
-            logout_path,
-            class:'btn btn-sm text-danger nav-link',
-            method: 'delete',
-            data:{confirm:"<div class='text-center h5 pt-3'>Are you sure you want to log out?</div>"} %>
+    <div class='col-1 small nav-link'>
+      <%= logout_btn %>
     </div>
   </div>
   <div class="row">
