@@ -3,10 +3,7 @@
     Bills
   </u>
   <span class='pb-2'>
-    <%= link_to "Add",
-      new_household_bill_path(current_household),
-      remote:true,
-      class:btn %>
+    <%= add_btn(:bill, current_household) %>
   </span>
   <small id="remaining_bills_amount" class='text-muted small pl-3'>
     Remaining Monthly Expenses: <strong><%= remaining_expenses %></strong>

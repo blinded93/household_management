@@ -3,10 +3,7 @@
     Chores
   </u>
   <span class='pb-2'>
-    <%= link_to "New",
-      new_household_chore_path(current_household),
-      remote:true,
-      class:btn %>
+    <%= add_btn(:chore, current_household) %>
     <%= refresh_btn(current_household, :chores) %>
   </span>
 </span>

@@ -3,10 +3,7 @@
     Requests
   </u>
   <span class='pb-2'>
-    <%= link_to "Add",
-      new_member_list_item_path(current_member),
-      remote:true,
-      class:btn %>
+    <%= add_btn(:list_item, current_member) %>
    </span>
 </span>
 <div>
