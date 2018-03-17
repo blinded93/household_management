@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col text-right">
     <%= link_to "Add Room",
-      new_household_room_path,
-      remote:true,
-      class:btn %>
+          new_household_room_path,
+          remote:true,
+          class:btn %>
       <br>
   </div>
 </div>
@@ -21,7 +21,7 @@
       <tbody id='household_rooms'>
         <% current_household.rooms.unowned.each do |room| %>
           <%= content_tag :tr,
-            class:room.row_id do %>
+                class:room.row_id do %>
             <%= render 'rooms/room', room:room %>
           <% end %>
         <% end %>
