@@ -5,23 +5,20 @@ class SessionsController < ApplicationController
   def create
     respond_to do |format|
       if auth_hash = request.env['omniauth.auth']
-        member = Member.find_or_create_by_oauth(auth_hash['info'])
-        session[:member_id] = member.id
+        @member = Member.find_or_create_by_oauth(auth_hash['info'])
+        session[:member_id] = @member.id
         format.html {
-          redirect_to member_path(member)
+          redirect_to member_path(@member)
         }
       else
-        member = Member.find_by(email: params[:email])
-        if member && member.authenticate(params[:password])
-            session[:member_id] = member.id
+        @member = Member.find_by(email: params[:email])
+        if @member && @member.authenticate(params[:password])
+            session[:member_id] = @member.id
             format.html {
-              redirect_to member_path(member)
+              redirect_to member_path(@member)
             }
         else
-          format.js {
-            render 'errors',
-              locals:{member:member}
-          }
+          format.js { render 'errors' }
         end
       end
     end
