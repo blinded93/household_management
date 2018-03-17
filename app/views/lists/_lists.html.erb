@@ -1,6 +1,6 @@
 <%= content_tag :span,
-  class:"badge badge-default",
-  id:"#{list.name.downcase}_list_items_badge" do %>
+      class:"badge badge-default",
+      id:"#{list.name.downcase}_list_items_badge" do %>
   <%= list.size %>
 <% end %>
 <a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_request" href="#list_<%= list.id %>_request" aria-expanded="true" aria-controls="list_<%= list.id %>_request">
