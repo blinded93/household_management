@@ -6,7 +6,7 @@ class Chore < ActiveRecord::Base
   validates :task, presence: true
   validates :member_id, presence: true
   validates :due_date, presence: true
-  validate :after_today, on: :create
+  validate :after_today
 
   default_scope { order(due_date: :desc) }
   scope :over_due, -> { where("due_date < ?", Date.today) }
@@ -14,7 +14,6 @@ class Chore < ActiveRecord::Base
   scope :due_tomorrow, -> { where(due_date: Date.today + 1) }
   scope :future, -> { where("due_date > ?", Date.today + 1) }
   scope :completed, -> { where(completed: true) }
-  scope :for_member, -> (member) { where(member:member) }
   scope :for, -> (household) {
     joins(:member).
     where(members: {household_id: household.id})
@@ -32,10 +31,6 @@ class Chore < ActiveRecord::Base
 
   def cols
     [:member_id, :due_date, :task]
-  end
-
-  def formatted_due_date
-    due_date.strftime("%D")
   end
 
   def after_today

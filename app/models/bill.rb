@@ -16,7 +16,6 @@ class Bill < ActiveRecord::Base
   scope :next_month, -> {
     unpaid.where(due_date: Date.today.next_month.beginning_of_month..Date.today.next_month.end_of_month)
     }
-  scope :due_on, -> (date) { where(due_date: date) }
 
   def self.scopes
     {
@@ -39,6 +38,6 @@ class Bill < ActiveRecord::Base
   end
 
   def over_due?
-    self.due_date < Date.today    
+    self.due_date < Date.today
   end
 end

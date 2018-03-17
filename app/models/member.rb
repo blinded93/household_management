@@ -47,27 +47,12 @@ class Member < ActiveRecord::Base
     end
   end
 
-  def self.find_or_create_from_household_by(house, attrs)
-    unless member = self.find_by(email: attrs[:email])
-      member = house.members.create(attrs)
-    end
-    member
-  end
-
   def cols
     [:first_name, :last_name, :monthly_income, :email, :password]
   end
 
   def name
     first_name
-  end
-
-  def plural
-    "#{self.name}'s"
-  end
-
-  def nested_id_name(field)
-    "household_members_attributes_0_#{field.to_s}"
   end
 
   def positive_income
@@ -80,10 +65,6 @@ class Member < ActiveRecord::Base
     if !head_of_household && household_id == nil
       errors.add(:base, "Household ID/passphrase don't match our records.")
     end
-  end
-
-  def reload_acc
-    "accordion_member"
   end
 
   def first_head?

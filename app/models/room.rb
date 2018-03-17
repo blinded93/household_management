@@ -19,19 +19,7 @@ class Room < ActiveRecord::Base
     items.count
   end
 
-  def member?
-    !!member
-  end
-
-  def owned_name
-    member? ? "#{member.plural} #{name}": name
-  end
-
   def scope
     name.downcase.tr(" ", "_")
-  end
-
-  def reload_acc
-    "reload_rooms"
   end
 end

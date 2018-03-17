@@ -11,12 +11,6 @@ class RoomItem < ActiveRecord::Base
 
   scope :with_requests, -> { where(request: true) }
   scope :need_purchased, -> { where("stock <= threshold") }
-  scope :entire_stock, -> { where("stock > threshold") }
-  scope :in, -> (room) { where(room: room) }
-  scope :for, -> (household) {
-    joins(:room).
-    where(rooms: {household_id: household.id})
-  }
 
   def item_attributes=(attrs)
     self.item = Item.find_or_create_by(attrs)

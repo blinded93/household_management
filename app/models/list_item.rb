@@ -8,11 +8,6 @@ class ListItem < ActiveRecord::Base
   belongs_to :list
   belongs_to :item
 
-  scope :for, -> (member) {
-    joins(:list).
-    where(lists: {member_id: member.id})
-  }
-
   def item_attributes=(attrs)
     self.item = Item.find_or_create_by(attrs)
   end
