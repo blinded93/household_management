@@ -4,13 +4,13 @@
   </u>
   <span class="pb-2">
     <%= link_to "New",
-      new_member_message_path(current_member),
-      remote:true,
-      class:btn %>
+          new_member_message_path(current_member),
+          remote:true,
+          class:btn %>
     <%= link_to "Check Messages",
-      [current_member, :check, :messages],
-      remote:true,
-      class:btn %>
+          [current_member, :check, :messages],
+          remote:true,
+          class:btn %>
     <span class='text-success small pl-2' id='message_confirmation'>
     </span>
   </span>

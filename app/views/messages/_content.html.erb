@@ -19,19 +19,18 @@
     <div class="modal-body">
       <div class="mr-4">
         <%= form_for [current_member, message],
-          remote:true do |f| %>
+              remote:true do |f| %>
           <%= render 'messages/form', f:f, message:nil %>
       </div>
     </div>
     <div class="modal-footer">
       <%= content_tag :div,
-        class:'text-danger small mr-auto',
-        id:"new_message_errors" do
-        %>
+            class:'text-danger small mr-auto',
+            id:"new_message_errors" do %>
       <% end %>
           <%= f.submit "Send",
-            form:"new_message",
-            class:btn %>
+                form:"new_message",
+                class:btn %>
         <% end %>
     </div>
   <% end %>
@@ -50,25 +49,25 @@
     <div class="collapse" id="reply_<%= message.id %>">
       <div class="card card-block p-4">
         <%= form_for [current_member, reply_message],
-          remote:true do |f| %>
+              remote:true do |f| %>
           <%= render 'messages/form', f:f, message:message %>
             <div class='text-left d-inline'>
               <%= content_tag :div,
-                class:errors,
-                id:message_errors(message.id) do %>
+                    class:errors,
+                    id:message_errors(message.id) do %>
               <% end %>
             </div>
             <div class='row'>
               <div class='col text-left d-inline'>
                 <%= content_tag :div,
-                  class:'text-danger small mr-auto',
-                  id:'new_message_errors' do
+                      class:'text-danger small mr-auto',
+                      id:'new_message_errors' do
                     %>
                 <% end %>
               </div>
               <div class="col text-right d-inline">
                 <%= f.submit "Send",
-                  class:btn %>
+                      class:btn %>
               </div>
             </div>
           </div>

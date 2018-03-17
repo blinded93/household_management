@@ -1,14 +1,14 @@
 <%= content_tag :tr,
-  class:"#{message.row_id}" do %>
+      class:"#{message.row_id}" do %>
   <td>
     <%= remove_btn(current_member, message) %>
   </td>
   <td>
     <%= link_to message.subject,
-      member_message_path(current_member, message, reply_message_id:message.id),
-      remote:true,
-      id:"message_#{message.id}",
-      class:"btn btn-sm text-info #{'font-weight-bold' if !message.read_at}" %>
+          member_message_path(current_member, message, reply_message_id:message.id),
+          remote:true,
+          id:"message_#{message.id}",
+          class:"btn btn-sm text-info #{'font-weight-bold' if !message.read_at}" %>
   </td>
   <td>
     <%= message.sender.name %>
