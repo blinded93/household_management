@@ -1,14 +1,12 @@
 <%= f.fields_for :item do |m| %>
   <div class='form-group row'>
     <%= m.label :name,
-      class:'text-center col-sm-4 col-form-label'
-      %>
+          class:'text-center col-sm-4 col-form-label' %>
     <div class='col-sm-8'>
       <%= m.text_field :name,
-        list:'item_name_autocomplete',
-        placeholder:'Item Name',
-        class:'form-control form-control-sm'
-        %>
+            list:'item_name_autocomplete',
+            placeholder:'Item Name',
+            class:'form-control form-control-sm' %>
       <datalist id='item_name_autocomplete'>
         <% @items.each do |item| %>
           <option value="<%= item %>"></option>
