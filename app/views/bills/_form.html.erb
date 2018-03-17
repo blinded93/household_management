@@ -48,16 +48,16 @@
     <%= content_tag :div,
           id:"bill_due_date" do %>
       <%= f.date_select :due_date,
-            {   use_two_digit_numbers:true,
-                start_year:Date.today.year,
-                end_year:Date.today.year + 1,
-                order: [:year, :month, :day],
-                prompt:{
-                  year:'Yr',
-                  month:'Mo',
-                  day:'Day'
-                }
-              },
+            { use_two_digit_numbers:true,
+              start_year:Date.today.year,
+              end_year:Date.today.year + 1,
+              order: [:month, :day, :year],
+              prompt:{
+                year:'Yr',
+                month:'Mo',
+                day:'Day'
+              }
+            },
               {class:'form-control form-control-sm'} %>
     <% end %>
   </div>
