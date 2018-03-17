@@ -1,7 +1,11 @@
-<% if member %>
+<% if @member %>
   <% message = "The provided email/password combination does not match our records." %>
+  $("#email").addClass("border border-danger");
+  $("#password").addClass("border border-danger");
 <% else %>
   <% message = "The provided email does not match a member in our records." %>
+  $("#email").addClass("border border-danger");
+  $("#password").removeClass("border border-danger");
 <% end %>
 
 $("#login_errors").html("<small class='d-block'><%= message %></small>");
