@@ -10,12 +10,12 @@
 <div id="accordion-chore" data-children=".chore-item">
   <% Chore.scopes.each do |scope, scope_title| %>
     <%= content_tag :div,
-      class:'chore_item',
-      id:"#{scope.to_s}_chores_collapse" do %>
+          class:'chore_item',
+          id:"#{scope.to_s}_chores_collapse" do %>
       <%= render 'chores/chores',
-        {scope_title: scope_title,
-         scope: scope,
-         chores: @chores.send(scope)} %>
+            {scope_title: scope_title,
+             scope: scope,
+             chores: @chores.send(scope)} %>
     <% end %>
   <% end %>
 </div>

@@ -1,6 +1,6 @@
 <%= content_tag :span,
-  class:badge_color(scope),
-  id:"#{scope.to_s}_chores_badge" do %>
+      class:badge_color(scope),
+      id:"#{scope.to_s}_chores_badge" do %>
   <%= chores.count %>
 <% end %>
 <a class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion-chore" href="#<%= scope.to_s %>_chores" aria-expanded="true" aria-controls="<%= scope.to_s %>_chores">
@@ -13,10 +13,10 @@
       </div>
       <div class="col-11">
         <%= link_to "Clear Completed", clear_chores_path,
-          method: :delete,
-          data:{confirm:"<div class='text-center h5 pt-3'>Clear all completed chores?</div>"},
-          class:btn,
-          remote:true %>
+              method: :delete,
+              data:{confirm:"<div class='text-center h5 pt-3'>Clear all completed chores?</div>"},
+              class:btn,
+              remote:true %>
       </div>
     </div>
   <% end %>
@@ -39,11 +39,11 @@
           </tr>
         </thead>
         <%= content_tag :tbody,
-          id:"chores_#{scope.to_s}_tbody" do %>
+              id:"chores_#{scope.to_s}_tbody" do %>
           <%= render partial:'chores/chores_tr',
-            collection:chores,
-            as: :chore,
-            locals:{scope:scope} %>
+                collection:chores,
+                as: :chore,
+                locals:{scope:scope} %>
         <% end %>
       </table>
     </div>

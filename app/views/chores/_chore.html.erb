@@ -5,27 +5,27 @@
   <td>
     <span title='Edit'>
       <%= link_to chore.task,
-        edit_household_chore_path(current_household, chore),
-        remote:true,
-        class:"btn btn-sm text-info #{strikeout(chore)}" %>
+            edit_household_chore_path(current_household, chore),
+            remote:true,
+            class:"btn btn-sm text-info #{strikeout(chore)}" %>
     </span>
   </td>
   <%= content_tag :td,
-    class:strikeout(chore) do %>
+        class:strikeout(chore) do %>
     <%= chore.member.name %>
   <% end %>
 <% else %>
   <td>
     <span title='Complete'>
       <%= link_to chore.task,
-        complete_chore_path(chore),
-        class:"btn btn-sm text-info complete_chore_#{chore.id} #{strikeout(chore)}",
-        method:'patch',
-        remote:true %>
+            complete_chore_path(chore),
+            class:"btn btn-sm text-info complete_chore_#{chore.id} #{strikeout(chore)}",
+            method:'patch',
+            remote:true %>
     </span>
   </td>
 <% end %>
 <%= content_tag :td,
-  class:strikeout(chore) do %>
+      class:strikeout(chore) do %>
   <%= formatted_due_date(chore.due_date) %>
 <% end %>
