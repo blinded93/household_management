@@ -1,41 +1,41 @@
 <div class="form-group row text-center">
   <div class="col-4">
     <%= f.label :first_name,
-      "First Name",
-      class:"text-center col-form-label" %>
+          "First Name",
+          class:"text-center col-form-label" %>
     </div>
   <div class="col-8">
     <%= f.text_field :first_name,
-      placeholder: "First Name",
-      class:'form-control form-control-sm' %>
+          placeholder: "First Name",
+          class:'form-control form-control-sm' %>
   </div>
 </div>
 <div class="form-group row text-center">
   <div class="col-4">
     <%= f.label :last_name,
-      "Last Name",
-      class:"text-center col-form-label" %>
+          "Last Name",
+          class:"text-center col-form-label" %>
     </div>
   <div class="col-8">
     <%= f.text_field :last_name,
-      placeholder: "Last Name",
-      class:'form-control form-control-sm' %>
+          placeholder: "Last Name",
+          class:'form-control form-control-sm' %>
   </div>
 </div>
 <% if admin? %>
   <div class="form-group row text-center">
     <div class="col-4">
       <%= f.label :monthly_income,
-        "Income",
-        class:"text-center col-form-label" %>
+            "Income",
+            class:"text-center col-form-label" %>
       </div>
     <div class="input-group input-group-sm col-8">
       <div class="input-group-addon">
         $
       </div>
       <%= f.number_field :monthly_income,
-        placeholder: "Monthly Income",
-        class:'form-control form-control-sm' %>
+            placeholder: "Monthly Income",
+            class:'form-control form-control-sm' %>
       <div class="input-group-addon">
         /month
       </div>
@@ -45,25 +45,25 @@
 <div class="form-group row text-center">
   <div class="col-4">
     <%= f.label :email,
-      "Email",
-      class:"text-center col-form-label" %>
+          "Email",
+          class:"text-center col-form-label" %>
     </div>
   <div class="col-8">
     <%= f.email_field :email,
-      placeholder: "Email",
-      class:'form-control form-control-sm' %>
+          placeholder: "Email",
+          class:'form-control form-control-sm' %>
   </div>
 </div>
 <div class="form-group row text-center">
   <div class="col-4">
     <%= f.label :password,
-      "Password",
-      class:"text-center col-form-label" %>
+          "Password",
+          class:"text-center col-form-label" %>
     </div>
   <div class="col-8">
     <%= f.password_field :password,
-      placeholder: "Password",
-      class:'form-control form-control-sm' %>
+          placeholder: "Password",
+          class:'form-control form-control-sm' %>
     <small id='passwordHelpBlock' class='form-text text-muted text-left'>
       Leave password field blank unless changing password.
     </small>
@@ -73,16 +73,16 @@
   <div class="form-group row">
     <div class="col-4">
       <%= f.check_box :head_of_household,
-        {class:'form-control form-control-sm d-inline',
-         id:'household_check_box',
-         disabled:f.object.first_head?},
-         "true",
-         "false" %>
+            {class:'form-control form-control-sm d-inline',
+             id:'household_check_box',
+             disabled:f.object.first_head?},
+             "true",
+             "false" %>
     </div>
     <div class="col-8">
       <%= f.label :head_of_household,
-        "Admin",
-        class:"col-form-label d-inline" %>
+            "Admin",
+            class:"col-form-label d-inline" %>
     </div>
   </div>
 <% elsif logged_in? %>
@@ -90,38 +90,38 @@
   <div class="form-group row text-center">
     <div class="col-4 col-form-label">
       <%= f.label :head_of_household,
-        "Joining a household?",
-        class:"text-center col-form-label" %>
+            "Joining a household?",
+            class:"text-center col-form-label" %>
     </div>
     <div class="col-8 vert-center">
       <%= f.check_box :head_of_household,
-        {class:'form-control form-c ontrol-sm',
-        style:'width:15px;',
-        id:'household_check_box'}, "false", "true" %>
+            {class:'form-control form-c ontrol-sm',
+             style:'width:15px;',
+           id:'household_check_box'}, "false", "true" %>
     </div>
   </div>
   <div id="household_fields" style="display:none;">
     <div class="form-group row text-center">
       <div class="col-4">
         <%= f.label :household_id, "",
-          class:"col-form-label" %>
+              class:"col-form-label" %>
       </div>
       <div class="col-8">
         <%= number_field_tag :household_id,
-          nil,
-          class:'form-control form-control-sm' %>
+              nil,
+              class:'form-control form-control-sm' %>
       </div>
     </div>
     <div class="form-group row text-center">
       <div class="col-4">
         <%= f.label :household_passphrase,
-          "Passphrase",
-          class:'text-center col-form-label' %>
+              "Passphrase",
+              class:'text-center col-form-label' %>
       </div>
       <div class="col-8">
         <%= text_field_tag :household_passphrase,
-          nil,
-          class:'form-control form-control-sm' %>
+              nil,
+              class:'form-control form-control-sm' %>
       </div>
     </div>
   </div>

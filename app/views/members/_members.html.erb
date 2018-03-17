@@ -1,7 +1,7 @@
 <%= content_tag :div,
-  class:"#{member.row_id} member_edit",
-  id:"reload_#{member.row_id}" do %>
+      class:"#{member.row_id} member_edit",
+      id:"reload_#{member.row_id}" do %>
     <%= render 'members/member',
-      member:member,
-      collapse:false %>
+          member:member,
+          collapse:false %>
 <% end %>
