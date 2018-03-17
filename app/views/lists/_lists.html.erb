@@ -3,10 +3,9 @@
       id:"#{list.name.downcase}_list_items_badge" do %>
   <%= list.size %>
 <% end %>
-<a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_request" href="#list_<%= list.id %>_request" aria-expanded="true" aria-controls="list_<%= list.id %>_request">
-  <%= list.member.name %>
-</a>
-<div id="list_<%= list.id %>_request" class="collapse" role="tabpanel">
+<%= accordion_link("#{list.row_id}_request",
+        "request") {list.member.name} %>
+<div id="<%= list.row_id %>_request" class="collapse" role="tabpanel">
   <div class="row">
     <div class="col">
     </div>

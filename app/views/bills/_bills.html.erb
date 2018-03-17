@@ -3,9 +3,8 @@
       id:"#{scope.to_s}_bills_badge" do %>
   <%= bills.send(scope).count %>
 <% end %>
-<a  class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_bill" href="#<%= scope.to_s %>_bills" aria-expanded="true" aria-controls="<%= scope.to_s %>_bills">
-  <%= scope_title %>
-</a>
+<%= accordion_link("#{scope.to_s}_bills",
+        "bill") {scope_title} %>
 <div id="<%= scope.to_s %>_bills" class="collapse" role="tabpanel">
   <div class="row">
     <div class="col-1">

@@ -3,9 +3,7 @@
       id:"#{scope.to_s}_chores_badge" do %>
   <%= chores.count %>
 <% end %>
-<a class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion-chore" href="#<%= scope.to_s %>_chores" aria-expanded="true" aria-controls="<%= scope.to_s %>_chores">
-  <%= scope_title %>
-</a>
+<%= accordion_link("#{scope.to_s}_chores", "chore") {scope_title} %>
 <div id="<%= scope.to_s %>_chores" class="collapse" role="tabpanel">
   <% if scope_title == "Completed" && admin? %>
     <div class="row pt-2">

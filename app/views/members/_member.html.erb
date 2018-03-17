@@ -4,13 +4,11 @@
       <%= remove_btn(current_household, member) %>
     </div>
     <div class='col-11'>
-      <a class='btn btn-sm text-info' data-toggle="collapse" data-parent="#accordion_member" href="#member_<%= member.id %>" aria-expanded="true" aria-controls="member_<%= member.id %>">
-        <%= member.name %>
-      </a>
+      <%= accordion_link(member.row_id, "member") {member.name} %>
     </div>
   </div>
 <% end %>
-<div id="member_<%= member.id %>" class="collapse <%= update_collapse(collapse) %>" role="tabpanel">
+<div id="<%= member.row_id %>" class="collapse <%= update_collapse(collapse) %>" role="tabpanel">
   <div class="row">
     <div class="col-1">
     </div>
