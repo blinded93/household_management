@@ -42,9 +42,12 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a class="btn btn-sm btn-outline-secondary text-dark mr-auto" data-toggle="collapse" href="#reply_<%= message.id %>" aria-expanded="false" aria-controls="reply">
-        Reply
-      </a>
+      <%= link_to "Reply",
+            "#reply_#{message.id}",
+            class:"btn btn-sm btn-outline-secondary text-dark mr-auto",
+            data:{toggle:"collapse"},
+            aria:{expanded:false,
+                  controls:"reply"} %>
     </div>
     <div class="collapse" id="reply_<%= message.id %>">
       <div class="card card-block p-4">
