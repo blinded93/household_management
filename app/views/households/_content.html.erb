@@ -6,23 +6,23 @@
 <div class="modal-body">
   <div class="mr-4">
     <%= form_for @household,
-      remote:true do |f| %>
+          remote:true do |f| %>
       <%= render "households/form", f:f %>
     </div>
   </div>
 
   <div class="modal-footer">
     <%= content_tag :div,
-      id:"household_errors",
-      class:errors do %>
+          id:"household_errors",
+          class:errors do %>
     <% end %>
     <%= content_tag :div,
-      id:"member_errors",
-      class:errors do %>
+          id:"member_errors",
+          class:errors do %>
     <% end %>
       <%= f.submit "Create",
-        class:btn,
-        form:"new_household" %>
+            class:btn,
+            form:"new_household" %>
     <% end %>
   </div>
 <% end %>
