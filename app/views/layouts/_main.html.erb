@@ -10,16 +10,16 @@
               Admin
             </span>
             (<%= link_to current_member.name,
-              member_path(current_member),
-              class:'btn btn-sm text-warning p-0 m-0' %>)
+                    member_path(current_member),
+                    class:'btn btn-sm text-warning p-0 m-0' %>)
           <% else %>
             <span class='text-success'>
               <%= current_member.first_name %>
             </span>
             <% if current_member.head_of_household? %>
               (<%= link_to "Admin",
-                [current_household, :control],
-                class:'btn btn-sm text-warning p-0 m-0' %>)
+                      [current_household, :control],
+                      class:'btn btn-sm text-warning p-0 m-0' %>)
             <% end %>
           <% end %>
         </small>
@@ -27,10 +27,10 @@
     </div>
     <div class='col-1'>
       <%= link_to "Logout",
-        logout_path,
-        class:'btn btn-sm text-danger nav-link',
-        method: 'delete',
-        data:{confirm:"<div class='text-center h5 pt-3'>Are you sure you want to log out?</div>"} %>
+            logout_path,
+            class:'btn btn-sm text-danger nav-link',
+            method: 'delete',
+            data:{confirm:"<div class='text-center h5 pt-3'>Are you sure you want to log out?</div>"} %>
     </div>
   </div>
   <div class="row">
