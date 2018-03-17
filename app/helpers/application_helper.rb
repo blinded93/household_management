@@ -1,6 +1,9 @@
 module ApplicationHelper
-  def new_btn
-
+  def add_btn(obj_type, scope)
+    link_to "Add",
+      [:new, scope, obj_type],
+      class:btn,
+      remote:true
   end
 
   def remove_btn(scope, obj)
@@ -12,9 +15,9 @@ module ApplicationHelper
       data:{confirm:"<div class='text-center h5 pt-3'>Delete #{obj.class_name}?</div>"}
   end
 
-  def refresh_btn(scope, object_type)
+  def refresh_btn(scope, obj_type)
     link_to("Refresh",
-      [scope, object_type, :reload],
+      [scope, obj_type, :reload],
       remote:true,
       class:btn).html_safe
   end
