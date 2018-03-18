@@ -1,6 +1,8 @@
-<div class="form-group row">
-  <%= f.label :company,
-        class:'text-center col-4 col-form-label' %>
+<div class="form-group row text-center">
+  <div class="col-4">
+    <%= f.label :company,
+          class:'col-form-label' %>
+  </div>
   <div class="col-8">
     <%= f.text_field :company,
           placeholder:'Company',
@@ -8,9 +10,11 @@
   </div>
 </div>
 
-<div class="form-group row">
-  <%= f.label :utility,
-        class:'text-center col-4 col-form-label' %>
+<div class="form-group row text-center">
+  <div class="col-4">
+    <%= f.label :utility,
+          class:'col-form-label' %>
+  </div>
   <div class="col-8">
     <%= f.text_field :utility,
           placeholder:'Utility',
@@ -18,9 +22,11 @@
   </div>
 </div>
 
-<div class="form-group row">
-  <%= f.label :amount,
-        class:'text-center col-4 col-form-label' %>
+<div class="form-group row text-center">
+  <div class="col-4">
+    <%= f.label :amount,
+          class:'col-form-label' %>
+  </div>
   <div class="input-group col-8">
     <div class='input-group-addon'>
       $
@@ -31,19 +37,22 @@
   </div>
 </div>
 
-<div class="form-group row">
-  <%= f.label :account_number, "Account#",
-        class:'text-center col-4 col-form-label' %>
+<div class="form-group row text-center">
+  <div class="col-4">
+    <%= f.label :account_number, "Account#",
+          class:'col-form-label' %>
+  </div>
   <div class="col-8">
     <%= f.number_field :account_number,
           placeholder:'Account No. (optional)',
           class:'form-control form-control-sm' %>
   </div>
 </div>
-
 <div class='form-group form-inline row'>
-  <%= f.label :due_date, 'Due',
-        class:'col-4 col-form-label' %>
+  <div class="col-4">
+    <%= f.label :due_date, 'Due',
+          class:'text-center col-form-label' %>
+  </div>
   <div class='col-8'>
     <%= content_tag :div,
           id:"bill_due_date" do %>

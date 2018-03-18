@@ -1,7 +1,9 @@
 <%= f.fields_for :item do |m| %>
-  <div class='form-group row'>
-    <%= m.label :name,
-          class:'text-center col-sm-4 col-form-label' %>
+  <div class='form-group row text-center'>
+    <div class="col-4">
+        <%= m.label :name,
+              class:'col-form-label' %>
+    </div>
     <div class='col-sm-8'>
       <%= m.text_field :name,
             list:'item_name_autocomplete',

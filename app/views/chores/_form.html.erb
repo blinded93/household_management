@@ -1,6 +1,8 @@
 <div class='form-group row'>
-  <%= f.label :member_id,
-        class: 'text-center col-4 col-form-label' %>
+  <div class="col-4 text-center">
+    <%= f.label :member_id,
+          class:'col-form-label' %>
+  </div>
   <div class='col-8'>
     <%= f.collection_select(:member_id,
           current_household.members,
@@ -12,9 +14,11 @@
 </div>
 
 <div class='form-group form-inline row'>
-  <%= f.label :due_date,
-        'Due',
-        class:'col-4 col-form-label' %>
+  <div class="col-4">
+    <%= f.label :due_date,
+          'Due',
+          class:'text-center col-form-label' %>
+  </div>
   <div class='col-8'>
     <%= content_tag :div,
           id:"chore_due_date" do %>
@@ -34,9 +38,11 @@
   </div>
 </div>
 
-<div class='form-group row'>
-  <%= f.label :task,
-        class:'text-center col-4 col-form-label' %>
+<div class='form-group row text-center'>
+  <div class="col-4">
+    <%= f.label :task,
+          class:'col-form-label' %>
+  </div>
   <div class='col-8'>
     <%= f.text_area :task,
      placeholder: "Task",
