@@ -1,6 +1,6 @@
 <%= content_tag :span,
       class:badge_color(scope),
-      id:"#{scope.to_s}_chores_badge" do %>
+      id:badge_id(scope, "chores") do %>
   <%= chores.count %>
 <% end %>
 <%= accordion_link("#{scope.to_s}_chores", "chore") {scope_title} %>
@@ -37,7 +37,7 @@
           </tr>
         </thead>
         <%= content_tag :tbody,
-              id:"chores_#{scope.to_s}_tbody" do %>
+              id:tbody_id(scope, "chores") do %>
           <%= render partial:'chores/chores_tr',
                 collection:chores,
                 as: :chore,

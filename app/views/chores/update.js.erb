@@ -3,14 +3,14 @@ $('#dialog').modal('toggle');
 <% if @old_scopes != @chore.scopes %>
   $(".<%= @chore.row_id %>").remove();
   <% @old_scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_chores_badge" %>")
+    $("#<%= badge_id(scope, @chore) %>")
         .html("<%= Chore.for(current_household).send(scope).count %>");
   <% end %>
 
   <% @chore.scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_chores_badge" %>")
+    $("#<%= badge_id(scope, @chore) %>")
         .html("<%= Chore.for(current_household).send(scope).count %>");
-    $("#<%= "chores_#{scope.to_s}_tbody" %>")
+    $("#<%= tbody_id(scope, @chore) %>")
         .append("<tr class='<%= @chore.row_id %>'></tr>");
   <% end %>
 <% end %>

@@ -1,6 +1,6 @@
 <%= content_tag :span,
       class:"badge badge-default",
-      id:"#{list.name.downcase}_list_items_badge" do %>
+      id:badge_id(list.name.downcase, "list_items") do %>
   <%= list.size %>
 <% end %>
 <%= accordion_link("#{list.row_id}_request",

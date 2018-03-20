@@ -3,14 +3,14 @@ $("#dialog").modal("toggle");
 
   $("#<%= @room_item.row_id %>").remove();
   <% @old_scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_room_items_badge" %>")
+    $("#<%= badge_id(scope, @room_item %>")
         .html("<%= restock_count(@old_room.room_items) %>");
   <% end %>
 
   <% @room_item.scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_room_items_badge" %>")
+    $("#<%= badge_id(scope, @room_item %>")
         .html("<%= restock_count(@room_item.room.room_items) %>");
-    $("#<%= "room_items_#{scope.to_s}_tbody" %>")
+    $("#<%= tbody_id(scope, @room_item) %>")
         .append("<tr id='<%= @room_item.row_id %>'></tr>");
   <% end %>
 

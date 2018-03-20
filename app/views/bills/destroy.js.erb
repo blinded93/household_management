@@ -1,6 +1,6 @@
 $(".<%= bill.row_id %>").remove();
 <% Bill.scopes.keys.each do |scope| %>
-  $("#<%= "#{scope.to_s}_bills_badge" %>")
+  $("#<%= badge_id(scope, bill) %>")
       .html("<%= bills.send(scope).count %>");
 <% end %>
 $("#remaining-bills-amount")

@@ -5,14 +5,14 @@
 <% if @old_scopes != @bill.scopes %>
   $(".<%= @bill.row_id %>").remove();
   <% @old_scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_bills_badge" %>")
+    $("#<%= badge_id(scope, @bill) %>")
         .html("<%= current_household.bills.send(scope).count %>");
   <% end %>
 
   <% @bill.scopes.each do |scope, scope_title| %>
-    $("#<%= "#{scope.to_s}_bills_badge" %>")
+    $("#<%= badge_id(scope, @bill) %>")
         .html("<%= current_household.bills.send(scope).count %>");
-    $("#<%= "bills_#{scope.to_s}_tbody" %>")
+    $("#<%= tbody_id(scope, @bill) %>")
         .prepend("<tr class='<%= @bill.row_id %>'></tr>");
   <% end %>
 <% end %>

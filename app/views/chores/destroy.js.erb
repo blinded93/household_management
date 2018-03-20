@@ -2,6 +2,6 @@
   $(".chore_<%= id %>").remove();
 <% end %>
 <% Chore.scopes.keys.each do |scope| %>
-  $("#<%= "#{scope.to_s}_chores_badge" %>")
+  $("#<%= badge_id(scope, "chores") %>")
       .html("<%= objs.send(scope).count %>");
 <% end %>
