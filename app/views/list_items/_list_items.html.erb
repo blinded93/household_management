@@ -8,10 +8,11 @@
       <th class='tbl-col-2'>Quantity</th>
     </tr>
   </thead>
-  <tbody id="list_items_tbody">
+  <%= content_tag :tbody,
+        id:"list_items_tbody" do %>
     <%= render partial:'list_items/list_items_tr',
           collection:list.list_items,
           as: :list_item,
           locals:{list:list} %>
-  </tbody>
+  <% end %>
 </table>
