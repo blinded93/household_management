@@ -60,6 +60,11 @@ module ApplicationHelper
     'show' if tab == selected_tab
   end
 
+  def tbody_id(scope, obj_type)
+    obj = obj_type.is_a?(String) ? obj_type : obj_type.plural_name
+    [obj, "_", scope, "_tbody"].join.html_safe
+  end
+
   def badge_color(scope)
     str = "badge"
     case scope
@@ -71,6 +76,13 @@ module ApplicationHelper
       str + " badge-success"
     end
   end
+
+  def badge_id(scope, obj)
+    scope_str = scope.is_a?(Symbol) ? scope.to_s : scope
+    obj_str = obj.is_a?(String) ? obj : obj.plural_name
+    [scope_str, "_", obj_str, "_badge"].join.html_safe
+  end
+
   # Modal Dialog form
   def form_header(obj)
     content_for :header do
