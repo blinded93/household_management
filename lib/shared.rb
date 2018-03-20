@@ -26,8 +26,4 @@ module Shared
   def completed_fields
     cols - errors.keys
   end
-
-  def badge_span(scope)
-    [scope.to_s, "_", plural_name, "_badge"].join.html_safe
-  end
 end
