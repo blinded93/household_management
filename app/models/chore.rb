@@ -6,7 +6,7 @@ class Chore < ActiveRecord::Base
   validates :task, presence: true
   validates :member_id, presence: true
   validates :due_date, presence: true
-  validate :after_today
+  validate :future
 
   default_scope { order(due_date: :desc) }
   scope :over_due, -> { where("due_date < ?", Date.today) }
@@ -33,8 +33,8 @@ class Chore < ActiveRecord::Base
     [:member_id, :due_date, :task]
   end
 
-  def after_today
-    if !due_date.blank? && due_date < Date.today
+  def future
+    if !due_date.blank? && due_date <= Date.today
       errors.add(:due_date, "can't be in the past.")
     end
   end
