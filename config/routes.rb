@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     get '/messages/check' => 'messages#check', as: :check_messages
     post '/messages/reply' => 'messages#reply'
     resources :messages, except: [:index, :update]
+    get '/list_items/reload' => 'list_items#reload'
     resources :list_items, except: [:index]
     patch 'request/room_item/:id' => 'room_items#inventory_request', as: :room_item_request
     get '/room_items/reload' => 'room_items#reload'
