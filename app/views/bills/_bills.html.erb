@@ -5,6 +5,9 @@
 <% end %>
 <%= accordion_link("#{scope.to_s}_bills",
         "bill") {scope_title} %>
+        <small id="over-due-bills-amount" class='text-danger small'>
+          <%= "- #{over_due_expenses}" if scope == :over_due %>
+        </small>
 <%= content_tag :div,
       id:"#{scope.to_s}_bills",
       class:"collapse",
