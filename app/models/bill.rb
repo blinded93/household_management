@@ -4,6 +4,7 @@ class Bill < ActiveRecord::Base
   belongs_to :household
 
   validates :company, :utility, :amount, :due_date, presence: true
+  validate :future
 
   default_scope { order(due_date: :asc) }
   scope :paid, -> { where(paid:true) }
@@ -25,6 +26,12 @@ class Bill < ActiveRecord::Base
       next_month: "Next Month",
       paid: "Paid"
     }
+  end
+
+  def future
+    if !due_date.blank? && due_date <= Date.today
+      errors.add(:due_date, "can't be in the past.")
+    end
   end
 
   def cols
