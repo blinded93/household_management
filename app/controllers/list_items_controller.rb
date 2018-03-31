@@ -62,7 +62,9 @@ class ListItemsController < ApplicationController
   end
 
   def reload
-    @lists = List.for(current_household)
+    if admin?
+      @lists = List.for(current_household)
+    end
     respond_to do |format|
       format.js
     end
