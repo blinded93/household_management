@@ -64,13 +64,15 @@ class BillsController < ApplicationController
 
   def pay
     @old_scopes = @bill.scopes.dup
+    locals = {
+      bill:@bill
+    }
+    locals[:modal] = params[:m] if params[:m]
     @bill.toggle!(:paid)
     respond_to do |format|
       format.js {
         render 'update',
-        locals:{
-          bill:@bill,
-          modal:params[:m]}
+        locals:locals
       }
     end
   end
