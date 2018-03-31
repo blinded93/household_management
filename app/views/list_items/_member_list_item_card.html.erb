@@ -4,7 +4,10 @@
   </u>
   <span class='pb-2'>
     <%= add_btn(:list_item, current_member) %>
-   </span>
+  </span>
+  <span class="pb-2">
+    <%= refresh_btn(current_member, :list_items) %>
+  </span>
 </span>
 <div>
  <%= render 'list_items/list_items',
