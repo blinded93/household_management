@@ -1,4 +1,4 @@
-<% if modal.nil? %>
+<% if !defined?(modal) %>
   $('#dialog').modal('toggle');
 <% end %>
 
@@ -21,3 +21,5 @@ $(".<%= @bill.row_id %>")
     .html("<%= j render "bills/bill", bill:@bill %>");
 $("#remaining-bills-amount")
     .html("Remaining Monthly Expenses: <%= remaining_expenses %>");
+$("#over-due-bills-amount")
+    .html("- <%= over_due_expenses %>")
