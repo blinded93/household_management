@@ -1,4 +1,9 @@
-<% @lists.each do |list| %>
-  $("#<%= list.row_id %>_collapse")
-      .html("<%= j render 'lists/lists', list:list %>");
+<% if admin? %>
+  <% @lists.each do |list| %>
+    $("#<%= list.row_id %>_collapse")
+        .html("<%= j render 'lists/lists', list:list %>");
+  <% end %>
+<% else %>
+  $("#list_items_tbody")
+        .html("<%= j render partial:'list_items/list_items_tr', collection:current_member.list.list_items, as: :list_item %>");
 <% end %>
