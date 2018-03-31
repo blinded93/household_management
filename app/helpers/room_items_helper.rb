@@ -4,7 +4,7 @@ module RoomItemsHelper
   end
 
   def requested?(room_item)
-    if room_item.request
+    if room_item.request || room_item.stock <= room_item.threshold
       "table-danger"
     end
   end
