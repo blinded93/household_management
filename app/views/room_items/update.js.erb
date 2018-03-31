@@ -3,12 +3,12 @@ $("#dialog").modal("toggle");
 
   $("#<%= @room_item.row_id %>").remove();
   <% @old_scopes.each do |scope, scope_title| %>
-    $("#<%= badge_id(scope, @room_item %>")
+    $("#<%= badge_id(scope, @room_item) %>")
         .html("<%= restock_count(@old_room.room_items) %>");
   <% end %>
 
   <% @room_item.scopes.each do |scope, scope_title| %>
-    $("#<%= badge_id(scope, @room_item %>")
+    $("#<%= badge_id(scope, @room_item) %>")
         .html("<%= restock_count(@room_item.room.room_items) %>");
     $("#<%= tbody_id(scope, @room_item) %>")
         .append("<tr id='<%= @room_item.row_id %>'></tr>");
