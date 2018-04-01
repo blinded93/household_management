@@ -1,3 +1,5 @@
 $('#dialog').modal('toggle');
 $("#edit_household")
     .html("<%= j render 'households/household', household:@household%>");
+$("#household_name")
+    .html("<%= current_household.name %>")
