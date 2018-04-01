@@ -4,7 +4,7 @@
       <h4 class="">
         HouseholdManagement
         <small class='text-muted'>
-          :<%= current_household.name %> =>
+          :<span id="household_name"><%= current_household.name %></span> =>
           <% if admin? %>
             <span class='text-success'>
               Admin
@@ -14,7 +14,7 @@
                     class:'btn btn-sm text-warning p-0 m-0' %>)
           <% else %>
             <span class='text-success'>
-              <%= current_member.first_name %>
+              <span id="member_name"><%= current_member.first_name %></span>
             </span>
             <% if current_member.head_of_household? %>
               (<%= link_to "Admin",
